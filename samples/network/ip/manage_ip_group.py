@@ -49,15 +49,15 @@ def main():
           ]
         }
     ).result()
-    print("Create ip group:\n{}".format(ip_group))
+    print(f"Create ip group:\n{ip_group}")
 
     # Get ip group
     ip_group = network_client.ip_groups.get(
         GROUP_NAME,
         IP_GROUP
     )
-    print("Get ip group:\n{}".format(ip_group))
-    
+    print(f"Get ip group:\n{ip_group}")
+
     # Delete ip group
     ip_group = network_client.ip_groups.begin_delete(
         GROUP_NAME,

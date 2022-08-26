@@ -48,7 +48,7 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(server))
+    print(f"Create server:\n{server}")
 
     # Create Server
     partner_server = sql_client.servers.begin_create_or_update(
@@ -60,7 +60,7 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(partner_server))
+    print(f"Create server:\n{partner_server}")
     # - end -
 
     # Create server communication link
@@ -72,7 +72,7 @@ def main():
           "partner_server": PARTNER_SERVER
         }
     ).result()
-    print("Create server communication link:\n{}".format(server_communication_link))
+    print(f"Create server communication link:\n{server_communication_link}")
 
     # Get server communication link
     server_communication_link = sql_client.server_communication_links.get(
@@ -80,7 +80,7 @@ def main():
         SERVER,
         SERVER_COMMUNICATION_LINK
     )
-    print("Get server communication link:\n{}".format(server_communication_link))
+    print(f"Get server communication link:\n{server_communication_link}")
 
     # Delete server communication link
     server_communication_link = sql_client.server_communication_links.delete(

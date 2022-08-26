@@ -87,34 +87,30 @@ def main():
         GROUP_NAME,
         AZURE_FIREWALL,
         {
-          "tags": {
-            "key1": "value1"
-          },
-          "location": "West US",
-          "zones": [],
-          "properties": {
-            "sku": {
-              "name": "AZFW_Hub",
-              "tier": "Standard"
+            "tags": {"key1": "value1"},
+            "location": "West US",
+            "zones": [],
+            "properties": {
+                "sku": {"name": "AZFW_Hub", "tier": "Standard"},
+                "threat_intel_mode": "Alert",
+                "virtual_hub": {
+                    "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualHubs/{VIRTUAL_HUB_NAME}"
+                },
+                "firewall_policy": {
+                    "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/firewallPolicies/{FIREWALL_POLICY_NAME}"
+                },
             },
-            "threat_intel_mode": "Alert",
-            "virtual_hub": {
-              "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualHubs/" + VIRTUAL_HUB_NAME + ""
-            },
-            "firewall_policy": {
-              "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/firewallPolicies/" + FIREWALL_POLICY_NAME + ""
-            }
-          }
-        }
+        },
     ).result()
-    print("Create azure firewall:\n{}".format(azure_firewall))
+
+    print(f"Create azure firewall:\n{azure_firewall}")
 
     # Get azure firewall
     azure_firewall = network_client.azure_firewalls.get(
         GROUP_NAME,
         AZURE_FIREWALL
     )
-    print("Get azure firewall:\n{}".format(azure_firewall))
+    print(f"Get azure firewall:\n{azure_firewall}")
 
     # Update azure firewall
     azure_firewall = network_client.azure_firewalls.begin_update_tags(
@@ -127,8 +123,8 @@ def main():
           }
         }
     )
-    print("Update azure firewall:\n{}".format(azure_firewall))
-    
+    print(f"Update azure firewall:\n{azure_firewall}")
+
     # Delete azure firewall
     azure_firewall = network_client.azure_firewalls.begin_delete(
         GROUP_NAME,

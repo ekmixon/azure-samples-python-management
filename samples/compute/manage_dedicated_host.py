@@ -49,7 +49,7 @@ def main():
           "platform_fault_domain_count": "3"
         }
     )
-    print("Create dedicated host group:\n{}".format(host_group))
+    print(f"Create dedicated host group:\n{host_group}")
 
     # Create dedicated host
     host = compute_client.dedicated_hosts.begin_create_or_update(
@@ -67,14 +67,14 @@ def main():
           }
         }
     ).result()
-    print("Create dedicated host:\n{}".format(host))
+    print(f"Create dedicated host:\n{host}")
 
     # Get dedicated host group
     host_group = compute_client.dedicated_host_groups.get(
         GROUP_NAME,
         HOST_GROUP_NAME
     )
-    print("Get dedicated host group:\n{}".format(host_group))
+    print(f"Get dedicated host group:\n{host_group}")
 
     # Get dedicated host
     host = compute_client.dedicated_hosts.get(
@@ -82,7 +82,7 @@ def main():
         HOST_GROUP_NAME,
         HOST_NAME
     )
-    print("Get dedicated host:\n{}".format(host))
+    print(f"Get dedicated host:\n{host}")
 
     # Update dedicated host group
     host_group = compute_client.dedicated_host_groups.update(
@@ -95,7 +95,7 @@ def main():
           "platform_fault_domain_count": "3"
         }
     )
-    print("Update dedicated host group:\n{}".format(host_group))
+    print(f"Update dedicated host group:\n{host_group}")
 
     # Update dedicated host
     host = compute_client.dedicated_hosts.begin_update(
@@ -108,7 +108,7 @@ def main():
           }
         }
     ).result()
-    print("Update dedicated host:\n{}".format(host))
+    print(f"Update dedicated host:\n{host}")
 
     # Delete dedicated host
     compute_client.dedicated_hosts.begin_delete(

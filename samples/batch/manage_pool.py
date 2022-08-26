@@ -73,8 +73,8 @@ def main():
           }
         }
     ).result()
-    print("Create storage account:\n{}".format(storage_account))
-    
+    print(f"Create storage account:\n{storage_account}")
+
     # Create account
     account = batch_client.batch_account.begin_create(
         GROUP_NAME,
@@ -86,7 +86,7 @@ def main():
             }
         }
     ).result()
-    print("Create batch account:\n{}".format(account))
+    print(f"Create batch account:\n{account}")
     # - end -
 
     # Create pool
@@ -127,7 +127,7 @@ def main():
             # }
         }
     )
-    print("Create pool:\n{}".format(pool))
+    print(f"Create pool:\n{pool}")
 
     # Get pool
     pool = batch_client.pool.get(
@@ -135,7 +135,7 @@ def main():
         ACCOUNT,
         POOL
     )
-    print("Get pool:\n{}".format(pool))
+    print(f"Get pool:\n{pool}")
 
     # Update pool
     pool = batch_client.pool.update(
@@ -150,8 +150,8 @@ def main():
             }
         }
     )
-    print("Update pool:\n{}".format(pool))
-    
+    print(f"Update pool:\n{pool}")
+
     # Delete pool
     pool = batch_client.pool.begin_delete(
         GROUP_NAME,

@@ -72,14 +72,14 @@ def main():
             "location": AZURE_LOCATION
         }
     ).result()
-    print("Create managed clusters:\n{}".format(managed_clusters))
+    print(f"Create managed clusters:\n{managed_clusters}")
 
     # Get managed clusters
     managed_clusters = containerservice_client.managed_clusters.get(
         GROUP_NAME,
         MANAGED_CLUSTERS
     )
-    print("Get managed clusters:\n{}".format(managed_clusters))
+    print(f"Get managed clusters:\n{managed_clusters}")
 
     # Update managed clusters
     managed_clusters = containerservice_client.managed_clusters.begin_update_tags(
@@ -92,7 +92,7 @@ def main():
             }
         }
     ).result()
-    print("Update managed clusters:\n{}".format(managed_clusters))
+    print(f"Update managed clusters:\n{managed_clusters}")
 
     # Delete managed clusters
     managed_clusters = containerservice_client.managed_clusters.begin_delete(

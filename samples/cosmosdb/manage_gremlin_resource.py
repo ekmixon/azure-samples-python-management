@@ -60,7 +60,7 @@ def main():
           "api_properties": {}
         }
     ).result()
-    print("Create database account:\n{}".format(database_account))
+    print(f"Create database account:\n{database_account}")
     # - end -
 
     # Create gremlin database
@@ -78,7 +78,7 @@ def main():
           }
         }
     ).result()
-    print("Create gremlin database:\n{}".format(database))
+    print(f"Create gremlin database:\n{database}")
 
     # Create gremlin graph
     graph = cosmosdb_client.gremlin_resources.begin_create_update_gremlin_graph(
@@ -129,7 +129,7 @@ def main():
           }
         }
     ).result()
-    print("Create gremlin graph:\n{}".format(graph))
+    print(f"Create gremlin graph:\n{graph}")
 
     # Get gremlin database
     database = cosmosdb_client.gremlin_resources.get_gremlin_database(
@@ -137,7 +137,7 @@ def main():
         DATABASE_ACCOUNT,
         DATABASE_NAME
     )
-    print("Get gremlin database:\n{}".format(database))
+    print(f"Get gremlin database:\n{database}")
 
     # Delete gremlin database
     cosmosdb_client.gremlin_resources.begin_delete_gremlin_database(

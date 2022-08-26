@@ -67,27 +67,19 @@ def main():
         GROUP_NAME,
         REDIS,
         {
-          "location": "eastus",
-          "zones": [
-            "1"
-          ],
-          "sku": {
-            "name": "Premium",
-            "family": "P",
-            "capacity": "1"
-          },
-          "enable_non_ssl_port": True,
-          "shard_count": "2",
-          # "replicas_per_master": "2",
-          "redis_configuration": {
-            "maxmemory-policy": "allkeys-lru"
-          },
-          "subnet_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + NETWORK_NAME + "/subnets/" + SUBNET_NAME,
-          "static_ip": "10.0.0.5",
-          "minimum_tls_version": "1.2"
-        }
+            "location": "eastus",
+            "zones": ["1"],
+            "sku": {"name": "Premium", "family": "P", "capacity": "1"},
+            "enable_non_ssl_port": True,
+            "shard_count": "2",
+            "redis_configuration": {"maxmemory-policy": "allkeys-lru"},
+            "subnet_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{NETWORK_NAME}/subnets/{SUBNET_NAME}",
+            "static_ip": "10.0.0.5",
+            "minimum_tls_version": "1.2",
+        },
     ).result()
-    print("Create redis:\n{}".format(redis))
+
+    print(f"Create redis:\n{redis}")
     # - end -
 
     # Create firewall rule
@@ -100,7 +92,7 @@ def main():
             "end_ip": "10.0.1.4"
         }
     )
-    print("Create firewall rule:\n{}".format(firewall_rule))
+    print(f"Create firewall rule:\n{firewall_rule}")
 
     # Get firewall rule
     firewall_rule = redis_client.firewall_rules.get(
@@ -108,7 +100,7 @@ def main():
         REDIS,
         FIREWALL_RULE
     )
-    print("Get firewall rule:\n{}".format(firewall_rule))
+    print(f"Get firewall rule:\n{firewall_rule}")
 
     # Delete firewall rule
     firewall_rule = redis_client.firewall_rules.delete(

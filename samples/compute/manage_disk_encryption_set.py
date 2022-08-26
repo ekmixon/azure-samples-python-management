@@ -42,7 +42,7 @@ def main():
         GROUP_NAME,
         {"location": "eastus"}
     )
-    print("Created a resource group:\n{}".format(resource_group))
+    print(f"Created a resource group:\n{resource_group}")
 
     # Create key
     vault = keyvault_client.vaults.begin_create_or_update(
@@ -86,10 +86,10 @@ def main():
             }
         }
     ).result()
-    print("Created a key:\n{}".format(vault))
+    print(f"Created a key:\n{vault}")
 
     key_client = KeyClient(vault.properties.vault_uri, DefaultAzureCredential())
-    
+
     expires_on = date_parse.parse("2050-02-02T08:00:00.000Z")
 
     key = key_client.create_key(
@@ -116,14 +116,14 @@ def main():
           }
         }
     ).result()
-    print("Create disk encryption set:\n{}".format(encryption_set))
+    print(f"Create disk encryption set:\n{encryption_set}")
 
     # Get disk encrytion set
     encryption_set = compute_client.disk_encryption_sets.get(
         GROUP_NAME,
         DISK_ENCRYPTION_SET_NAME
     )
-    print("Get disk encryption set:\n{}".format(encryption_set))
+    print(f"Get disk encryption set:\n{encryption_set}")
 
     # Update disk encryption set
     encryption_set = compute_client.disk_encryption_sets.begin_update(
@@ -142,7 +142,7 @@ def main():
           }
         }
     ).result()
-    print("Update disk encryption set:\n{}".format(encryption_set))
+    print(f"Update disk encryption set:\n{encryption_set}")
 
     # Delete disk encryption set
     compute_client.disk_encryption_sets.begin_delete(

@@ -85,7 +85,7 @@ def main():
           ]
         }
     ).result()
-    print("Create firewall policy rule group:\n{}".format(firewall_policy_rule_group))
+    print(f"Create firewall policy rule group:\n{firewall_policy_rule_group}")
 
     # Get firewall policy rule group
     firewall_policy_rule_group = network_client.firewall_policy_rule_groups.get(
@@ -93,7 +93,7 @@ def main():
         FIREWALL_POLICY,
         FIREWALL_POLICY_RULE_GROUP
     )
-    print("Get firewall policy rule group:\n{}".format(firewall_policy_rule_group))
+    print(f"Get firewall policy rule group:\n{firewall_policy_rule_group}")
 
     # Delete firewall policy rule group
     firewall_policy_rule_group = network_client.firewall_policy_rule_groups.begin_delete(

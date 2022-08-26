@@ -49,9 +49,7 @@ class createVMSample(object):
             subnet_name,
             {'address_prefix': '10.0.0.0/24'}
         )
-        subnet_info = async_subnet_creation.result()
-          
-        return subnet_info
+        return async_subnet_creation.result()
 
     def create_network_interface(self, group_name, location, nic_name, subnet):
 

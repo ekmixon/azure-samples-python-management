@@ -45,14 +45,14 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(server))
+    print(f"Create server:\n{server}")
 
     # Get server
     server = sql_client.servers.get(
         GROUP_NAME,
         SERVER
     )
-    print("Get server:\n{}".format(server))
+    print(f"Get server:\n{server}")
 
     # Update server
     server = sql_client.servers.begin_update(
@@ -63,8 +63,8 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Update server:\n{}".format(server))
-    
+    print(f"Update server:\n{server}")
+
     # Delete server
     server = sql_client.servers.begin_delete(
         GROUP_NAME,

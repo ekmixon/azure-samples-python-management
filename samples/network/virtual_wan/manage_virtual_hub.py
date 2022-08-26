@@ -55,25 +55,24 @@ def main():
         GROUP_NAME,
         VIRTUAL_HUB,
         {
-          "location": "West US",
-          "tags": {
-            "key1": "value1"
-          },
-          "virtual_wan": {
-            "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualWans/" + VIRTUAL_WAN + ""
-          },
-          "address_prefix": "10.168.0.0/24",
-          "sku": "Basic"
-        }
+            "location": "West US",
+            "tags": {"key1": "value1"},
+            "virtual_wan": {
+                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualWans/{VIRTUAL_WAN}"
+            },
+            "address_prefix": "10.168.0.0/24",
+            "sku": "Basic",
+        },
     ).result()
-    print("Create virtual hub:\n{}".format(virtual_hub))
+
+    print(f"Create virtual hub:\n{virtual_hub}")
 
     # Get virtual hub
     virtual_hub = network_client.virtual_hubs.get(
         GROUP_NAME,
         VIRTUAL_HUB
     )
-    print("Get virtual hub:\n{}".format(virtual_hub))
+    print(f"Get virtual hub:\n{virtual_hub}")
 
     # Update virtual hub
     virtual_hub = network_client.virtual_hubs.update_tags(
@@ -86,8 +85,8 @@ def main():
           }
         }
     )
-    print("Update virtual hub:\n{}".format(virtual_hub))
-    
+    print(f"Update virtual hub:\n{virtual_hub}")
+
     # Delete virtual hub
     virtual_hub = network_client.virtual_hubs.begin_delete(
         GROUP_NAME,

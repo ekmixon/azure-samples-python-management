@@ -49,7 +49,7 @@ def main():
           "location": "East US 2"
         }
     )
-    print("Create automation account:\n{}".format(automation_account))
+    print(f"Create automation account:\n{automation_account}")
 
     # Create runbook
     runbook = automation_client.runbook.create_or_update(
@@ -77,7 +77,7 @@ def main():
           }
         }
     )
-    print("Create runbook:\n{}".format(runbook))
+    print(f"Create runbook:\n{runbook}")
     # - end -
 
     # Create webhook
@@ -95,7 +95,7 @@ def main():
           }
         }
     )
-    print("Create webhook:\n{}".format(webhook))
+    print(f"Create webhook:\n{webhook}")
 
     # Get webhook
     webhook = automation_client.webhook.get(
@@ -103,7 +103,7 @@ def main():
         AUTOMATION_ACCOUNT,
         WEBHOOK
     )
-    print("Get webhook:\n{}".format(webhook))
+    print(f"Get webhook:\n{webhook}")
 
     # Update webhook
     webhook = automation_client.webhook.update(
@@ -116,8 +116,8 @@ def main():
           "description": "updated webhook"
         }
     )
-    print("Update webhook:\n{}".format(webhook))
-    
+    print(f"Update webhook:\n{webhook}")
+
     # Delete webhook
     webhook = automation_client.webhook.delete(
         GROUP_NAME,

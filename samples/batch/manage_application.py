@@ -75,8 +75,8 @@ def main():
           }
         }
     ).result()
-    print("Create storage account:\n{}".format(storage_account))
-    
+    print(f"Create storage account:\n{storage_account}")
+
     # Create account
     account = batch_client.batch_account.begin_create(
         GROUP_NAME,
@@ -88,7 +88,7 @@ def main():
             }
         }
     ).result()
-    print("Create batch account:\n{}".format(account))
+    print(f"Create batch account:\n{account}")
     # - end -
 
     # Create application
@@ -101,7 +101,7 @@ def main():
             "allow_updates": True
         }
     )
-    print("Create application:\n{}".format(application))
+    print(f"Create application:\n{application}")
 
     # Create application package
     package = batch_client.application_package.create(
@@ -110,7 +110,7 @@ def main():
         APPLICATION,
         "v1.0"
     )
-    print("Create package:\n{}".format(package))
+    print(f"Create package:\n{package}")
 
     # Get application
     application = batch_client.application.get(
@@ -118,7 +118,7 @@ def main():
         ACCOUNT,
         APPLICATION
     )
-    print("Get application:\n{}".format(application))
+    print(f"Get application:\n{application}")
 
     with io.BytesIO(b'Hello World') as f:
         headers = {'x-ms-blob-type': 'BlockBlob'}
@@ -149,7 +149,7 @@ def main():
             "default_version": "v1.0"
         }
     )
-    print("Update application:\n{}".format(application))
+    print(f"Update application:\n{application}")
 
     # Delete package
     batch_client.application_package.delete(
@@ -159,7 +159,7 @@ def main():
         "v1.0"
     )
     print("Delete package.\n")
-    
+
     # Delete application
     application = batch_client.application.delete(
         GROUP_NAME,

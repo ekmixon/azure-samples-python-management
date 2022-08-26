@@ -63,7 +63,10 @@ def main():
         EXPRESS_ROUTE_CIRCUIT_AUTHORIZATION,
         {}
     ).result()
-    print("Create express route circuit authorization:\n{}".format(express_route_circuit_authorization))
+    print(
+        f"Create express route circuit authorization:\n{express_route_circuit_authorization}"
+    )
+
 
     # Get express route circuit authorization
     express_route_circuit_authorization = network_client.express_route_circuit_authorizations.get(
@@ -71,7 +74,10 @@ def main():
         EXPRESS_ROUTE_CIRCUIT,
         EXPRESS_ROUTE_CIRCUIT_AUTHORIZATION
     )
-    print("Get express route circuit authorization:\n{}".format(express_route_circuit_authorization))
+    print(
+        f"Get express route circuit authorization:\n{express_route_circuit_authorization}"
+    )
+
 
     # Delete express route circuit authorization
     express_route_circuit_authorization = network_client.express_route_circuit_authorizations.begin_delete(

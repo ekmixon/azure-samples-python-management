@@ -60,7 +60,7 @@ def main():
           "api_properties": {}
         }
     ).result()
-    print("Create database account:\n{}".format(database_account))
+    print(f"Create database account:\n{database_account}")
     # - end -
 
     # Create cassandra keyspace
@@ -78,7 +78,7 @@ def main():
           }
         }
     ).result()
-    print("Create cassandra keyspace:\n{}".format(keysapce))
+    print(f"Create cassandra keyspace:\n{keysapce}")
 
     # Create cassandra table
     table = cosmosdb_client.cassandra_resources.begin_create_update_cassandra_table(
@@ -103,7 +103,7 @@ def main():
                   "name": "columnA"
                 }
               ]
-              
+
             }
           },
           "options": {
@@ -111,7 +111,7 @@ def main():
           }
         }
     ).result()
-    print("Create cassandra table:\n{}".format(table))
+    print(f"Create cassandra table:\n{table}")
 
     # Get cassandra keyspace
     keyspace = cosmosdb_client.cassandra_resources.get_cassandra_keyspace(
@@ -119,7 +119,7 @@ def main():
         DATABASE_ACCOUNT,
         KEYSPACE_NAME
     )
-    print("Get cassandra keyspace:\n{}".format(keyspace))
+    print(f"Get cassandra keyspace:\n{keyspace}")
 
     # Delete cassandra keyspace 
     cosmosdb_client.cassandra_resources.begin_delete_cassandra_keyspace(

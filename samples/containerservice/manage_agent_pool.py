@@ -75,7 +75,7 @@ def main():
         }
     ).result()
     # Create agent pool
-    for i in range(10):
+    for _ in range(10):
         try:
             agent_pool = containerservice_client.agent_pools.begin_create_or_update(
                 GROUP_NAME,
@@ -100,7 +100,7 @@ def main():
             time.sleep(30)
         else:
             break
-    print("Create agent pool:\n{}".format(agent_pool))
+    print(f"Create agent pool:\n{agent_pool}")
 
     # Get agent pool
     agent_pool = containerservice_client.agent_pools.get(
@@ -108,7 +108,7 @@ def main():
         AGENT_POOL,
         AGENT_POOL_NAME
     )
-    print("Get agent pool:\n{}".format(agent_pool))
+    print(f"Get agent pool:\n{agent_pool}")
 
     # Delete Group
     resource_client.resource_groups.begin_delete(

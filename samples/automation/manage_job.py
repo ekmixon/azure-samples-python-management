@@ -49,7 +49,7 @@ def main():
           "location": "East US 2"
         }
     )
-    print("Create automation account:\n{}".format(automation_account))
+    print(f"Create automation account:\n{automation_account}")
 
     # Create runbook
     runbook = automation_client.runbook.create_or_update(
@@ -77,7 +77,7 @@ def main():
           }
         }
     )
-    print("Create runbook:\n{}".format(runbook))
+    print(f"Create runbook:\n{runbook}")
     # - end -
 
     # Create job
@@ -96,7 +96,7 @@ def main():
           "run_on": ""
         }
     )
-    print("Create job:\n{}".format(job))
+    print(f"Create job:\n{job}")
 
     # Get job
     job = automation_client.job.get(
@@ -104,7 +104,7 @@ def main():
         AUTOMATION_ACCOUNT,
         JOB
     )
-    print("Get job:\n{}".format(job))
+    print(f"Get job:\n{job}")
 
     # Delete Group
     resource_client.resource_groups.begin_delete(

@@ -82,7 +82,7 @@ def main():
           }
         }
     ).result()
-    print("Create namespace:\n{}".format(namespace))
+    print(f"Create namespace:\n{namespace}")
 
     # Create namespace authorization rule
     rule = servicebus_client.namespaces.create_or_update_authorization_rule(
@@ -96,54 +96,40 @@ def main():
           ]
         }
     )
-    print("Create name authorization rule:\n{}".format(rule))
+    print(f"Create name authorization rule:\n{rule}")
 
     # Create namespace network rule set
     rule_set = servicebus_client.namespaces.create_or_update_network_rule_set(
         GROUP_NAME,
         NAMESPACE,
         {
-          "default_action": "Deny",
-          "virtual_network_rules": [
-            {
-              "subnet": {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + NETWORK_NAME + "/subnets/" + SUBNET_NAME
-              },
-              "ignore_missing_vnet_service_endpoint": True
-            }
-          ],
-          "ip_rules": [
-            {
-              "ip_mask": "1.1.1.1",
-              "action": "Allow"
-            },
-            {
-              "ip_mask": "1.1.1.2",
-              "action": "Allow"
-            },
-            {
-              "ip_mask": "1.1.1.3",
-              "action": "Allow"
-            },
-            {
-              "ip_mask": "1.1.1.4",
-              "action": "Allow"
-            },
-            {
-              "ip_mask": "1.1.1.5",
-              "action": "Allow"
-            }
-          ]
-        }
+            "default_action": "Deny",
+            "virtual_network_rules": [
+                {
+                    "subnet": {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{NETWORK_NAME}/subnets/{SUBNET_NAME}"
+                    },
+                    "ignore_missing_vnet_service_endpoint": True,
+                }
+            ],
+            "ip_rules": [
+                {"ip_mask": "1.1.1.1", "action": "Allow"},
+                {"ip_mask": "1.1.1.2", "action": "Allow"},
+                {"ip_mask": "1.1.1.3", "action": "Allow"},
+                {"ip_mask": "1.1.1.4", "action": "Allow"},
+                {"ip_mask": "1.1.1.5", "action": "Allow"},
+            ],
+        },
     )
-    print("Create network rule set:\n{}".format(rule_set))
+
+    print(f"Create network rule set:\n{rule_set}")
 
     # Get namespace
     namespace = servicebus_client.namespaces.get(
         GROUP_NAME,
         NAMESPACE
     )
-    print("Get namespace:\n{}".format(namespace))
+    print(f"Get namespace:\n{namespace}")
 
     # Get authorization rule
     rule = servicebus_client.namespaces.get_authorization_rule(
@@ -151,14 +137,14 @@ def main():
         NAMESPACE,
         AUTHORIZATION_RULE_NAME
     )
-    print("Get authorization rule:\n{}".format(rule))
+    print(f"Get authorization rule:\n{rule}")
 
     # Get network rule set
     rule_set = servicebus_client.namespaces.get_network_rule_set(
         GROUP_NAME,
         NAMESPACE
     )
-    print("Get network rule set:\n{}".format(rule_set))
+    print(f"Get network rule set:\n{rule_set}")
 
     # Update namespace
     namespace = servicebus_client.namespaces.update(
@@ -172,8 +158,8 @@ def main():
           }
         }
     )
-    print("Update namespace:\n{}".format(namespace))
-    
+    print(f"Update namespace:\n{namespace}")
+
     # Delete namespace
     result = servicebus_client.namespaces.begin_delete(
         GROUP_NAME,

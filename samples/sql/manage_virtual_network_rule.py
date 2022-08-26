@@ -54,7 +54,7 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(server))
+    print(f"Create server:\n{server}")
 
     # Create virtual network
     network = network_client.virtual_networks.begin_create_or_update(
@@ -67,7 +67,7 @@ def main():
             }
         }
     ).result()
-    print("Create virtual network:\n{}".format(network))
+    print(f"Create virtual network:\n{network}")
 
     # Create subnet
     subnet = network_client.subnets.begin_create_or_update(
@@ -78,7 +78,7 @@ def main():
             'address_prefix': '10.0.0.0/24',
         }
     ).result()
-    print("Create subnet:\n{}".format(subnet))
+    print(f"Create subnet:\n{subnet}")
     # - end -
 
     # Create virtual network rule
@@ -87,11 +87,12 @@ def main():
         SERVER,
         VIRTUAL_NETWORK_RULE,
         {
-          "ignore_missing_vnet_service_endpoint": True,
-          "virtual_network_subnet_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + NETWORK + "/subnets/" + SUBNET
-        }
+            "ignore_missing_vnet_service_endpoint": True,
+            "virtual_network_subnet_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{NETWORK}/subnets/{SUBNET}",
+        },
     ).result()
-    print("Create virtual network rule:\n{}".format(virtual_network_rule))
+
+    print(f"Create virtual network rule:\n{virtual_network_rule}")
 
     # Get virtual network rule
     virtual_network_rule = sql_client.virtual_network_rules.get(
@@ -99,7 +100,7 @@ def main():
         SERVER,
         VIRTUAL_NETWORK_RULE
     )
-    print("Get virtual network rule:\n{}".format(virtual_network_rule))
+    print(f"Get virtual network rule:\n{virtual_network_rule}")
 
     # Delete virtual network rule
     virtual_network_rule = sql_client.virtual_network_rules.begin_delete(

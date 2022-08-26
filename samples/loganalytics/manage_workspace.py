@@ -26,7 +26,7 @@ def main():
         workspace_name,
         {"location": "eastus"}
     ).result()
-    print("Create consumption:\n{}\n".format(loganalytics))
+    print(f"Create consumption:\n{loganalytics}\n")
 
     loganalytics=loganalytics_client.workspaces.list()
     print("List consumption:")
@@ -37,14 +37,14 @@ def main():
         GROUP_NAME,
         workspace_name
     )
-    print("\nGet consumption:\n{}\n".format(loganalytics))
+    print(f"\nGet consumption:\n{loganalytics}\n")
 
 
     loganalytics=loganalytics_client.workspaces.begin_delete(
         GROUP_NAME,
         workspace_name
     ).result()
-    print("Delete consumption:\n{}\n".format(loganalytics))
+    print(f"Delete consumption:\n{loganalytics}\n")
 
     resource_client.resource_groups.begin_delete(
         GROUP_NAME

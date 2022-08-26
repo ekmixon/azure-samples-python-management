@@ -46,14 +46,14 @@ def main():
             "disk_size_gb": "200"
         }
     ).result()
-    print("Create disk:\n{}".format(disk))
+    print(f"Create disk:\n{disk}")
 
     # Get disk
     disk = compute_client.disks.get(
         GROUP_NAME,
         DISK
     )
-    print("Get disk:\n{}".format(disk))
+    print(f"Get disk:\n{disk}")
 
     # Update disk
     disk = compute_client.disks.begin_update(
@@ -63,8 +63,8 @@ def main():
             "disk_size_gb": "200"
         }
     ).result()
-    print("Update disk:\n{}".format(disk))
-    
+    print(f"Update disk:\n{disk}")
+
     # Delete disk
     disk = compute_client.disks.begin_delete(
         GROUP_NAME,

@@ -30,7 +30,10 @@ def main():
     STORAGE_ACCOUNT_NAME = "storageaccountxxxy"
     NETWORK_WATCHER_NAME = "networkwatcher"
 
-    your_password = 'A1_' + ''.join(random.choice(string.ascii_lowercase) for i in range(8))
+    your_password = 'A1_' + ''.join(
+        random.choice(string.ascii_lowercase) for _ in range(8)
+    )
+
 
     # Create client
     # For other authentication approaches, please see: https://pypi.org/project/azure-identity/
@@ -184,14 +187,15 @@ def main():
         NETWORK_WATCHER_NAME,
         PACKET_CAPTURE,
         {
-          "target": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Compute/virtualMachines/" + VIRTUAL_MACHINE_NAME + "",
-          "storage_location": {
-            "storage_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Storage/storageAccounts/" + STORAGE_ACCOUNT_NAME + "",
-            "storage_path": "https://" + STORAGE_ACCOUNT_NAME + ".blob.core.windows.net/capture/pc1.cap",
-          }
-        }
+            "target": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Compute/virtualMachines/{VIRTUAL_MACHINE_NAME}",
+            "storage_location": {
+                "storage_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Storage/storageAccounts/{STORAGE_ACCOUNT_NAME}",
+                "storage_path": f"https://{STORAGE_ACCOUNT_NAME}.blob.core.windows.net/capture/pc1.cap",
+            },
+        },
     ).result()
-    print("Create packet capture:\n{}".format(packet_capture))
+
+    print(f"Create packet capture:\n{packet_capture}")
 
     # Get packet capture
     packet_capture = network_client.packet_captures.get(
@@ -199,7 +203,7 @@ def main():
         NETWORK_WATCHER_NAME,
         PACKET_CAPTURE
     )
-    print("Get packet capture:\n{}".format(packet_capture))
+    print(f"Get packet capture:\n{packet_capture}")
 
     # Delete packet capture
     packet_capture = network_client.packet_captures.begin_delete(

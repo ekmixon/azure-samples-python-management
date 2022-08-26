@@ -68,14 +68,18 @@ def main():
     ).result()
 
     vn_para = VirtualNetworkGateway(
-        ip_configurations=[VirtualNetworkGatewayIPConfiguration(
-            private_ip_allocation_method="Dynamic",
-            subnet=SubResource(
-                id="/subscriptions/" + subscription + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + VIRTUAL_NETWORK_NAME + "/subnets/" + SUBNET + ""),
-            public_ip_address=SubResource(
-                id="/subscriptions/" + subscription + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/publicIPAddresses/" + PUBLIC_IP_ADDRESS_NAME + ""),
-            name=IP_CONFIGURATION_NAME
-        )],
+        ip_configurations=[
+            VirtualNetworkGatewayIPConfiguration(
+                private_ip_allocation_method="Dynamic",
+                subnet=SubResource(
+                    id=f"/subscriptions/{subscription}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{VIRTUAL_NETWORK_NAME}/subnets/{SUBNET}"
+                ),
+                public_ip_address=SubResource(
+                    id=f"/subscriptions/{subscription}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/publicIPAddresses/{PUBLIC_IP_ADDRESS_NAME}"
+                ),
+                name=IP_CONFIGURATION_NAME,
+            )
+        ],
         gateway_type="Vpn",
         vpn_type="RouteBased",
         enable_bgp=False,
@@ -83,14 +87,21 @@ def main():
         enable_dns_forwarding=False,
         sku=VirtualNetworkGatewaySku(name="VpnGw2", tier="VpnGw2"),
         vpn_client_configuration=VpnClientConfiguration(
-            vpn_client_address_pool=AddressSpace(address_prefixes=["192.168.0.0/24"]),
+            vpn_client_address_pool=AddressSpace(
+                address_prefixes=["192.168.0.0/24"]
+            ),
             vpn_authentication_types=['Certificate'],
-            vpn_client_root_certificates=[VpnClientRootCertificate(name="testCA", public_cert_data=root_cert)],
+            vpn_client_root_certificates=[
+                VpnClientRootCertificate(
+                    name="testCA", public_cert_data=root_cert
+                )
+            ],
             vpn_client_protocols=["OpenVPN"],
         ),
         vpn_gateway_generation="Generation2",
-        location=LOCATION
+        location=LOCATION,
     )
+
 
     # Create virtual network gateway
     virtual_network_gateway = nmclient.virtual_network_gateways.begin_create_or_update(

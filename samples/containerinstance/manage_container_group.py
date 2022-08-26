@@ -89,14 +89,14 @@ def main():
           ]
         }
     ).result()
-    print("Create container group:\n{}".format(container_group))
+    print(f"Create container group:\n{container_group}")
 
     # Get container group
     container_group = containerinstance_client.container_groups.get(
         GROUP_NAME,
         CONTAINER_GROUP
     )
-    print("Get container group:\n{}".format(container_group))
+    print(f"Get container group:\n{container_group}")
 
     # Update container group
     container_group = containerinstance_client.container_groups.update(
@@ -109,7 +109,7 @@ def main():
           }
         }
     )
-    print("Update container group:\n{}".format(container_group))
+    print(f"Update container group:\n{container_group}")
 
     # Container exec
     result = containerinstance_client.containers.execute_command(
@@ -124,8 +124,8 @@ def main():
           }
         }
     )
-    print("Container exec:\n{}".format(result))
-    
+    print(f"Container exec:\n{result}")
+
     # Delete container group
     container_group = containerinstance_client.container_groups.begin_delete(
         GROUP_NAME,

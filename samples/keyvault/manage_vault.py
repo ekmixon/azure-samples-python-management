@@ -104,14 +104,14 @@ def main():
           }
         }
     ).result()
-    print("Create vault:\n{}".format(vault))
+    print(f"Create vault:\n{vault}")
 
     # Get vault
     vault = keyvault_client.vaults.get(
         GROUP_NAME,
         VAULT
     )
-    print("Get vault:\n{}".format(vault))
+    print(f"Get vault:\n{vault}")
 
     # Update vault
     vault = keyvault_client.vaults.update(
@@ -123,8 +123,8 @@ def main():
             }
         }
     )
-    print("Update vault:\n{}".format(vault))
-    
+    print(f"Update vault:\n{vault}")
+
     # Delete vault
     keyvault_client.vaults.delete(
         GROUP_NAME,

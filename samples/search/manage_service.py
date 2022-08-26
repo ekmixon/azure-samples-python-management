@@ -48,14 +48,14 @@ def main():
             }
         }
     ).result()
-    print("Create service:\n{}".format(service))
+    print(f"Create service:\n{service}")
 
     # Get service
     service = search_client.services.get(
         GROUP_NAME,
         SERVICE
     )
-    print("Get service:\n{}".format(service))
+    print(f"Get service:\n{service}")
 
     # Delete service
     service = search_client.services.delete(

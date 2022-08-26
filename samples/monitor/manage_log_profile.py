@@ -73,11 +73,11 @@ def main():
           "storage_account_id": storage_account.id,
         }
     )
-    print("Create log profile:\n{}".format(log_profile))
+    print(f"Create log profile:\n{log_profile}")
 
     # Get log profile
     log_profile = monitor_client.log_profiles.delete(LOGPROFILE_NAME)
-    print("Get log profile:\n{}".format(log_profile))
+    print(f"Get log profile:\n{log_profile}")
 
     # Delete log profile
     monitor_client.log_profiles.delete(LOGPROFILE_NAME)

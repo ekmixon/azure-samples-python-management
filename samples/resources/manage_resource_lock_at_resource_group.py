@@ -40,14 +40,14 @@ def main():
             "level": "CanNotDelete"
         }
     )
-    print("Create lock: {}".format(lock))
+    print(f"Create lock: {lock}")
 
     # Get lock
     lock = lock_client.management_locks.get_at_resource_group_level(
         GROUP_NAME,
         LOCK_NAME
     )
-    print("Get lock: {}".format(lock))
+    print(f"Get lock: {lock}")
 
     # Delete lock
     lock_client.management_locks.delete_at_resource_group_level(

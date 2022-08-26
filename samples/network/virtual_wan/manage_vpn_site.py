@@ -55,43 +55,38 @@ def main():
         GROUP_NAME,
         VPN_SITE,
         {
-          "tags": {
-            "key1": "value1"
-          },
-          "location": "West US",
-          "virtual_wan": {
-            "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualWans/" + VIRTUAL_WAN + ""
-          },
-          "address_space": {
-            "address_prefixes": [
-              "10.0.0.0/16"
-            ]
-          },
-          "is_security_site": False,
-          "vpn_site_links": [
-            {
-              "name": "vpnSiteLink1",
-              "ip_address": "50.50.50.56",
-              "link_properties": {
-                "link_provider_name": "vendor1",
-                "link_speed_in_mbps": "0"
-              },
-              "bgp_properties": {
-                "bgp_peering_address": "192.168.0.0",
-                "asn": "1234"
-              }
-            }
-          ]
-        }
+            "tags": {"key1": "value1"},
+            "location": "West US",
+            "virtual_wan": {
+                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualWans/{VIRTUAL_WAN}"
+            },
+            "address_space": {"address_prefixes": ["10.0.0.0/16"]},
+            "is_security_site": False,
+            "vpn_site_links": [
+                {
+                    "name": "vpnSiteLink1",
+                    "ip_address": "50.50.50.56",
+                    "link_properties": {
+                        "link_provider_name": "vendor1",
+                        "link_speed_in_mbps": "0",
+                    },
+                    "bgp_properties": {
+                        "bgp_peering_address": "192.168.0.0",
+                        "asn": "1234",
+                    },
+                }
+            ],
+        },
     ).result()
-    print("Create vpn site:\n{}".format(vpn_site))
+
+    print(f"Create vpn site:\n{vpn_site}")
 
     # Get vpn site
     vpn_site = network_client.vpn_sites.get(
         GROUP_NAME,
         VPN_SITE
     )
-    print("Get vpn site:\n{}".format(vpn_site))
+    print(f"Get vpn site:\n{vpn_site}")
 
     # Update vpn site
     vpn_site = network_client.vpn_sites.update_tags(
@@ -104,8 +99,8 @@ def main():
           }
         }
     )
-    print("Update vpn site:\n{}".format(vpn_site))
-    
+    print(f"Update vpn site:\n{vpn_site}")
+
     # Delete vpn site
     vpn_site = network_client.vpn_sites.begin_delete(
         GROUP_NAME,

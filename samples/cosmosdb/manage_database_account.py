@@ -58,14 +58,14 @@ def main():
           ]
         }
     ).result()
-    print("Create database account:\n{}".format(database_account))
+    print(f"Create database account:\n{database_account}")
 
     # Get database account
     database_account = cosmosdb_client.database_accounts.get(
         GROUP_NAME,
         DATABASE_ACCOUNT
     )
-    print("Get database account:\n{}".format(database_account))
+    print(f"Get database account:\n{database_account}")
 
     # Update database account
     database_account = cosmosdb_client.database_accounts.begin_update(
@@ -77,8 +77,8 @@ def main():
           }
         }
     ).result()
-    print("Update database account:\n{}".format(database_account))
-    
+    print(f"Update database account:\n{database_account}")
+
     # Delete database account
     database_account = cosmosdb_client.database_accounts.begin_delete(
         GROUP_NAME,

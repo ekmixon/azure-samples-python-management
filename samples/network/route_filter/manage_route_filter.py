@@ -45,14 +45,14 @@ def main():
           "rules": []
         }
     ).result()
-    print("Create route filter:\n{}".format(route_filter))
+    print(f"Create route filter:\n{route_filter}")
 
     # Get route filter
     route_filter = network_client.route_filters.get(
         GROUP_NAME,
         ROUTE_FILTER
     )
-    print("Get route filter:\n{}".format(route_filter))
+    print(f"Get route filter:\n{route_filter}")
 
     # Update route filter
     route_filter = network_client.route_filters.update_tags(
@@ -64,8 +64,8 @@ def main():
           }
         }
     )
-    print("Update route filter:\n{}".format(route_filter))
-    
+    print(f"Update route filter:\n{route_filter}")
+
     # Delete route filter
     route_filter = network_client.route_filters.begin_delete(
         GROUP_NAME,

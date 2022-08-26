@@ -99,7 +99,7 @@ def main():
           "post_migration_name": POST_MIGRATION_NAME
         }
     ).result()
-    print("Create migration config:\n{}".format(migration_config))
+    print(f"Create migration config:\n{migration_config}")
 
     # Complete migration config
     result = servicebus_client.migration_configs.complete_migration(
@@ -124,7 +124,7 @@ def main():
             MIGRATION_CONFIG
         )
         count += 1
-    print("Get migration config:\n{}".format(migration_config))
+    print(f"Get migration config:\n{migration_config}")
 
     # Delete migration config
     try:

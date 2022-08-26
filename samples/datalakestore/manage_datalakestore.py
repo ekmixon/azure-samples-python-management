@@ -65,20 +65,20 @@ def main():
     #         'tag1': 'value1'
     #     }
     # )
-    
+
     datalakestore = datalakestore_client.accounts.begin_create(
         GROUP_NAME,
         ACCOUNT_NAME,
         params_create
     ).result()
-    print("Create datalakestore:\n{}".format(datalakestore))
+    print(f"Create datalakestore:\n{datalakestore}")
 
     # Get datalakestore
     datalakestore = datalakestore_client.accounts.get(
         GROUP_NAME,
         ACCOUNT_NAME
     )
-    print("Get datalakestore:\n{}".format(datalakestore))
+    print(f"Get datalakestore:\n{datalakestore}")
 
     # Update datalakestore
     datalakestore = datalakestore_client.accounts.begin_update(
@@ -90,8 +90,8 @@ def main():
                 }
             )
     ).result()
-    print("Update datalakestore:\n{}".format(datalakestore))
-    
+    print(f"Update datalakestore:\n{datalakestore}")
+
     # Delete datalakestore
     datalakestore = datalakestore_client.accounts.begin_delete(
         GROUP_NAME,

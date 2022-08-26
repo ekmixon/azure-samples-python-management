@@ -15,10 +15,15 @@ def main():
         subscription_id=subscription_id
     )
     #
-    loganalytics_client_gov = LogAnalyticsManagementClient(credentials, subscription_id,
-                                                           base_url=AZURE_US_GOV_CLOUD.endpoints.resource_manager,
-                                                           credential_scopes=[
-                                                               AZURE_US_GOV_CLOUD.endpoints.resource_manager + ".default"])
+    loganalytics_client_gov = LogAnalyticsManagementClient(
+        credentials,
+        subscription_id,
+        base_url=AZURE_US_GOV_CLOUD.endpoints.resource_manager,
+        credential_scopes=[
+            f"{AZURE_US_GOV_CLOUD.endpoints.resource_manager}.default"
+        ],
+    )
+
     resource_client.resource_groups.create_or_update(
         GROUP_NAME,
         {"location": "eastus"}
@@ -29,7 +34,7 @@ def main():
         workspace_name,
         {"location": "eastus"}
     ).result()
-    print("Create consumption:\n{}\n".format(loganalytics))
+    print(f"Create consumption:\n{loganalytics}\n")
 
     loganalytics = loganalytics_client_gov.workspaces.list()
     print("List consumption:")
@@ -40,13 +45,13 @@ def main():
         GROUP_NAME,
         workspace_name
     )
-    print("\nGet consumption:\n{}\n".format(loganalytics))
+    print(f"\nGet consumption:\n{loganalytics}\n")
 
     loganalytics = loganalytics_client_gov.workspaces.begin_delete(
         GROUP_NAME,
         workspace_name
     ).result()
-    print("Delete consumption:\n{}\n".format(loganalytics))
+    print(f"Delete consumption:\n{loganalytics}\n")
 
 
 if __name__ == "__main__":

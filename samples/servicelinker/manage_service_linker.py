@@ -54,14 +54,14 @@ def random_string(length: int) -> str:
 
 # Setup connection between Spring Cloud App and SQL Database using username and password by creating Service Linker
 def create_spring_cloud_and_sql_connection(credential: azure.core.credentials.TokenCredential, SUBSCRIPTION_ID: str, RESOURCE_GROUP_NAME: str):
-    RESOURCE_GROUP_NAME = RESOURCE_GROUP_NAME or 'rg' + random_string(8)
+    RESOURCE_GROUP_NAME = RESOURCE_GROUP_NAME or f'rg{random_string(8)}'
     REGION = 'eastus'
-    SPRING_SERVICE_NAME = 'spring' + random_string(8)
-    SPRING_APP_NAME = 'app' + random_string(8)
-    SQL_SERVER_NAME = 'sqlserver' + random_string(8)
-    SQL_DATABASE_NAME = 'sqldb' + random_string(8)
-    SQL_USER_NAME = 'sql' + random_string(8)
-    SQL_PASSWORD = '5$Ql' + random_string(8)
+    SPRING_SERVICE_NAME = f'spring{random_string(8)}'
+    SPRING_APP_NAME = f'app{random_string(8)}'
+    SQL_SERVER_NAME = f'sqlserver{random_string(8)}'
+    SQL_DATABASE_NAME = f'sqldb{random_string(8)}'
+    SQL_USER_NAME = f'sql{random_string(8)}'
+    SQL_PASSWORD = f'5$Ql{random_string(8)}'
     LINKER_NAME = 'sql'
 
     resource_client = azure.mgmt.resource.ResourceManagementClient(
@@ -114,7 +114,7 @@ def create_spring_cloud_and_sql_connection(credential: azure.core.credentials.To
             }
         }
     ).result()
-    print('created spring cloud deployment: {}'.format(deployment.id))
+    print(f'created spring cloud deployment: {deployment.id}')
 
     # Create SQL Database
     sql_client.servers.begin_create_or_update(
@@ -134,7 +134,7 @@ def create_spring_cloud_and_sql_connection(credential: azure.core.credentials.To
             'location': REGION,
         }
     ).result()
-    print('created sql database: {}'.format(sql_database.id))
+    print(f'created sql database: {sql_database.id}')
 
     # Setup connection between Spring Cloud App and SQL Database using username and password by creating Service Linker
     linker = service_linker_client.linker.begin_create_or_update(
@@ -156,7 +156,7 @@ def create_spring_cloud_and_sql_connection(credential: azure.core.credentials.To
             'clientType': 'django',
         },
     ).result()
-    print('created service linker: {}'.format(linker.id))
+    print(f'created service linker: {linker.id}')
 
     # List Configurations of the connection
     configuration =  service_linker_client.linker.list_configurations(
@@ -166,17 +166,17 @@ def create_spring_cloud_and_sql_connection(credential: azure.core.credentials.To
 
     print('Configurations:')
     for config in configuration.configurations:
-        print('\t{}: {}'.format(config.name, config.value))
+        print(f'\t{config.name}: {config.value}')
 
 
 # Setup connection between Web App and Key Vault using User Assigned Identity by creating Service Linker
 def create_web_app_and_key_vault_connection(credential: azure.core.credentials.TokenCredential, SUBSCRIPTION_ID: str, TENANT_ID: str, RESOURCE_GROUP_NAME: str):
-    RESOURCE_GROUP_NAME = RESOURCE_GROUP_NAME or 'rg' + random_string(8)
+    RESOURCE_GROUP_NAME = RESOURCE_GROUP_NAME or f'rg{random_string(8)}'
     REGION = 'eastus'
-    WEB_APP_PLAN_NAME = 'plan' + random_string(8)
-    WEB_APP_NAME = 'web' + random_string(8)
-    KEY_VAULT_NAME = 'vault' + random_string(8)
-    IDENTITY_NAME = 'identity' + random_string(8)
+    WEB_APP_PLAN_NAME = f'plan{random_string(8)}'
+    WEB_APP_NAME = f'web{random_string(8)}'
+    KEY_VAULT_NAME = f'vault{random_string(8)}'
+    IDENTITY_NAME = f'identity{random_string(8)}'
     LINKER_NAME = 'keyvault'
 
     resource_client = azure.mgmt.resource.ResourceManagementClient(
@@ -227,7 +227,7 @@ def create_web_app_and_key_vault_connection(credential: azure.core.credentials.T
             },
         }
     ).result()
-    print('created web app: {}'.format(web_app.id))
+    print(f'created web app: {web_app.id}')
 
     # Create Key Vault
     key_vault = key_vault_client.vaults.begin_create_or_update(
@@ -245,7 +245,7 @@ def create_web_app_and_key_vault_connection(credential: azure.core.credentials.T
             },
         }
     ).result()
-    print('created key vault: {}'.format(key_vault.id))
+    print(f'created key vault: {key_vault.id}')
 
     # Create User Assigned Identity
     identity = msi_client.user_assigned_identities.create_or_update(
@@ -255,7 +255,10 @@ def create_web_app_and_key_vault_connection(credential: azure.core.credentials.T
             'location': REGION,
         }
     )
-    print('created user assigned identity: {}, client_id: {}'.format(identity.id, identity.client_id))
+    print(
+        f'created user assigned identity: {identity.id}, client_id: {identity.client_id}'
+    )
+
 
     # Setup connection between Web App and Key Vault using User Assigned Identity by creating Service Linker
     linker = service_linker_client.linker.begin_create_or_update(
@@ -274,7 +277,7 @@ def create_web_app_and_key_vault_connection(credential: azure.core.credentials.T
             'clientType': 'python',
         },
     ).result()
-    print('created service linker: {}'.format(linker.id))
+    print(f'created service linker: {linker.id}')
 
     # List Configurations of the connection
     configuration =  service_linker_client.linker.list_configurations(
@@ -284,14 +287,14 @@ def create_web_app_and_key_vault_connection(credential: azure.core.credentials.T
 
     print('Configurations:')
     for config in configuration.configurations:
-        print('\t{}: {}'.format(config.name, config.value))
+        print(f'\t{config.name}: {config.value}')
 
 
 def main():
     credential = azure.identity.DefaultAzureCredential()
     SUBSCRIPTION_ID = os.environ.get("SUBSCRIPTION_ID", None)
     TENANT_ID = os.environ.get("AZURE_TENANT_ID", None)
-    RESOURCE_GROUP_NAME = 'rg' + random_string(8)
+    RESOURCE_GROUP_NAME = f'rg{random_string(8)}'
     try:
         create_spring_cloud_and_sql_connection(credential, SUBSCRIPTION_ID, RESOURCE_GROUP_NAME)
         create_web_app_and_key_vault_connection(credential, SUBSCRIPTION_ID, TENANT_ID, RESOURCE_GROUP_NAME)

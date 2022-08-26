@@ -23,7 +23,10 @@ def main():
     NETWORK_NAME = "networknamex"
     VIRTUAL_MACHINE_EXTENSION_NAME = "virtualmachineextensionx"
 
-    your_password = 'A1_' + ''.join(random.choice(string.ascii_lowercase) for i in range(8))
+    your_password = 'A1_' + ''.join(
+        random.choice(string.ascii_lowercase) for _ in range(8)
+    )
+
 
     # Create client
     # For other authentication approaches, please see: https://pypi.org/project/azure-identity/
@@ -85,60 +88,54 @@ def main():
         GROUP_NAME,
         VIRTUAL_MACHINE_NAME,
         {
-          "location": "eastus",
-          "hardware_profile": {
-            "vm_size": "Standard_D2_v2"
-          },
-          "storage_profile": {
-            "image_reference": {
-              "sku": "2016-Datacenter",
-              "publisher": "MicrosoftWindowsServer",
-              "version": "latest",
-              "offer": "WindowsServer"
+            "location": "eastus",
+            "hardware_profile": {"vm_size": "Standard_D2_v2"},
+            "storage_profile": {
+                "image_reference": {
+                    "sku": "2016-Datacenter",
+                    "publisher": "MicrosoftWindowsServer",
+                    "version": "latest",
+                    "offer": "WindowsServer",
+                },
+                "os_disk": {
+                    "caching": "ReadWrite",
+                    "managed_disk": {"storage_account_type": "Standard_LRS"},
+                    "name": "myVMosdisk",
+                    "create_option": "FromImage",
+                },
+                "data_disks": [
+                    {
+                        "disk_size_gb": "1023",
+                        "create_option": "Empty",
+                        "lun": "0",
+                    },
+                    {
+                        "disk_size_gb": "1023",
+                        "create_option": "Empty",
+                        "lun": "1",
+                    },
+                ],
             },
-            "os_disk": {
-              "caching": "ReadWrite",
-              "managed_disk": {
-                "storage_account_type": "Standard_LRS"
-              },
-              "name": "myVMosdisk",
-              "create_option": "FromImage"
+            "os_profile": {
+                "admin_username": "testuser",
+                "computer_name": "myVM",
+                "admin_password": your_password,
+                "windows_configuration": {
+                    "enable_automatic_updates": True  # need automatic update for reimage
+                },
             },
-            "data_disks": [
-              {
-                "disk_size_gb": "1023",
-                "create_option": "Empty",
-                "lun": "0"
-              },
-              {
-                "disk_size_gb": "1023",
-                "create_option": "Empty",
-                "lun": "1"
-              }
-            ]
-          },
-          "os_profile": {
-            "admin_username": "testuser",
-            "computer_name": "myVM",
-            "admin_password": your_password,
-            "windows_configuration": {
-              "enable_automatic_updates": True  # need automatic update for reimage
-            }
-          },
-          "network_profile": {
-            "network_interfaces": [
-              {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/networkInterfaces/" + INTERFACE_NAME + "",
-                # "id": NIC_ID,
-                "properties": {
-                  "primary": True
-                }
-              }
-            ]
-          }
-        }
+            "network_profile": {
+                "network_interfaces": [
+                    {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/networkInterfaces/{INTERFACE_NAME}",
+                        "properties": {"primary": True},
+                    }
+                ]
+            },
+        },
     ).result()
-    print("Create virtual machine:\n{}".format(vm))
+
+    print(f"Create virtual machine:\n{vm}")
 
     # Create vm extension
     extension = compute_client.virtual_machine_extensions.begin_create_or_update(
@@ -153,14 +150,14 @@ def main():
           "type_handler_version": "1.4",
         }
     ).result()
-    print("Create vm extension:\n{}".format(extension))
+    print(f"Create vm extension:\n{extension}")
 
     # Get virtual machine
     vm = compute_client.virtual_machines.get(
         GROUP_NAME,
         VIRTUAL_MACHINE_NAME
     )
-    print("Get virtual machine:\n{}".format(vm))
+    print(f"Get virtual machine:\n{vm}")
 
     # Get vm extension
     extension = compute_client.virtual_machine_extensions.get(
@@ -168,26 +165,25 @@ def main():
         VIRTUAL_MACHINE_NAME,
         VIRTUAL_MACHINE_EXTENSION_NAME
     )
-    print("Get vm extesnion:\n{}".format(extension))
+    print(f"Get vm extesnion:\n{extension}")
 
     # Update virtual machine
     vm = compute_client.virtual_machines.begin_update(
         GROUP_NAME,
         VIRTUAL_MACHINE_NAME,
         {
-          "network_profile": {
-            "network_interfaces": [
-              {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/networkInterfaces/" + INTERFACE_NAME + "",
-                "properties": {
-                  "primary": True
-                }
-              }
-            ]
-          }
-        }
+            "network_profile": {
+                "network_interfaces": [
+                    {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/networkInterfaces/{INTERFACE_NAME}",
+                        "properties": {"primary": True},
+                    }
+                ]
+            }
+        },
     ).result()
-    print("Update virtual machine:\n{}".format(vm))
+
+    print(f"Update virtual machine:\n{vm}")
 
     # Update vm extension
     extension = compute_client.virtual_machine_extensions.begin_update(
@@ -202,7 +198,7 @@ def main():
           }
         }
     ).result()
-    print("Update vm extension:\n{}".format(extension))
+    print(f"Update vm extension:\n{extension}")
 
 
     # Delete vm extension (Need vm started)

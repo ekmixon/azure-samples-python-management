@@ -49,20 +49,20 @@ async def main():
         }
     )
     network = await async_poller.result()
-    print("Create virtual network:\n{}".format(network))
+    print(f"Create virtual network:\n{network}")
 
     # Get virtual network
     network = await network_client.virtual_networks.get(
         GROUP_NAME,
         VIRTUAL_NETWORK_NAME
     )
-    print("Get virtual network:\n{}".format(network))
+    print(f"Get virtual network:\n{network}")
 
     # List virtual network (List operation will return asyncList)
-    networks = list()
+    networks = []
     async for net in network_client.virtual_networks.list(GROUP_NAME):
         networks.append(net)
-    print("List virtual networks:\n{}".format(networks))
+    print(f"List virtual networks:\n{networks}")
 
     # Update virtual network tags
     network = await network_client.virtual_networks.update_tags(
@@ -75,7 +75,7 @@ async def main():
           }
         }
     )
-    print("Update virtual network tags:\n{}".format(network))
+    print(f"Update virtual network tags:\n{network}")
 
     # Delete virtual network
     async_poller = await network_client.virtual_networks.begin_delete(

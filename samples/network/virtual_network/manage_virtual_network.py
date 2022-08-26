@@ -46,14 +46,14 @@ def main():
           "location": "eastus"
         }
     ).result()
-    print("Create virtual network:\n{}".format(network))
+    print(f"Create virtual network:\n{network}")
 
     # Get virtual network
     network = network_client.virtual_networks.get(
         GROUP_NAME,
         VIRTUAL_NETWORK_NAME
     )
-    print("Get virtual network:\n{}".format(network))
+    print(f"Get virtual network:\n{network}")
 
     # Update virtual network tags
     network = network_client.virtual_networks.update_tags(
@@ -66,7 +66,7 @@ def main():
           }
         }
     )
-    print("Update virtual network tags:\n{}".format(network))
+    print(f"Update virtual network tags:\n{network}")
 
     # Delete virtual network
     network_client.virtual_networks.begin_delete(

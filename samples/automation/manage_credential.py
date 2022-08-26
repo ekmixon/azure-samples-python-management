@@ -48,7 +48,7 @@ def main():
           "location": "East US 2"
         }
     )
-    print("Create automation account:\n{}".format(automation_account))
+    print(f"Create automation account:\n{automation_account}")
     # - end -
 
     # Create credential
@@ -63,7 +63,7 @@ def main():
           "description": "my description goes here"
         }
     )
-    print("Create credential:\n{}".format(credential))
+    print(f"Create credential:\n{credential}")
 
     # Get credential
     credential = automation_client.credential.get(
@@ -71,7 +71,7 @@ def main():
         AUTOMATION_ACCOUNT,
         CREDENTIAL
     )
-    print("Get credential:\n{}".format(credential))
+    print(f"Get credential:\n{credential}")
 
     # Update credential
     credential = automation_client.credential.update(
@@ -85,8 +85,8 @@ def main():
           "description": "my description goes here"
         }
     )
-    print("Update credential:\n{}".format(credential))
-    
+    print(f"Update credential:\n{credential}")
+
     # Delete credential
     credential = automation_client.credential.delete(
         GROUP_NAME,

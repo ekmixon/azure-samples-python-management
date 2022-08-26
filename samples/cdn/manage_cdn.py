@@ -18,8 +18,8 @@ def main():
 
     SUBSCRIPTION_ID = os.environ.get("SUBSCRIPTION_ID", None)
     TIME = str(time.time()).replace('.','')
-    GROUP_NAME = "testcdn" + TIME
-    CDN = "cdn" + TIME
+    GROUP_NAME = f"testcdn{TIME}"
+    CDN = f"cdn{TIME}"
     LOCATION='WestUs'
 
     # Create client
@@ -55,14 +55,14 @@ def main():
             }
         }
     ).result()
-    print("Create cdn:\n{}\n".format(cdn))
+    print(f"Create cdn:\n{cdn}\n")
 
     # Get cdn
     cdn = cdn_client.profiles.get(
         GROUP_NAME,
         CDN
     )
-    print("Get cdn:\n{}\n".format(cdn))
+    print(f"Get cdn:\n{cdn}\n")
 
     # Update cdn
     cdn = cdn_client.profiles.begin_update(
@@ -74,8 +74,8 @@ def main():
             }
         }
     ).result()
-    print("Update cdn:\n{}\n".format(cdn))
-    
+    print(f"Update cdn:\n{cdn}\n")
+
     # Delete cdn
     cdn = cdn_client.profiles.begin_delete(
         GROUP_NAME,

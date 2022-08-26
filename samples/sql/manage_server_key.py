@@ -64,7 +64,7 @@ def main():
           "public_network_access":"Enabled"
         }
     ).result()
-    print("Create server:\n{}".format(server))
+    print(f"Create server:\n{server}")
 
     # Create vault
     vault = keyvault_client.vaults.begin_create_or_update(
@@ -169,7 +169,7 @@ def main():
         size=2048,
         expires_on=date_parse.parse("2050-02-02T08:00:00.000Z")
     )
-    SERVER_KEY = VAULT + "_testkey_" + key.id.split("/")[-1]
+    SERVER_KEY = f"{VAULT}_testkey_" + key.id.split("/")[-1]
     # - end -
 
     # Create server key
@@ -183,7 +183,7 @@ def main():
             "uri": key.id
         }
     ).result()
-    print("Create server key:\n{}".format(server_key))
+    print(f"Create server key:\n{server_key}")
 
     # Get server key
     server_key = sql_client.server_keys.get(
@@ -191,7 +191,7 @@ def main():
         SERVER,
         SERVER_KEY
     )
-    print("Get server key:\n{}".format(server_key))
+    print(f"Get server key:\n{server_key}")
 
     # Delete server key
     server_key = sql_client.server_keys.begin_delete(

@@ -45,14 +45,14 @@ def main():
           }
         }
     ).result()
-    print("Create public ip prefix:\n{}".format(public_ip_prefix))
+    print(f"Create public ip prefix:\n{public_ip_prefix}")
 
     # Get public ip prefix
     public_ip_prefix = network_client.public_ip_prefixes.get(
         GROUP_NAME,
         PUBLIC_IP_PREFIX
     )
-    print("Get public ip prefix:\n{}".format(public_ip_prefix))
+    print(f"Get public ip prefix:\n{public_ip_prefix}")
 
     # Update public ip prefix
     public_ip_prefix = network_client.public_ip_prefixes.update_tags(
@@ -65,8 +65,8 @@ def main():
           }
         }
     )
-    print("Update public ip prefix:\n{}".format(public_ip_prefix))
-    
+    print(f"Update public ip prefix:\n{public_ip_prefix}")
+
     # Delete public ip prefix
     public_ip_prefix = network_client.public_ip_prefixes.begin_delete(
         GROUP_NAME,

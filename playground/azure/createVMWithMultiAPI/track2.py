@@ -10,7 +10,9 @@ from azure.mgmt.network import models as network_models
 from azure.mgmt.resource.resources import models as resource_models
 from azure.identity import DefaultAzureCredential
 
-YOUR_PASSWORD = 'A1_' + ''.join(random.choice(string.ascii_lowercase) for i in range(21))
+YOUR_PASSWORD = 'A1_' + ''.join(
+    random.choice(string.ascii_lowercase) for _ in range(21)
+)
 
 class createVMSample(object):
 
@@ -113,9 +115,7 @@ class createVMSample(object):
             #     }]
             # }
         )
-        nic = async_nic_creation.result()
-
-        return nic
+        return async_nic_creation.result()
 
     def create_vm(self, vm_name, network_name, subnet_name, interface_name):
         group_name = self.group.name
@@ -235,7 +235,7 @@ class createVMSample(object):
             model_style_vm
         )
         vm = result.result()
-        print("Create VM successfully\nVM:\n{}".format(vm))
+        print(f"Create VM successfully\nVM:\n{vm}")
 
 
 def main():

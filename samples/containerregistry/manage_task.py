@@ -91,7 +91,7 @@ def main():
           }
         }
     ).result()
-    print("Create task:\n{}".format(task))
+    print(f"Create task:\n{task}")
 
     # Get task
     task = containerregistry_client.tasks.get(
@@ -99,7 +99,7 @@ def main():
         REGISTRIES,
         TASK
     )
-    print("Get task:\n{}".format(task))
+    print(f"Get task:\n{task}")
 
     # Update task
     task = containerregistry_client.tasks.begin_update(
@@ -139,8 +139,8 @@ def main():
           }
         }
     ).result()
-    print("Update task:\n{}".format(task))
-    
+    print(f"Update task:\n{task}")
+
     # Delete task
     task = containerregistry_client.tasks.begin_delete(
         GROUP_NAME,

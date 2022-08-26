@@ -87,7 +87,7 @@ def main():
         }
 
     )
-    print("Create consumption:\n{}\n".format(costmanagement))
+    print(f"Create consumption:\n{costmanagement}\n")
 
     costmanagement_client.exports.delete(
         scope,

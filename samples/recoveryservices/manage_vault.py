@@ -46,14 +46,14 @@ def main():
             "properties": {}
         }
     )
-    print("Create vault:\n{}".format(vault))
+    print(f"Create vault:\n{vault}")
 
     # Get vault
     vault = recoveryservices_client.vaults.get(
         GROUP_NAME,
         VAULT
     )
-    print("Get vault:\n{}".format(vault))
+    print(f"Get vault:\n{vault}")
 
     # Update vault
     vault = recoveryservices_client.vaults.update(
@@ -67,8 +67,8 @@ def main():
             "properties": {}
         }
     )
-    print("Update vault:\n{}".format(vault))
-    
+    print(f"Update vault:\n{vault}")
+
     # Delete vault
     vault = recoveryservices_client.vaults.delete(
         GROUP_NAME,

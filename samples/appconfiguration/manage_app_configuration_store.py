@@ -44,14 +44,14 @@ def main():
           }
         }
     ).result()
-    print("Create appconfigruation store:\n{}".format(appconfig_store))
+    print(f"Create appconfigruation store:\n{appconfig_store}")
 
     # Get appconfiguration store
     appconfig_store = appconfig_client.configuration_stores.get(
         GROUP_NAME,
         CONFIG_STORE_NAME
     )
-    print("Get appconfigruation store:\n{}".format(appconfig_store))
+    print(f"Get appconfigruation store:\n{appconfig_store}")
 
     # Update appconfiguration store
     appconfig_store = appconfig_client.configuration_stores.begin_update(
@@ -66,7 +66,7 @@ def main():
           }
         }
     ).result()
-    print("Update appconfigruation store:\n{}".format(appconfig_store))
+    print(f"Update appconfigruation store:\n{appconfig_store}")
 
     # Delete appconfiguration store
     appconfig_client.configuration_stores.begin_delete(

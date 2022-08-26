@@ -48,7 +48,7 @@ def main():
           "location": "East US 2"
         }
     )
-    print("Create automation account:\n{}".format(automation_account))
+    print(f"Create automation account:\n{automation_account}")
     # - end -
 
     # Create variable
@@ -63,7 +63,7 @@ def main():
           "is_encrypted": False
         }
     )
-    print("Create variable:\n{}".format(variable))
+    print(f"Create variable:\n{variable}")
 
     # Get variable
     variable = automation_client.variable.get(
@@ -71,7 +71,7 @@ def main():
         AUTOMATION_ACCOUNT,
         VARIABLE
     )
-    print("Get variable:\n{}".format(variable))
+    print(f"Get variable:\n{variable}")
 
     # Update variable
     variable = automation_client.variable.update(
@@ -85,8 +85,8 @@ def main():
           "is_encrypted": False
         }
     )
-    print("Update variable:\n{}".format(variable))
-    
+    print(f"Update variable:\n{variable}")
+
     # Delete variable
     variable = automation_client.variable.delete(
         GROUP_NAME,

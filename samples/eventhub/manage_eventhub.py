@@ -78,24 +78,25 @@ def main():
         NAMESPACE_NAME,
         EVENTHUB_NAME,
         {
-          "message_retention_in_days": "4",
-          "partition_count": "4",
-          "status": "Active",
-          "capture_description": {
-            "enabled": True,
-            "encoding": "Avro",
-            "interval_in_seconds": "120",
-            "size_limit_in_bytes": "10485763",
-            "destination": {
-              "name": "EventHubArchive.AzureBlockBlob",
-              "storage_account_resource_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Storage/storageAccounts/" + STORAGE_ACCOUNT_NAME + "",
-              "blob_container": "container",
-              "archive_name_format": "{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}"
-            }
-          }
-        }
+            "message_retention_in_days": "4",
+            "partition_count": "4",
+            "status": "Active",
+            "capture_description": {
+                "enabled": True,
+                "encoding": "Avro",
+                "interval_in_seconds": "120",
+                "size_limit_in_bytes": "10485763",
+                "destination": {
+                    "name": "EventHubArchive.AzureBlockBlob",
+                    "storage_account_resource_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Storage/storageAccounts/{STORAGE_ACCOUNT_NAME}",
+                    "blob_container": "container",
+                    "archive_name_format": "{Namespace}/{EventHub}/{PartitionId}/{Year}/{Month}/{Day}/{Hour}/{Minute}/{Second}",
+                },
+            },
+        },
     )
-    print("Create EventHub: {}".format(eventhub))
+
+    print(f"Create EventHub: {eventhub}")
 
     # Get EventHub
     eventhub = eventhub_client.event_hubs.get(
@@ -103,7 +104,7 @@ def main():
         NAMESPACE_NAME,
         EVENTHUB_NAME
     )
-    print("Get EventHub: {}".format(eventhub))
+    print(f"Get EventHub: {eventhub}")
 
     # Delete EventHub
     eventhub_client.event_hubs.delete(

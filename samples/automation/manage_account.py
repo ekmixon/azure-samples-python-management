@@ -46,14 +46,14 @@ def main():
           "location": "East US 2"
         }
     )
-    print("Create automation account:\n{}".format(automation_account))
+    print(f"Create automation account:\n{automation_account}")
 
     # Get automation account
     automation_account = automation_client.automation_account.get(
         GROUP_NAME,
         AUTOMATION_ACCOUNT
     )
-    print("Get automation account:\n{}".format(automation_account))
+    print(f"Get automation account:\n{automation_account}")
 
     # Update automation account
     automation_account = automation_client.automation_account.update(
@@ -67,8 +67,8 @@ def main():
           "location": "East US 2"
         }
     )
-    print("Update automation account:\n{}".format(automation_account))
-    
+    print(f"Update automation account:\n{automation_account}")
+
     # Delete automation account
     automation_account = automation_client.automation_account.delete(
         GROUP_NAME,

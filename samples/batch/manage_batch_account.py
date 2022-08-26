@@ -72,7 +72,7 @@ def main():
           }
         }
     ).result()
-    print("Create storage account:\n{}".format(storage_account))
+    print(f"Create storage account:\n{storage_account}")
     # - end -
 
     # Create batch account
@@ -86,14 +86,14 @@ def main():
             }
         }
     ).result()
-    print("Create batch account:\n{}".format(batch_account))
+    print(f"Create batch account:\n{batch_account}")
 
     # Get batch account
     batch_account = batch_client.batch_account.get(
         GROUP_NAME,
         BATCH_ACCOUNT
     )
-    print("Get batch account:\n{}".format(batch_account))
+    print(f"Get batch account:\n{batch_account}")
 
     # Update batch account
     batch_account = batch_client.batch_account.update(
@@ -106,8 +106,8 @@ def main():
             }
         }
     )
-    print("Update batch account:\n{}".format(batch_account))
-    
+    print(f"Update batch account:\n{batch_account}")
+
     # Delete batch account
     batch_account = batch_client.batch_account.begin_delete(
         GROUP_NAME,

@@ -81,29 +81,30 @@ def main():
         GROUP_NAME,
         BASTION_HOST,
         {
-          "location": "eastus",
-          "ip_configurations": [
-            {
-              "name": "bastionHostIpConfiguration",
-              "subnet": {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + BASTION_VIRTUAL_NETWORK_NAME + "/subnets/" + BASTION_SUBNET_NAME + ""
-              },
-              "public_ip_address": {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/publicIPAddresses/" + PUBLIC_IP_ADDRESS_NAME + ""
-              }
-            }
-          ]
-        }
+            "location": "eastus",
+            "ip_configurations": [
+                {
+                    "name": "bastionHostIpConfiguration",
+                    "subnet": {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{BASTION_VIRTUAL_NETWORK_NAME}/subnets/{BASTION_SUBNET_NAME}"
+                    },
+                    "public_ip_address": {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/publicIPAddresses/{PUBLIC_IP_ADDRESS_NAME}"
+                    },
+                }
+            ],
+        },
     ).result()
-    print("Create bastion host:\n{}".format(bastion_host))
+
+    print(f"Create bastion host:\n{bastion_host}")
 
     # Get bastion host
     bastion_host = network_client.bastion_hosts.get(
         GROUP_NAME,
         BASTION_HOST
     )
-    print("Get bastion host:\n{}".format(bastion_host))
-    
+    print(f"Get bastion host:\n{bastion_host}")
+
     # Delete bastion host
     bastion_host = network_client.bastion_hosts.begin_delete(
         GROUP_NAME,

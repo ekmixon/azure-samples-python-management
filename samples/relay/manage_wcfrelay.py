@@ -51,7 +51,7 @@ def main():
             }
         }
     ).result()
-    print("Create namespace:\n{}".format(namespace))
+    print(f"Create namespace:\n{namespace}")
     # - end -
 
     # Create wcfrelay
@@ -66,7 +66,7 @@ def main():
             "user_metadata": "User dta for WcfRelay"
         }
     )
-    print("Create wcfrelay:\n{}".format(wcfrelay))
+    print(f"Create wcfrelay:\n{wcfrelay}")
 
     # Get wcfrelay
     wcfrelay = relay_client.wcf_relays.get(
@@ -74,7 +74,7 @@ def main():
         NAMESPACE,
         WCFRELAY
     )
-    print("Get wcfrelay:\n{}".format(wcfrelay))
+    print(f"Get wcfrelay:\n{wcfrelay}")
 
     # Delete wcfrelay
     wcfrelay = relay_client.wcf_relays.delete(

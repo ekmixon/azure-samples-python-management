@@ -18,8 +18,8 @@ def main():
 
     SUBSCRIPTION_ID = os.environ.get("SUBSCRIPTION_ID", None)
     TIME = str(time.time()).replace('.','')
-    GROUP_NAME = "testconsumption" + TIME
-    CONSUMPTION = "consumption" + TIME
+    GROUP_NAME = f"testconsumption{TIME}"
+    CONSUMPTION = f"consumption{TIME}"
 
     # Create client
     # # For other authentication approaches, please see: https://pypi.org/project/azure-identity/
@@ -44,7 +44,7 @@ def main():
     # - end -
 
     # Create consumption
-    SCOPE = '/subscriptions/{}/resourceGroups/{}'.format(SUBSCRIPTION_ID, GROUP_NAME)
+    SCOPE = f'/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}'
     consumption = consumption_client.budgets.create_or_update(
         SCOPE,
         CONSUMPTION,
@@ -58,14 +58,14 @@ def main():
             }
         }
     )
-    print("Create consumption:\n{}\n".format(consumption))
+    print(f"Create consumption:\n{consumption}\n")
 
     # Get consumption
     consumption = consumption_client.budgets.get(
         SCOPE,
         CONSUMPTION
     )
-    print("Get consumption:\n{}\n".format(consumption))
+    print(f"Get consumption:\n{consumption}\n")
 
     # Delete consumption
     consumption_client.budgets.delete(

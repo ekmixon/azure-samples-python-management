@@ -47,7 +47,7 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(server))
+    print(f"Create server:\n{server}")
     # - end -
 
     # Create server dns alias
@@ -56,7 +56,7 @@ def main():
         SERVER,
         SERVER_DNS_ALIAS
     ).result()
-    print("Create server dns alias:\n{}".format(server_dns_alias))
+    print(f"Create server dns alias:\n{server_dns_alias}")
 
     # Get server dns alias
     server_dns_alias = sql_client.server_dns_aliases.get(
@@ -64,7 +64,7 @@ def main():
         SERVER,
         SERVER_DNS_ALIAS
     )
-    print("Get server dns alias:\n{}".format(server_dns_alias))
+    print(f"Get server dns alias:\n{server_dns_alias}")
 
     # Delete server dns alias
     server_dns_alias = sql_client.server_dns_aliases.begin_delete(

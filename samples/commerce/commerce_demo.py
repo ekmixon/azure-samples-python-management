@@ -23,16 +23,17 @@ def main():
 
     # List usage aggregates
     output = usage_client.usage_aggregates.list(
-        str(dt.date.today() - dt.timedelta(days=1))+'T00:00:00Z',
-        str(dt.date.today())+'T00:00:00Z'
+        f'{str(dt.date.today() - dt.timedelta(days=1))}T00:00:00Z',
+        f'{str(dt.date.today())}T00:00:00Z',
     )
-    print("List usage aggregate:\n{}".format(output))
+
+    print(f"List usage aggregate:\n{output}")
 
     # Get rate card
     rate = usage_client.rate_card.get(
         "OfferDurableId eq 'MS-AZR-0062P' and Currency eq 'USD' and Locale eq 'en-US' and RegionInfo eq 'US'"
     )
-    print("Get rate card:\n{}".format(rate))
+    print(f"Get rate card:\n{rate}")
 
 
 if __name__ == "__main__":

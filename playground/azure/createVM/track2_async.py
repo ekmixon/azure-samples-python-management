@@ -11,7 +11,9 @@ from azure.mgmt.network import models as network_models
 from azure.mgmt.resource.resources import models as resource_models
 from azure.identity.aio import DefaultAzureCredential
 
-YOUR_PASSWORD = 'A1_' + ''.join(random.choice(string.ascii_lowercase) for i in range(21))
+YOUR_PASSWORD = 'A1_' + ''.join(
+    random.choice(string.ascii_lowercase) for _ in range(21)
+)
 
 class createVMSample(object):
 
@@ -36,7 +38,7 @@ class createVMSample(object):
         )
 
     async def init_group(self):
-        print("Init Group: {}".format(self.group_name))
+        print(f"Init Group: {self.group_name}")
         self.group = await self.resource_client.resource_groups.create_or_update(
             self.group_name,
             # model style
@@ -50,7 +52,7 @@ class createVMSample(object):
 
     async def close(self):
         # Comment this delete operation, if you want to keep virtual machine
-        print("Delete Group {}".format(self.group_name))
+        print(f"Delete Group {self.group_name}")
         await self.resource_client.resource_groups.delete(
             self.group_name
         )
@@ -245,7 +247,7 @@ class createVMSample(object):
             vm_name,
             model_style_vm
         )
-        print("Create VM successfully\nVM:\n{}".format(vm))
+        print(f"Create VM successfully\nVM:\n{vm}")
 
 
 async def main():

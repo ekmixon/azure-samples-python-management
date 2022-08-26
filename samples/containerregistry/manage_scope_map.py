@@ -66,7 +66,7 @@ def main():
           ]
         }
     ).result()
-    print("Create scope map:\n{}".format(scope_map))
+    print(f"Create scope map:\n{scope_map}")
 
     # Get scope map
     scope_map = containerregistry_client.scope_maps.get(
@@ -74,7 +74,7 @@ def main():
         REGISTRIES,
         SCOPE_MAP
     )
-    print("Get scope map:\n{}".format(scope_map))
+    print(f"Get scope map:\n{scope_map}")
 
     # Update scope map
     scope_map = containerregistry_client.scope_maps.begin_update(
@@ -89,8 +89,8 @@ def main():
           ]
         }
     ).result()
-    print("Update scope map:\n{}".format(scope_map))
-    
+    print(f"Update scope map:\n{scope_map}")
+
     # Delete scope map
     scope_map = containerregistry_client.scope_maps.begin_delete(
         GROUP_NAME,

@@ -63,7 +63,7 @@ def main():
             "enable_partitioning": True
         }
     )
-    print("Create queue:\n{}".format(queue))
+    print(f"Create queue:\n{queue}")
 
     # Get queue
     queue = servicebus_client.queues.get(
@@ -71,7 +71,7 @@ def main():
         NAMESPACE,
         QUEUE
     )
-    print("Get queue:\n{}".format(queue))
+    print(f"Get queue:\n{queue}")
 
     # Delete queue
     queue = servicebus_client.queues.delete(

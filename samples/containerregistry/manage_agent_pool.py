@@ -68,7 +68,7 @@ def main():
           "os": "Linux"
         }
     ).result()
-    print("Create agent pool:\n{}".format(agent_pool))
+    print(f"Create agent pool:\n{agent_pool}")
 
     # Get agent pool
     agent_pool = containerregistry_client.agent_pools.get(
@@ -76,7 +76,7 @@ def main():
         REGISTRIES,
         AGENT_POOL
     )
-    print("Get agent pool:\n{}".format(agent_pool))
+    print(f"Get agent pool:\n{agent_pool}")
 
     # Update agent pool
     agent_pool = containerregistry_client.agent_pools.begin_update(
@@ -87,8 +87,8 @@ def main():
             "count": "1"
         }
     ).result()
-    print("Update agent pool:\n{}".format(agent_pool))
-    
+    print(f"Update agent pool:\n{agent_pool}")
+
     # Delete agent pool
     agent_pool = containerregistry_client.agent_pools.begin_delete(
         GROUP_NAME,

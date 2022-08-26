@@ -68,7 +68,10 @@ def main():
           "vlan_id": "101"
         }
     ).result()
-    print("Create express route circuit peering:\n{}".format(express_route_circuit_peering))
+    print(
+        f"Create express route circuit peering:\n{express_route_circuit_peering}"
+    )
+
 
     # Get express route circuit peering
     express_route_circuit_peering = network_client.express_route_circuit_peerings.get(
@@ -76,7 +79,7 @@ def main():
         EXPRESS_ROUTE_CIRCUIT,
         EXPRESS_ROUTE_CIRCUIT_PEERING
     )
-    print("Get express route circuit peering:\n{}".format(express_route_circuit_peering))
+    print(f"Get express route circuit peering:\n{express_route_circuit_peering}")
 
     # Delete express route circuit peering
     express_route_circuit_peering = network_client.express_route_circuit_peerings.begin_delete(

@@ -55,7 +55,7 @@ def main():
           "api_properties": {}
         }
     ).result()
-    print("Create database account:\n{}".format(database_account))
+    print(f"Create database account:\n{database_account}")
     # - end -
 
     # Create mongodb database
@@ -73,7 +73,7 @@ def main():
           }
         }
     ).result()
-    print("Create mongodb database:\n{}".format(database))
+    print(f"Create mongodb database:\n{database}")
 
     # Create mongodb collection
     collection = cosmosdb_client.mongo_db_resources.begin_create_update_mongo_db_collection(
@@ -94,7 +94,7 @@ def main():
           }
         }
     )
-    print("Create mongodb collection:\n{}".format(collection))
+    print(f"Create mongodb collection:\n{collection}")
 
     # Get mongodb database
     database = cosmosdb_client.mongo_db_resources.get_mongo_db_database(
@@ -102,7 +102,7 @@ def main():
         DATABASE_ACCOUNT,
         DATABASE_NAME
     )
-    print("Get mongodb database:\n{}".format(database))
+    print(f"Get mongodb database:\n{database}")
 
     # Delete mongodb database 
     cosmosdb_client.mongo_db_resources.begin_delete_mongo_db_database(

@@ -54,14 +54,14 @@ def main():
           }
         }
     )
-    print("Create static site:\n{}".format(static_site))
+    print(f"Create static site:\n{static_site}")
 
     # Get static site
     static_site = web_client.static_sites.get_static_site(
         GROUP_NAME,
         STATIC_SITE
     )
-    print("Get static site:\n{}".format(static_site))
+    print(f"Get static site:\n{static_site}")
 
     # Delete static site
     static_site = web_client.static_sites.begin_delete_static_site(

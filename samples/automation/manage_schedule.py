@@ -48,7 +48,7 @@ def main():
           "location": "East US 2"
         }
     )
-    print("Create automation account:\n{}".format(automation_account))
+    print(f"Create automation account:\n{automation_account}")
     # - end -
 
     # Create schedule
@@ -65,7 +65,7 @@ def main():
           "frequency": "Hour"
         }
     )
-    print("Create schedule:\n{}".format(schedule))
+    print(f"Create schedule:\n{schedule}")
 
     # Get schedule
     schedule = automation_client.schedule.get(
@@ -73,7 +73,7 @@ def main():
         AUTOMATION_ACCOUNT,
         SCHEDULE
     )
-    print("Get schedule:\n{}".format(schedule))
+    print(f"Get schedule:\n{schedule}")
 
     # Update schedule
     schedule = automation_client.schedule.update(
@@ -86,8 +86,8 @@ def main():
           "is_enabled": False
         }
     )
-    print("Update schedule:\n{}".format(schedule))
-    
+    print(f"Update schedule:\n{schedule}")
+
     # Delete schedule
     schedule = automation_client.schedule.delete(
         GROUP_NAME,

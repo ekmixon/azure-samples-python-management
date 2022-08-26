@@ -62,7 +62,7 @@ def main():
           ]
         }
     ).result()
-    print("Create route filter rule:\n{}".format(route_filter_rule))
+    print(f"Create route filter rule:\n{route_filter_rule}")
 
     # Get route filter rule
     route_filter_rule = network_client.route_filter_rules.get(
@@ -70,7 +70,7 @@ def main():
         ROUTE_FILTER,
         ROUTE_FILTER_RULE
     )
-    print("Get route filter rule:\n{}".format(route_filter_rule))
+    print(f"Get route filter rule:\n{route_filter_rule}")
 
     # Delete route filter rule
     route_filter_rule = network_client.route_filter_rules.begin_delete(

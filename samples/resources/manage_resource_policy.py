@@ -63,19 +63,16 @@ def main():
             }
         }
     )
-    print("Create policy definition: {}".format(definition))
+    print(f"Create policy definition: {definition}")
 
     # Get policy definition
     definition = policy_client.policy_definitions.get(
         POLICY_NAME
     )
-    print("Get policy definition: {}".format(definition))
+    print(f"Get policy definition: {definition}")
 
     # Policy Assignment - By Name
-    scope = '/subscriptions/{}/resourceGroups/{}'.format(
-        SUBSCRIPTION_ID,
-        GROUP_NAME
-    )
+    scope = f'/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}'
 
     # Create policy assignment
     assignment = policy_client.policy_assignments.create(
@@ -85,14 +82,14 @@ def main():
             'policy_definition_id': definition.id,
         }
     )
-    print("Create policy assignment: {}".format(assignment))
+    print(f"Create policy assignment: {assignment}")
 
     # Get policy assignment
     assignment = policy_client.policy_assignments.get(
         assignment.scope,
         assignment.name
     )
-    print("Get policy assignment: {}".format(assignment))
+    print(f"Get policy assignment: {assignment}")
 
     # Create policy set definition
     policy_set = policy_client.policy_set_definitions.create_or_update(
@@ -114,13 +111,13 @@ def main():
             }
         }
     )
-    print("Create policy set definition: {}".format(policy_set))
+    print(f"Create policy set definition: {policy_set}")
 
     # Get policy set definition
     policy_set = policy_client.policy_set_definitions.get(
         POLICY_SET_NAME
     )
-    print("Get policy set definition: {}".format(policy_set))
+    print(f"Get policy set definition: {policy_set}")
 
     # Delete policy set definition
     policy_client.policy_set_definitions.delete(

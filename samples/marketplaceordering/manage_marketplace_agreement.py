@@ -28,7 +28,7 @@ def main():
         offer_id="bigdl_vm",
         plan_id="bigdl_vm_0p4"
     )
-    print("Get marketplace agreement:\n{}".format(marketplace_agreement))
+    print(f"Get marketplace agreement:\n{marketplace_agreement}")
 
 
 if __name__ == "__main__":

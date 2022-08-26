@@ -56,13 +56,14 @@ def main():
         GROUP_NAME,
         SNAPSHOT_NAME,
         {
-          "location": "eastus",
-          "creation_data": {
-            "create_option": "Copy",
-            "source_uri": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Compute/disks/" + DISK_NAME
-          }
-        }
+            "location": "eastus",
+            "creation_data": {
+                "create_option": "Copy",
+                "source_uri": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Compute/disks/{DISK_NAME}",
+            },
+        },
     ).result()
+
 
     # Create gallery
     gallery = compute_client.galleries.begin_create_or_update(
@@ -73,7 +74,7 @@ def main():
           "description": "This is the gallery description."
         }
     ).result()
-    print("Create gallery:\n{}".format(gallery))
+    print(f"Create gallery:\n{gallery}")
 
     # Create gallery application
     application = compute_client.gallery_applications.begin_create_or_update(
@@ -87,7 +88,7 @@ def main():
           "supported_os_type": "Windows"
         }
     ).result()
-    print("Create gallery application:\n{}".format(application))
+    print(f"Create gallery application:\n{application}")
 
     # Create gallery image
     image = compute_client.gallery_images.begin_create_or_update(
@@ -106,14 +107,14 @@ def main():
           }
         }
     ).result()
-    print("Create gallery image:\n{}".format(image))
+    print(f"Create gallery image:\n{image}")
 
     # Get gallery
     gallery = compute_client.galleries.get(
         GROUP_NAME,
         GALLERY_NAME
     )
-    print("Get gallery:\n{}".format(gallery))
+    print(f"Get gallery:\n{gallery}")
 
     # Get gallery application
     application = compute_client.gallery_applications.get(
@@ -121,7 +122,7 @@ def main():
         GALLERY_NAME,
         APPLICATION_NAME
     )
-    print("Get gallery application:\n{}".format(application))
+    print(f"Get gallery application:\n{application}")
 
     # Get gallery image
     image = compute_client.gallery_images.get(
@@ -129,7 +130,7 @@ def main():
         GALLERY_NAME,
         IMAGE_NAME
     )
-    print("Get gallery image:\n{}".format(image))
+    print(f"Get gallery image:\n{image}")
 
     # Update gallery
     gallery = compute_client.galleries.begin_update(
@@ -139,7 +140,7 @@ def main():
           "description": "This is the gallery description."
         }
     ).result()
-    print("Update gallery:\n{}".format(gallery))
+    print(f"Update gallery:\n{gallery}")
 
     # Update gallery application
     application = compute_client.gallery_applications.begin_update(
@@ -155,7 +156,7 @@ def main():
           }
         }
     ).result()
-    print("Update gallery application:\n{}".format(application))
+    print(f"Update gallery application:\n{application}")
 
     # Update gallery image
     image = compute_client.gallery_images.begin_update(
@@ -173,7 +174,7 @@ def main():
           }
         }
     ).result()
-    print("Update gallery image:\n{}".format(image))
+    print(f"Update gallery image:\n{image}")
 
     # Delete gallery image
     compute_client.gallery_images.begin_delete(

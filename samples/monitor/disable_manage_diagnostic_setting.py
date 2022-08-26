@@ -179,31 +179,29 @@ def main():
         RESOURCE_URI,
         INSIGHT,
         {
-          "storage_account_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Storage/storageAccounts/" + STORAGE_ACCOUNT_NAME + "",
-          "workspace_id": workspace.id,
-          "event_hub_authorization_rule_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/microsoft.eventhub/namespaces/" + NAMESPACE + "/authorizationrules/" + AUTHORIZATION_RULE,
-          "event_hub_name": EVENTHUB,
-          "metrics": [],
-          "logs": [
-            {
-              "category": "WorkflowRuntime",
-              "enabled": True,
-              "retention_policy": {
-                "enabled": False,
-                "days": "0"
-              }
-            }
-          ],
-        }
+            "storage_account_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Storage/storageAccounts/{STORAGE_ACCOUNT_NAME}",
+            "workspace_id": workspace.id,
+            "event_hub_authorization_rule_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/microsoft.eventhub/namespaces/{NAMESPACE}/authorizationrules/{AUTHORIZATION_RULE}",
+            "event_hub_name": EVENTHUB,
+            "metrics": [],
+            "logs": [
+                {
+                    "category": "WorkflowRuntime",
+                    "enabled": True,
+                    "retention_policy": {"enabled": False, "days": "0"},
+                }
+            ],
+        },
     )
-    print("Create diagnostic setting:\n{}".format(diagnostic_setting))
+
+    print(f"Create diagnostic setting:\n{diagnostic_setting}")
 
     # Get diagnostic setting
     diagnostic_setting = monitor_client.diagnostic_settings.get(
         RESOURCE_URI,
         INSIGHT
     )
-    print("Get diagnostic setting:\n{}".format(diagnostic_setting))
+    print(f"Get diagnostic setting:\n{diagnostic_setting}")
 
     # Delete diagnostic setting
     monitor_client.diagnostic_settings.delete(

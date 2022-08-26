@@ -95,14 +95,14 @@ def main():
           }
         }
     )
-    print("Create scheduled query rule:\n{}".format(schedueld_query_rule))
+    print(f"Create scheduled query rule:\n{schedueld_query_rule}")
 
     # Get scheduled query rule
     schedueld_query_rule = monitor_client.scheduled_query_rules.get(
         GROUP_NAME,
         SCHEDULED_QUERY_RULE
     )
-    print("Get scheduled query rule:\n{}".format(schedueld_query_rule))
+    print(f"Get scheduled query rule:\n{schedueld_query_rule}")
 
     # Patch scheduled query rule
     schedueld_query_rule = monitor_client.scheduled_query_rules.update(
@@ -112,7 +112,7 @@ def main():
           "enabled": "true"
         }
     )
-    print("Update scheduled query rule:\n{}".format(schedueld_query_rule))
+    print(f"Update scheduled query rule:\n{schedueld_query_rule}")
 
     # Delete scheduled query rule
     monitor_client.scheduled_query_rules.delete(

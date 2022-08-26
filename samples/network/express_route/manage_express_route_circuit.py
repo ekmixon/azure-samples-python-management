@@ -51,14 +51,14 @@ def main():
           }
         }
     ).result()
-    print("Create express route circuit:\n{}".format(express_route_circuit))
+    print(f"Create express route circuit:\n{express_route_circuit}")
 
     # Get express route circuit
     express_route_circuit = network_client.express_route_circuits.get(
         GROUP_NAME,
         EXPRESS_ROUTE_CIRCUIT
     )
-    print("Get express route circuit:\n{}".format(express_route_circuit))
+    print(f"Get express route circuit:\n{express_route_circuit}")
 
     # Update express route circuit
     express_route_circuit = network_client.express_route_circuits.update_tags(
@@ -71,8 +71,8 @@ def main():
           }
         }
     )
-    print("Update express route circuit:\n{}".format(express_route_circuit))
-    
+    print(f"Update express route circuit:\n{express_route_circuit}")
+
     # Delete express route circuit
     express_route_circuit = network_client.express_route_circuits.begin_delete(
         GROUP_NAME,

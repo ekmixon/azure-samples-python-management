@@ -80,7 +80,7 @@ def main():
           "name": NAMESPACE_NAME_2
         }
     )
-    print("Check name availability: {}".format(result))
+    print(f"Check name availability: {result}")
 
     # Create disaster recovery config
     config = eventhub_client.disaster_recovery_configs.create_or_update(
@@ -91,7 +91,7 @@ def main():
           "partner_namespace": second_namespace.id
         }
     )
-    print("Create disaster recovery config: {}".format(config))
+    print(f"Create disaster recovery config: {config}")
 
     # Get disaster recovery config
     for _ in range(5):
@@ -103,7 +103,7 @@ def main():
         if config.provisioning_state == "Successed":
             break
         time.sleep(30)
-    print("Get disaster recovery config: {}".format(config))
+    print(f"Get disaster recovery config: {config}")
 
     # Break pairing disaster recovery config
     eventhub_client.disaster_recovery_configs.break_pairing(

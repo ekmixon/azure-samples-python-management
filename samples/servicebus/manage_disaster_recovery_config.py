@@ -106,7 +106,7 @@ def main():
             "partner_namespace": second_namespace.id
         }
     )
-    print("Create disaster recovery config:\n{}".format(disaster_recovery_config))
+    print(f"Create disaster recovery config:\n{disaster_recovery_config}")
 
     # Get disaster recovery config
     disaster_recovery_config = servicebus_client.disaster_recovery_configs.get(
@@ -123,7 +123,7 @@ def main():
             DISASTER_RECOVERY_CONFIG
         )
         count += 1
-    print("Get disaster recovery config:\n{}".format(disaster_recovery_config))
+    print(f"Get disaster recovery config:\n{disaster_recovery_config}")
 
     # Fail over
     result = servicebus_client.disaster_recovery_configs.fail_over(
@@ -132,7 +132,7 @@ def main():
         DISASTER_RECOVERY_CONFIG
     )
     print("Fail over disaster recovery config.\n")
-    
+
     # Delete disaster recovery config
     count = 0
     while count<10:

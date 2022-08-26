@@ -66,30 +66,31 @@ def main():
         GROUP_NAME,
         NETWORK_PROFILE,
         {
-          "location": "eastus",
-          "container_network_interface_configurations": [
-            {
-              "name": "eth1",
-              "ip_configurations": [
+            "location": "eastus",
+            "container_network_interface_configurations": [
                 {
-                  "name": "ipconfig1",
-                  "subnet": {
-                    "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + VIRTUAL_NETWORK_NAME + "/subnets/" + SUBNET + ""
-                  }
+                    "name": "eth1",
+                    "ip_configurations": [
+                        {
+                            "name": "ipconfig1",
+                            "subnet": {
+                                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{VIRTUAL_NETWORK_NAME}/subnets/{SUBNET}"
+                            },
+                        }
+                    ],
                 }
-              ]
-            }
-          ]
-        }
+            ],
+        },
     )
-    print("Create network profile:\n{}".format(network_profile))
+
+    print(f"Create network profile:\n{network_profile}")
 
     # Get network profile
     network_profile = network_client.network_profiles.get(
         GROUP_NAME,
         NETWORK_PROFILE
     )
-    print("Get network profile:\n{}".format(network_profile))
+    print(f"Get network profile:\n{network_profile}")
 
     # Update network profile
     network_profile = network_client.network_profiles.update_tags(
@@ -102,8 +103,8 @@ def main():
           }
         }
     )
-    print("Update network profile:\n{}".format(network_profile))
-    
+    print(f"Update network profile:\n{network_profile}")
+
     # Delete network profile
     network_profile = network_client.network_profiles.begin_delete(
         GROUP_NAME,

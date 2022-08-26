@@ -43,14 +43,14 @@ def main():
           "platform_update_domain_count": "20"
         }
     )
-    print("Create availability set:\n{}".format(availability_set))
+    print(f"Create availability set:\n{availability_set}")
 
     # Get availability set
     availability_set = compute_client.availability_sets.get(
         GROUP_NAME,
         AVAILABILITY_SET_NAME
     )
-    print("Get availability set:\n{}".format(availability_set))
+    print(f"Get availability set:\n{availability_set}")
 
     # Update availability set
     availability_set = compute_client.availability_sets.update(
@@ -61,7 +61,7 @@ def main():
           "platform_update_domain_count": "20"
         }
     )
-    print("Update availability set:\n{}".format(availability_set))
+    print(f"Update availability set:\n{availability_set}")
 
     # Delete availability set
     compute_client.availability_sets.delete(

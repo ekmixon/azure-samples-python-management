@@ -41,14 +41,14 @@ def main():
           "location": "eastus"
         }
     ).result()
-    print("Create network security group:\n{}".format(network_security_group))
+    print(f"Create network security group:\n{network_security_group}")
 
     # Get network security group
     network_security_group = network_client.network_security_groups.get(
         GROUP_NAME,
         NETWORK_SECURITY_GROUP
     )
-    print("Get network security group:\n{}".format(network_security_group))
+    print(f"Get network security group:\n{network_security_group}")
 
     # Update network security group
     network_security_group = network_client.network_security_groups.update_tags(
@@ -61,8 +61,8 @@ def main():
           }
         }
     )
-    print("Update network security group:\n{}".format(network_security_group))
-    
+    print(f"Update network security group:\n{network_security_group}")
+
     # Delete network security group
     network_security_group = network_client.network_security_groups.begin_delete(
         GROUP_NAME,

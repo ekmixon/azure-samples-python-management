@@ -22,7 +22,10 @@ def main():
     NETWORK_NAME = "networknamex"
     SUBNET_NAME = "subnetnamex"
 
-    your_password = 'A1_' + ''.join(random.choice(string.ascii_lowercase) for i in range(8))
+    your_password = 'A1_' + ''.join(
+        random.choice(string.ascii_lowercase) for _ in range(8)
+    )
+
 
     # Create client
     # For other authentication approaches, please see: https://pypi.org/project/azure-identity/
@@ -69,62 +72,61 @@ def main():
         GROUP_NAME,
         VIRTUAL_MACHINE_SCALE_SET_NAME,
         {
-          "sku": {
-            "tier": "Standard",
-            "capacity": "2",
-            "name": "Standard_D1_v2"
-          },
-          "location": "eastus",
-          "overprovision": True,
-          "virtual_machine_profile": {
-            "storage_profile": {
-              "image_reference": {
-                  "offer": "UbuntuServer",
-                  "publisher": "Canonical",
-                  "sku": "18.04-LTS",
-                  "version": "latest"
-              },
-              "os_disk": {
-                "caching": "ReadWrite",
-                "managed_disk": {
-                  "storage_account_type": "Standard_LRS"
+            "sku": {
+                "tier": "Standard",
+                "capacity": "2",
+                "name": "Standard_D1_v2",
+            },
+            "location": "eastus",
+            "overprovision": True,
+            "virtual_machine_profile": {
+                "storage_profile": {
+                    "image_reference": {
+                        "offer": "UbuntuServer",
+                        "publisher": "Canonical",
+                        "sku": "18.04-LTS",
+                        "version": "latest",
+                    },
+                    "os_disk": {
+                        "caching": "ReadWrite",
+                        "managed_disk": {
+                            "storage_account_type": "Standard_LRS"
+                        },
+                        "create_option": "FromImage",
+                        "disk_size_gb": "512",
+                    },
                 },
-                "create_option": "FromImage",
-                "disk_size_gb": "512"
-              },
-            },
-            "os_profile": {
-              "computer_name_prefix": "testPC",
-              "admin_username": "testuser",
-              "admin_password": your_password
-            },
-            "network_profile": {
-              "network_interface_configurations": [
-                {
-                  "name": "testPC",
-                  "primary": True,
-                  "enable_ipforwarding": True,
-                  "ip_configurations": [
-                    {
-                      "name": "testPC",
-                      "properties": {
-                        "subnet": {
-                          "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + NETWORK_NAME + "/subnets/" + SUBNET_NAME + ""
+                "os_profile": {
+                    "computer_name_prefix": "testPC",
+                    "admin_username": "testuser",
+                    "admin_password": your_password,
+                },
+                "network_profile": {
+                    "network_interface_configurations": [
+                        {
+                            "name": "testPC",
+                            "primary": True,
+                            "enable_ipforwarding": True,
+                            "ip_configurations": [
+                                {
+                                    "name": "testPC",
+                                    "properties": {
+                                        "subnet": {
+                                            "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{NETWORK_NAME}/subnets/{SUBNET_NAME}"
+                                        }
+                                    },
+                                }
+                            ],
                         }
-                      }
-                    }
-                  ]
-                }
-              ]
-            }
-          },
-          "upgrade_policy": {
-            "mode": "Manual"
-          },
-          "upgrade_mode": "Manual"
-        }
+                    ]
+                },
+            },
+            "upgrade_policy": {"mode": "Manual"},
+            "upgrade_mode": "Manual",
+        },
     ).result()
-    print("Create virtual machine scale set:\n{}".format(vmss))
+
+    print(f"Create virtual machine scale set:\n{vmss}")
 
     # Create vmss extension
     extension = compute_client.virtual_machine_scale_set_extensions.begin_create_or_update(
@@ -139,14 +141,14 @@ def main():
           "type_handler_version": "1.4",
         }
     ).result()
-    print("Create vmss extension:\n{}".format(extension))
+    print(f"Create vmss extension:\n{extension}")
 
     # Get virtual machine scale set
     vmss = compute_client.virtual_machine_scale_sets.get(
         GROUP_NAME,
         VIRTUAL_MACHINE_SCALE_SET_NAME
     )
-    print("Get virtual machine scale set:\n{}".format(vmss))
+    print(f"Get virtual machine scale set:\n{vmss}")
 
     # Get vmss extesnion
     extension = compute_client.virtual_machine_scale_set_extensions.get(
@@ -154,7 +156,7 @@ def main():
         VIRTUAL_MACHINE_SCALE_SET_NAME,
         VMSS_EXTENSION_NAME
     )
-    print("Get vmss extension:\n{}".format(extension))
+    print(f"Get vmss extension:\n{extension}")
 
     # Update virtual machine scale set
     vmss = compute_client.virtual_machine_scale_sets.begin_update(
@@ -171,7 +173,7 @@ def main():
           }
         }
     ).result()
-    print("Update virtual machine scale set:\n{}".format(vmss))
+    print(f"Update virtual machine scale set:\n{vmss}")
 
     # Update vmss extension
     extension = compute_client.virtual_machine_scale_set_extensions.begin_update(
@@ -182,7 +184,7 @@ def main():
           "auto_upgrade_minor_version": True,
         }
     ).result()
-    print("Update vmss extension:\n{}".format(extension))
+    print(f"Update vmss extension:\n{extension}")
 
     # Delete vmss extension
     compute_client.virtual_machine_scale_set_extensions.begin_delete(
