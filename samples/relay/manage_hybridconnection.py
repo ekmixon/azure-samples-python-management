@@ -51,7 +51,7 @@ def main():
             }
         }
     ).result()
-    print("Create namespace:\n{}".format(namespace))
+    print(f"Create namespace:\n{namespace}")
     # - end -
 
     # Create hybridconnection
@@ -64,7 +64,7 @@ def main():
             "user_metadata": "User data for HybridConnection"
         }
     )
-    print("Create hybridconnection:\n{}".format(hybridconnection))
+    print(f"Create hybridconnection:\n{hybridconnection}")
 
     # Get hybridconnection
     hybridconnection = relay_client.hybrid_connections.get(
@@ -72,7 +72,7 @@ def main():
         NAMESPACE,
         HYBRIDCONNECTION
     )
-    print("Get hybridconnection:\n{}".format(hybridconnection))
+    print(f"Get hybridconnection:\n{hybridconnection}")
 
     # Delete hybridconnection
     hybridconnection = relay_client.hybrid_connections.delete(

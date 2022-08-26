@@ -18,8 +18,8 @@ def main():
 
     SUBSCRIPTION_ID = os.environ.get("SUBSCRIPTION_ID", None)
     TIME = str(time.time()).replace('.','')
-    GROUP_NAME = "testeventgrid" + TIME
-    EVENTGRID = "eventgrid" + TIME
+    GROUP_NAME = f"testeventgrid{TIME}"
+    EVENTGRID = f"eventgrid{TIME}"
     LOCATION='eastus'
 
     # Create client
@@ -52,14 +52,14 @@ def main():
             "location":LOCATION
         }
     ).result()
-    print("Create eventgrid:\n{}".format(eventgrid))
+    print(f"Create eventgrid:\n{eventgrid}")
 
     # Get eventgrid
     eventgrid = eventgrid_client.domains.get(
         GROUP_NAME,
         EVENTGRID
     )
-    print("Get eventgrid:\n{}".format(eventgrid))
+    print(f"Get eventgrid:\n{eventgrid}")
 
     # Update eventgrid
     eventgrid = eventgrid_client.domains.begin_update(
@@ -72,8 +72,8 @@ def main():
             }
         }
     ).result()
-    print("Update eventgrid:\n{}".format(eventgrid))
-    
+    print(f"Update eventgrid:\n{eventgrid}")
+
     # Delete eventgrid
     eventgrid_client.domains.begin_delete(
         GROUP_NAME,

@@ -62,7 +62,7 @@ def main():
             ]
         }
     ).result()
-    print("Create database account:\n{}".format(_format(database_account)))
+    print(f"Create database account:\n{_format(database_account)}")
 
     # Get database account
     database_account = cosmosdb_client.database_accounts.get(
@@ -70,14 +70,14 @@ def main():
         DATABASE_ACCOUNT
     )
 
-    print("Get database account:\n{}".format(_format(database_account)))
+    print(f"Get database account:\n{_format(database_account)}")
 
     # List database account keys
     database_account_keys = cosmosdb_client.database_accounts.list_keys(
         GROUP_NAME,
         DATABASE_ACCOUNT
     )
-    print("List database account keys:\n{}".format(_format(database_account_keys)))
+    print(f"List database account keys:\n{_format(database_account_keys)}")
 
     # Create database under database account
     url = database_account.document_endpoint
@@ -93,7 +93,7 @@ def main():
         "(name.value eq 'Available Storage' or name.value eq 'Data Size' or name.value eq 'Index Size') and timeGrain eq duration'PT5M'"
     )
     for item in database:
-        print("Get database:\n{}".format(_format(item)))
+        print(f"Get database:\n{_format(item)}")
 
     # Delete Group
     resource_client.resource_groups.begin_delete(

@@ -53,20 +53,20 @@ async def main():
         }
     )
     namespace = await async_poller.result()
-    print("Create Namespace:\n{}".format(namespace))
+    print(f"Create Namespace:\n{namespace}")
 
     # Get Namesapce
     namespace = await eventhub_client.namespaces.get(
         GROUP_NAME,
         NAMESPACE_NAME
     )
-    print("Get Namespace:\n{}".format(namespace))
+    print(f"Get Namespace:\n{namespace}")
 
     # List Namespace (List operation will return asyncList)
-    namespaces = list()
+    namespaces = []
     async for n in eventhub_client.namespaces.list_by_resource_group(GROUP_NAME):
         namespaces.append(n)
-    print("List Namespace:\n{}".format(namespaces))
+    print(f"List Namespace:\n{namespaces}")
 
 
     # Update Namespace
@@ -81,7 +81,7 @@ async def main():
           }
         }
     )
-    print("Update Namespace:\n{}".format(namespace))
+    print(f"Update Namespace:\n{namespace}")
 
     await asyncio.sleep(30)
 

@@ -47,20 +47,20 @@ async def main():
         }
     )
     appconfig_store = await async_poller.result()
-    print("Create appconfigruation store:\n{}".format(appconfig_store))
+    print(f"Create appconfigruation store:\n{appconfig_store}")
 
     # Get appconfiguration store
     appconfig_store = await appconfig_client.configuration_stores.get(
         GROUP_NAME,
         CONFIG_STORE_NAME
     )
-    print("Get appconfigruation store:\n{}".format(appconfig_store))
+    print(f"Get appconfigruation store:\n{appconfig_store}")
 
     # List appconfiguration store (List operation will return asyncList)
-    appconfig_stores = list()
+    appconfig_stores = []
     async for app_store in appconfig_client.configuration_stores.list():
         appconfig_stores.append(app_store)
-    print("List appconfiguration stores:\n{}".format(appconfig_stores))
+    print(f"List appconfiguration stores:\n{appconfig_stores}")
 
     # Update appconfiguration store
     async_poller = await appconfig_client.configuration_stores.begin_update(
@@ -76,7 +76,7 @@ async def main():
         }
     )
     appconfig_store = await async_poller.result()
-    print("Update appconfigruation store:\n{}".format(appconfig_store))
+    print(f"Update appconfigruation store:\n{appconfig_store}")
 
     # Delete appconfiguration store
     async_poller = await appconfig_client.configuration_stores.begin_delete(

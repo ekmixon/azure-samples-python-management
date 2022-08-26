@@ -60,14 +60,14 @@ def main():
             }
         }
     ).result()
-    print("Create iot hub resource:\n{}".format(iot_hub_resource))
+    print(f"Create iot hub resource:\n{iot_hub_resource}")
 
     # Get iot hub resource
     iot_hub_resource = iothub_client.iot_hub_resource.get(
         GROUP_NAME,
         IOT_HUB_RESOURCE
     )
-    print("Get iot hub resource:\n{}".format(iot_hub_resource))
+    print(f"Get iot hub resource:\n{iot_hub_resource}")
 
     # Delete iot hub resource
     iot_hub_resource = iothub_client.iot_hub_resource.begin_delete(

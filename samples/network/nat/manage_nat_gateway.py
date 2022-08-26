@@ -69,30 +69,29 @@ def main():
         GROUP_NAME,
         NAT_GATEWAY,
         {
-          "location": "eastus",
-          "sku": {
-            "name": "Standard"
-          },
-          "public_ip_addresses": [
-            {
-              "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/publicIPAddresses/" + PUBLIC_IP_ADDRESS
-            }
-          ],
-          "public_ip_prefixes": [
-            {
-              "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/publicIPPrefixes/" + PUBLIC_IP_PREFIX
-            }
-          ]
-        }
+            "location": "eastus",
+            "sku": {"name": "Standard"},
+            "public_ip_addresses": [
+                {
+                    "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/publicIPAddresses/{PUBLIC_IP_ADDRESS}"
+                }
+            ],
+            "public_ip_prefixes": [
+                {
+                    "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/publicIPPrefixes/{PUBLIC_IP_PREFIX}"
+                }
+            ],
+        },
     ).result()
-    print("Create nat gateway:\n{}".format(nat_gateway))
+
+    print(f"Create nat gateway:\n{nat_gateway}")
 
     # Get nat gateway
     nat_gateway = network_client.nat_gateways.get(
         GROUP_NAME,
         NAT_GATEWAY
     )
-    print("Get nat gateway:\n{}".format(nat_gateway))
+    print(f"Get nat gateway:\n{nat_gateway}")
 
     # Update nat gateway
     nat_gateway = network_client.nat_gateways.update_tags(
@@ -105,8 +104,8 @@ def main():
           }
         }
     )
-    print("Update nat gateway:\n{}".format(nat_gateway))
-    
+    print(f"Update nat gateway:\n{nat_gateway}")
+
     # Delete nat gateway
     nat_gateway = network_client.nat_gateways.begin_delete(
         GROUP_NAME,

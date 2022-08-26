@@ -29,7 +29,7 @@ def main():
         credential=DefaultAzureCredential(),
         subscription_id=SUBSCRIPTION_ID
     )
-    
+
     labservices_client = LabServicesClient(
         credential=DefaultAzureCredential(),
         subscription_id=SUBSCRIPTION_ID
@@ -153,8 +153,8 @@ def main():
 
     # Get LabServices Labs
     labservices_lab = labservices_client.labs.get(GROUP_NAME,LAB)
-    print("Get lab:\n{}".format(labservices_lab))
-    
+    print(f"Get lab:\n{labservices_lab}")
+        
 
     # Delete Lab
     labservices_client.labs.begin_delete(

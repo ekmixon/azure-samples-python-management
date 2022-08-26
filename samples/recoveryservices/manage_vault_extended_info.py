@@ -50,26 +50,31 @@ def main():
             "properties": {}
         }
     )
-    print("Create vault:\n{}".format(vault))
+    print(f"Create vault:\n{vault}")
     # - end -
 
     # Create vault extended info
-    vault_extended_info = recoveryservices_client.vault_extended_info.create_or_update(
-        GROUP_NAME,
-        VAULT,
-        {
-            "algorithm": "None",
-            "integrity_key": base64.b64encode(bytearray(random.getrandbits(8) for i in range(16)))
-        }
+    vault_extended_info = (
+        recoveryservices_client.vault_extended_info.create_or_update(
+            GROUP_NAME,
+            VAULT,
+            {
+                "algorithm": "None",
+                "integrity_key": base64.b64encode(
+                    bytearray(random.getrandbits(8) for _ in range(16))
+                ),
+            },
+        )
     )
-    print("Create vault extended info:\n{}".format(vault_extended_info))
+
+    print(f"Create vault extended info:\n{vault_extended_info}")
 
     # Get vault extended info
     vault_extended_info = recoveryservices_client.vault_extended_info.get(
         GROUP_NAME,
         VAULT
     )
-    print("Get vault extended info:\n{}".format(vault_extended_info))
+    print(f"Get vault extended info:\n{vault_extended_info}")
 
     # Delete Group
     resource_client.resource_groups.begin_delete(

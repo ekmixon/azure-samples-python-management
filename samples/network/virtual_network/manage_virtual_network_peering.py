@@ -93,16 +93,17 @@ def main():
         VIRTUAL_NETWORK_NAME,
         VIRTUAL_NETWORK_PEERING,
         {
-          "allow_virtual_network_access": True,
-          "allow_forwarded_traffic": True,
-          "allow_gateway_transit": False,
-          "use_remote_gateways": False,
-          "remote_virtual_network": {
-            "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + REMOTE_NETWORK_NAME + ""
-          }
-        }
+            "allow_virtual_network_access": True,
+            "allow_forwarded_traffic": True,
+            "allow_gateway_transit": False,
+            "use_remote_gateways": False,
+            "remote_virtual_network": {
+                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{REMOTE_NETWORK_NAME}"
+            },
+        },
     ).result()
-    print("Create virtual network peering:\n{}".format(virtual_network_peering))
+
+    print(f"Create virtual network peering:\n{virtual_network_peering}")
 
     # Get virtual network peering
     virtual_network_peering = network_client.virtual_network_peerings.get(
@@ -110,7 +111,7 @@ def main():
         VIRTUAL_NETWORK_NAME,
         VIRTUAL_NETWORK_PEERING
     )
-    print("Get virtual network peering:\n{}".format(virtual_network_peering))
+    print(f"Get virtual network peering:\n{virtual_network_peering}")
 
     # Delete virtual network peering
     virtual_network_peering = network_client.virtual_network_peerings.begin_delete(

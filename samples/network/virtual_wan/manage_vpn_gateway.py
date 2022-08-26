@@ -57,52 +57,46 @@ def main():
         GROUP_NAME,
         VIRTUAL_HUB,
         {
-          "location": "West US",
-          "tags": {
-            "key1": "value1"
-          },
-          "virtual_wan": {
-            "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualWans/" + VIRTUAL_WAN + ""
-          },
-          "address_prefix": "10.168.0.0/24",
-          "sku": "Basic"
-        }
+            "location": "West US",
+            "tags": {"key1": "value1"},
+            "virtual_wan": {
+                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualWans/{VIRTUAL_WAN}"
+            },
+            "address_prefix": "10.168.0.0/24",
+            "sku": "Basic",
+        },
     ).result()
+
 
     # Create vpn site
     network_client.vpn_sites.begin_create_or_update(
         GROUP_NAME,
         VPN_SITE,
         {
-          "tags": {
-            "key1": "value1"
-          },
-          "location": "West US",
-          "virtual_wan": {
-            "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualWans/" + VIRTUAL_WAN + ""
-          },
-          "address_space": {
-            "address_prefixes": [
-              "10.0.0.0/16"
-            ]
-          },
-          "is_security_site": False,
-          "vpn_site_links": [
-            {
-              "name": VPN_SITE_LINK,
-              "ip_address": "50.50.50.56",
-              "link_properties": {
-                "link_provider_name": "vendor1",
-                "link_speed_in_mbps": "0"
-              },
-              "bgp_properties": {
-                "bgp_peering_address": "192.168.0.0",
-                "asn": "1234"
-              }
-            }
-          ]
-        }
+            "tags": {"key1": "value1"},
+            "location": "West US",
+            "virtual_wan": {
+                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualWans/{VIRTUAL_WAN}"
+            },
+            "address_space": {"address_prefixes": ["10.0.0.0/16"]},
+            "is_security_site": False,
+            "vpn_site_links": [
+                {
+                    "name": VPN_SITE_LINK,
+                    "ip_address": "50.50.50.56",
+                    "link_properties": {
+                        "link_provider_name": "vendor1",
+                        "link_speed_in_mbps": "0",
+                    },
+                    "bgp_properties": {
+                        "bgp_peering_address": "192.168.0.0",
+                        "asn": "1234",
+                    },
+                }
+            ],
+        },
     ).result()
+
     # - end -
 
     # Create vpn gateway
@@ -110,46 +104,42 @@ def main():
         GROUP_NAME,
         VPN_GATEWAY,
         {
-          "location": "West US",
-          "tags": {
-            "key1": "value1"
-          },
-          "virtual_hub": {
-            "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualHubs/" + VIRTUAL_HUB + ""
-          },
-          "connections": [
-            {
-              "name": "vpnConnection1",
-              "remote_vpn_site": {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/vpnSites/" + VPN_SITE + ""
-              },
-              "vpn_link_connections": [
+            "location": "West US",
+            "tags": {"key1": "value1"},
+            "virtual_hub": {
+                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualHubs/{VIRTUAL_HUB}"
+            },
+            "connections": [
                 {
-                  "name": "Connection-Link1",
-                  "vpn_site_link": {
-                    "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/vpnSites/" + VPN_SITE + "/vpnSiteLinks/" + VPN_SITE_LINK + ""
-                  },
-                  "connection_bandwidth": "200",
-                  "vpn_connection_protocol_type": "IKEv2",
-                  "shared_key": "key"
+                    "name": "vpnConnection1",
+                    "remote_vpn_site": {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/vpnSites/{VPN_SITE}"
+                    },
+                    "vpn_link_connections": [
+                        {
+                            "name": "Connection-Link1",
+                            "vpn_site_link": {
+                                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/vpnSites/{VPN_SITE}/vpnSiteLinks/{VPN_SITE_LINK}"
+                            },
+                            "connection_bandwidth": "200",
+                            "vpn_connection_protocol_type": "IKEv2",
+                            "shared_key": "key",
+                        }
+                    ],
                 }
-              ]
-            }
-          ],
-          "bgp_settings": {
-            "asn": "65515",
-            "peer_weight": "0"
-          }
-        }
+            ],
+            "bgp_settings": {"asn": "65515", "peer_weight": "0"},
+        },
     ).result()
-    print("Create vpn gateway:\n{}".format(vpn_gateway))
+
+    print(f"Create vpn gateway:\n{vpn_gateway}")
 
     # Get vpn gateway
     vpn_gateway = network_client.vpn_gateways.get(
         GROUP_NAME,
         VPN_GATEWAY
     )
-    print("Get vpn gateway:\n{}".format(vpn_gateway))
+    print(f"Get vpn gateway:\n{vpn_gateway}")
 
     # Update vpn gateway
     vpn_gateway = network_client.vpn_gateways.begin_update_tags(
@@ -162,8 +152,8 @@ def main():
           }
         }
     ).result()
-    print("Update vpn gateway:\n{}".format(vpn_gateway))
-    
+    print(f"Update vpn gateway:\n{vpn_gateway}")
+
     # Delete vpn gateway
     vpn_gateway = network_client.vpn_gateways.begin_delete(
         GROUP_NAME,

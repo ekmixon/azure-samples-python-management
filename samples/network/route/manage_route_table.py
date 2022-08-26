@@ -41,14 +41,14 @@ def main():
           "location": "westus"
         }
     ).result()
-    print("Create route table:\n{}".format(route_table))
+    print(f"Create route table:\n{route_table}")
 
     # Get route table
     route_table = network_client.route_tables.get(
         GROUP_NAME,
         ROUTE_TABLE
     )
-    print("Get route table:\n{}".format(route_table))
+    print(f"Get route table:\n{route_table}")
 
     # Update route table
     route_table = network_client.route_tables.update_tags(
@@ -61,8 +61,8 @@ def main():
           }
         }
     )
-    print("Update route table:\n{}".format(route_table))
-    
+    print(f"Update route table:\n{route_table}")
+
     # Delete route table
     route_table = network_client.route_tables.begin_delete(
         GROUP_NAME,

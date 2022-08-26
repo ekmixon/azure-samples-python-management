@@ -89,49 +89,38 @@ def main():
         GROUP_NAME,
         PRIVATE_LINK_SERVICE,
         {
-          "location": "eastus",
-          "visibility": {
-            "subscriptions": [
-              SUBSCRIPTION_ID
-            ]
-          },
-          "auto_approval": {
-            "subscriptions": [
-              SUBSCRIPTION_ID
-            ]
-          },
-          "fqdns": [
-            "fqdn1",
-            "fqdn2",
-            "fqdn3"
-          ],
-          "load_balancer_frontend_ip_configurations": [
-            {
-              "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/loadBalancers/" + LOAD_BALANCER_NAME + "/frontendIPConfigurations/" + IP_CONFIGURATION_NAME
-            }
-          ],
-          "ip_configurations": [
-            {
-              "name": IP_CONFIGURATION_NAME,
-              "private_ip_address": "10.0.1.4",
-              "private_ipallocation_method": "Static",
-              "private_ip_address_version": "IPv4",
-              "subnet": {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + VIRTUAL_NETWORK_NAME + "/subnets/" + SUBNET
-              }
-            }
-          ]
-        }
+            "location": "eastus",
+            "visibility": {"subscriptions": [SUBSCRIPTION_ID]},
+            "auto_approval": {"subscriptions": [SUBSCRIPTION_ID]},
+            "fqdns": ["fqdn1", "fqdn2", "fqdn3"],
+            "load_balancer_frontend_ip_configurations": [
+                {
+                    "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/loadBalancers/{LOAD_BALANCER_NAME}/frontendIPConfigurations/{IP_CONFIGURATION_NAME}"
+                }
+            ],
+            "ip_configurations": [
+                {
+                    "name": IP_CONFIGURATION_NAME,
+                    "private_ip_address": "10.0.1.4",
+                    "private_ipallocation_method": "Static",
+                    "private_ip_address_version": "IPv4",
+                    "subnet": {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{VIRTUAL_NETWORK_NAME}/subnets/{SUBNET}"
+                    },
+                }
+            ],
+        },
     ).result()
-    print("Create private link service:\n{}".format(private_link_service))
+
+    print(f"Create private link service:\n{private_link_service}")
 
     # Get private link service
     private_link_service = network_client.private_link_services.get(
         GROUP_NAME,
         PRIVATE_LINK_SERVICE
     )
-    print("Get private link service:\n{}".format(private_link_service))
-    
+    print(f"Get private link service:\n{private_link_service}")
+
     # Delete private link service
     private_link_service = network_client.private_link_services.begin_delete(
         GROUP_NAME,

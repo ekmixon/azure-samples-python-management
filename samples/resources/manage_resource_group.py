@@ -25,20 +25,20 @@ def main():
     result_check = resource_client.resource_groups.check_existence(
         GROUP_NAME
     )
-    print("Whether resource group exists:\n{}".format(result_check))
+    print(f"Whether resource group exists:\n{result_check}")
 
     # Create resource group
     resource_group = resource_client.resource_groups.create_or_update(
         GROUP_NAME,
         {"location": "eastus"}
     )
-    print("Create resource group:\n{}".format(resource_group))
+    print(f"Create resource group:\n{resource_group}")
 
     # Get resource group
     resource_group = resource_client.resource_groups.get(
         GROUP_NAME
     )
-    print("Get resource group:\n{}".format(resource_group))
+    print(f"Get resource group:\n{resource_group}")
 
     # Update resource group
     resource_group = resource_client.resource_groups.update(
@@ -50,7 +50,7 @@ def main():
             }
         }
     )
-    print("Update resource group:\n{}".format(resource_group))
+    print(f"Update resource group:\n{resource_group}")
 
     # Delete Group
     resource_client.resource_groups.begin_delete(

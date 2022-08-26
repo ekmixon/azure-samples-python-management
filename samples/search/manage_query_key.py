@@ -50,7 +50,7 @@ def main():
             }
         }
     ).result()
-    print("Create service:\n{}".format(service))
+    print(f"Create service:\n{service}")
     # - end -
 
     # Create query key
@@ -59,14 +59,14 @@ def main():
         SERVICE,
         QUERY_KEY
     )
-    print("Create query key:\n{}".format(query_key))
+    print(f"Create query key:\n{query_key}")
 
     # List query key
     query_keys = search_client.query_keys.list_by_search_service(
         GROUP_NAME,
         SERVICE
     )
-    print("List query key:\n{}".format(list(query_keys)))
+    print(f"List query key:\n{list(query_keys)}")
 
     # Delete query key
     query_key = search_client.query_keys.delete(

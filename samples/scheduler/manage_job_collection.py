@@ -47,14 +47,14 @@ def main():
             }
         }
     )
-    print("Create job collection:\n{}".format(job_collection))
+    print(f"Create job collection:\n{job_collection}")
 
     # Get job collection
     job_collection = scheduler_client.job_collections.get(
         GROUP_NAME,
         JOB_COLLECTION
     )
-    print("Get job collection:\n{}".format(job_collection))
+    print(f"Get job collection:\n{job_collection}")
 
     # Delete job collection
     job_collection = scheduler_client.job_collections.begin_delete(

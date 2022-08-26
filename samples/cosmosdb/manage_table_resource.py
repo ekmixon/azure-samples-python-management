@@ -57,7 +57,7 @@ def main():
           "api_properties": {}
         }
     ).result()
-    print("Create database account:\n{}".format(database_account))
+    print(f"Create database account:\n{database_account}")
     # - end -
 
     # Create table
@@ -73,7 +73,7 @@ def main():
           "options": {}
         }
     ).result()
-    print("Create table:\n{}".format(table))
+    print(f"Create table:\n{table}")
 
     # Delete table
     cosmosdb_client.table_resources.begin_delete_table(

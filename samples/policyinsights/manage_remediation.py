@@ -72,13 +72,10 @@ def main():
             }
         }
     )
-    print("Create policy definition: {}".format(definition))
+    print(f"Create policy definition: {definition}")
 
     # Policy Assignment - By Name
-    scope = '/subscriptions/{}/resourceGroups/{}'.format(
-        SUBSCRIPTION_ID,
-        GROUP_NAME
-    )
+    scope = f'/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}'
 
     # Create policy assignment
     assignment = policy_client.policy_assignments.create(
@@ -88,7 +85,7 @@ def main():
             'policy_definition_id': definition.id,
         }
     )
-    print("Create policy assignment: {}".format(assignment))
+    print(f"Create policy assignment: {assignment}")
     # - end -
 
     # Create remediation
@@ -99,14 +96,14 @@ def main():
             "policy_assignment_id": assignment.id
         }
     )
-    print("Create remediation:\n{}".format(remediation))
+    print(f"Create remediation:\n{remediation}")
 
     # Get remediation
     remediation = policyinsights_client.remediations.get_at_resource_group(
         GROUP_NAME,
         REMEDIATION
     )
-    print("Get remediation:\n{}".format(remediation))
+    print(f"Get remediation:\n{remediation}")
 
     # Delete remediation
     remediation = policyinsights_client.remediations.delete_at_resource_group(

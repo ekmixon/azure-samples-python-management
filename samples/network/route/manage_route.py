@@ -55,7 +55,7 @@ def main():
           "next_hop_type": "VirtualNetworkGateway"
         }
     ).result()
-    print("Create route:\n{}".format(route))
+    print(f"Create route:\n{route}")
 
     # Get route
     route = network_client.routes.get(
@@ -63,7 +63,7 @@ def main():
         ROUTE_TABLE,
         ROUTE
     )
-    print("Get route:\n{}".format(route))
+    print(f"Get route:\n{route}")
 
     # Delete route
     route = network_client.routes.begin_delete(

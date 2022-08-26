@@ -18,7 +18,7 @@ from azure.mgmt.resource import ResourceManagementClient
 def main():
     SUBSCRIPTION_ID = os.environ.get("SUBSCRIPTION_ID", None)
     TIME = str(time.time()).replace('.', '')
-    GROUP_NAME = "testhdinsight" + TIME
+    GROUP_NAME = f"testhdinsight{TIME}"
 
     # Create client
     # # For other authentication approaches, please see: https://pypi.org/project/azure-identity/

@@ -41,14 +41,14 @@ def main():
           "location": "westus"
         }
     ).result()
-    print("Create ddos protection plan:\n{}".format(ddos_protection_plan))
+    print(f"Create ddos protection plan:\n{ddos_protection_plan}")
 
     # Get ddos protection plan
     ddos_protection_plan = network_client.ddos_protection_plans.get(
         GROUP_NAME,
         DDOS_PROTECTION_PLAN
     )
-    print("Get ddos protection plan:\n{}".format(ddos_protection_plan))
+    print(f"Get ddos protection plan:\n{ddos_protection_plan}")
 
     # Update ddos protection plan
     ddos_protection_plan = network_client.ddos_protection_plans.update_tags(
@@ -61,8 +61,8 @@ def main():
           }
         }
     )
-    print("Update ddos protection plan:\n{}".format(ddos_protection_plan))
-    
+    print(f"Update ddos protection plan:\n{ddos_protection_plan}")
+
     # Delete ddos protection plan
     ddos_protection_plan = network_client.ddos_protection_plans.begin_delete(
         GROUP_NAME,

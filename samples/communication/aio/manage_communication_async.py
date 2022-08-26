@@ -66,13 +66,13 @@ def __create_communication_management_client(credentials):
 
 
 def __print_resource(resource):
-    print("Name: " + resource.name)
-    print("Provisioning State: " + resource.provisioning_state)
-    print("Immutable Resource ID: " + resource.immutable_resource_id)
-    print("Location: " + resource.location)
-    print("Data Location: " + resource.data_location)
-    print("Notification Hub ID: " + str(resource.notification_hub_id))
-    print("Tags: " + str(resource.tags))
+    print(f"Name: {resource.name}")
+    print(f"Provisioning State: {resource.provisioning_state}")
+    print(f"Immutable Resource ID: {resource.immutable_resource_id}")
+    print(f"Location: {resource.location}")
+    print(f"Data Location: {resource.data_location}")
+    print(f"Notification Hub ID: {str(resource.notification_hub_id)}")
+    print(f"Tags: {str(resource.tags)}")
 
 async def __create_communication_service(clients, args):
     """
@@ -106,10 +106,7 @@ async def __update_communication_service(clients, args):
     """
     print("\nUpdate...")
 
-    tags = {}
-    if args.keyvalues is not None:
-        tags = {"tags": dict(args.keyvalues)}
-
+    tags = {"tags": dict(args.keyvalues)} if args.keyvalues is not None else {}
     resource = await clients.acs_client.communication_service.update(args.resource_group_name, args.resource_name, TaggedResource(**tags))
     print("Resource Updated: ")
     __print_resource(resource)
@@ -339,8 +336,8 @@ def __setup_run_all(subparsers, parent_parser):
     Define the parser to run all commands.
     """
 
-    resource_name = "py-sample-" + str(randint(1, 1000000))
-    resource_group_name = "rg-py-sample-" + str(randint(1, 1000000))
+    resource_name = f"py-sample-{str(randint(1, 1000000))}"
+    resource_group_name = f"rg-py-sample-{str(randint(1, 1000000))}"
 
     parser = subparsers.add_parser('all', help='Run all available commands for Communication Services')
     parser.add_argument('resource_group_name', type=str, nargs='?', default=resource_group_name)

@@ -57,19 +57,15 @@ def main():
 
     # Create link
     link = link_client.resource_links.create_or_update(
-        resource_1.id + "/providers/Microsoft.Resources/links/myLink",
-        {
-            "properties": {
-                "target_id": resource_2.id,
-                "notes": "Testing links"
-            }
-        }
+        f"{resource_1.id}/providers/Microsoft.Resources/links/myLink",
+        {"properties": {"target_id": resource_2.id, "notes": "Testing links"}},
     )
-    print("Create link:\n{}".format(link))
+
+    print(f"Create link:\n{link}")
 
     # Get link
     link = link_client.resource_links.get(link.id)
-    print("Get link:\n{}".format(link))
+    print(f"Get link:\n{link}")
 
     # Delete link
     link_client.resource_links.delete(

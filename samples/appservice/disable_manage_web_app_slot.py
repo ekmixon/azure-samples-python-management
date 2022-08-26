@@ -75,7 +75,7 @@ def main():
           "https_only": False
         }
     ).result()
-    print("Create web app:\n{}".format(web_app))
+    print(f"Create web app:\n{web_app}")
     # - end -
 
     # Create web app slot
@@ -86,10 +86,10 @@ def main():
         {
           "location": "eastus",
           "reserved": False
-          
+
         }
     ).result()
-    print("Create web app slot:\n{}".format(web_app_slot))
+    print(f"Create web app slot:\n{web_app_slot}")
 
     # Get web app slot
     web_app_slot = web_client.web_apps.get_slot(
@@ -97,7 +97,7 @@ def main():
         WEB_APP,
         WEB_APP_SLOT
     )
-    print("Get web app slot:\n{}".format(web_app_slot))
+    print(f"Get web app slot:\n{web_app_slot}")
 
     # Update web app slot
     web_app_slot = web_client.web_apps.update_slot(
@@ -120,8 +120,8 @@ def main():
           }
         }
     )
-    print("Update web app slot:\n{}".format(web_app_slot))
-    
+    print(f"Update web app slot:\n{web_app_slot}")
+
     # Delete web app slot
     web_app_slot = web_client.web_apps.delete_slot(
         GROUP_NAME,

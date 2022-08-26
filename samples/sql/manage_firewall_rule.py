@@ -47,7 +47,7 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(server))
+    print(f"Create server:\n{server}")
     # - end -
 
     # Create firewall rule
@@ -60,7 +60,7 @@ def main():
           "end_ip_address": "0.0.0.3"
         }
     )
-    print("Create firewall rule:\n{}".format(firewall_rule))
+    print(f"Create firewall rule:\n{firewall_rule}")
 
     # Get firewall rule
     firewall_rule = sql_client.firewall_rules.get(
@@ -68,7 +68,7 @@ def main():
         SERVER,
         FIREWALL_RULE
     )
-    print("Get firewall rule:\n{}".format(firewall_rule))
+    print(f"Get firewall rule:\n{firewall_rule}")
 
     # Delete firewall rule
     firewall_rule = sql_client.firewall_rules.delete(

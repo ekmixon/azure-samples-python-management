@@ -18,7 +18,7 @@ def main():
 
     # List subscriptions
     page_result = subscription_client.subscriptions.list()
-    result = [item for item in page_result]
+    result = list(page_result)
     for item in result:
         print(item.subscription_id)
         print(item.tags)

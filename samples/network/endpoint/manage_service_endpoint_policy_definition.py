@@ -51,14 +51,18 @@ def main():
         SERVICE_ENDPOINT_POLICY,
         SERVICE_ENDPOINT_POLICY_DEFINITION,
         {
-          "description": "Storage Service EndpointPolicy Definition",
-          "service": "Microsoft.Storage",
-          "service_resources": [
-            "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME
-          ]
-        }
+            "description": "Storage Service EndpointPolicy Definition",
+            "service": "Microsoft.Storage",
+            "service_resources": [
+                f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}"
+            ],
+        },
     ).result()
-    print("Create service endpoint policy definition:\n{}".format(service_endpoint_policy_definition))
+
+    print(
+        f"Create service endpoint policy definition:\n{service_endpoint_policy_definition}"
+    )
+
 
     # Get service endpoint policy definition
     service_endpoint_policy_definition = network_client.service_endpoint_policy_definitions.get(
@@ -66,8 +70,11 @@ def main():
         SERVICE_ENDPOINT_POLICY,
         SERVICE_ENDPOINT_POLICY_DEFINITION
     )
-    print("Get service endpoint policy definition:\n{}".format(service_endpoint_policy_definition))
-    
+    print(
+        f"Get service endpoint policy definition:\n{service_endpoint_policy_definition}"
+    )
+
+
     # Delete service endpoint policy definition
     service_endpoint_policy_definition = network_client.service_endpoint_policy_definitions.begin_delete(
         GROUP_NAME,

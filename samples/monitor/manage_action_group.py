@@ -57,14 +57,14 @@ def main():
           ]
         }
     )
-    print("Create action group:\n{}".format(action_group))
+    print(f"Create action group:\n{action_group}")
 
     # Get action group
     action_group = monitor_client.action_groups.get(
         GROUP_NAME,
         ACTION_GROUP_NAME
     )
-    print("Get action group:\n{}".format(action_group))
+    print(f"Get action group:\n{action_group}")
 
     # Update action group
     action_group = monitor_client.action_groups.update(
@@ -80,14 +80,14 @@ def main():
           }
         }
     )
-    print("Update action group:\n{}".format(action_group))
+    print(f"Update action group:\n{action_group}")
 
     # Delete action group
     monitor_client.action_groups.delete(
         GROUP_NAME,
         ACTION_GROUP_NAME
     )
-    print("Delete action group:\n{}".format(action_group))
+    print(f"Delete action group:\n{action_group}")
 
     # Delete Group
     resource_client.resource_groups.begin_delete(

@@ -41,14 +41,14 @@ def main():
           "location": "eastus"
         }
     ).result()
-    print("Create service endpoint policy:\n{}".format(service_endpoint_policy))
+    print(f"Create service endpoint policy:\n{service_endpoint_policy}")
 
     # Get service endpoint policy
     service_endpoint_policy = network_client.service_endpoint_policies.get(
         GROUP_NAME,
         SERVICE_ENDPOINT_POLICY
     )
-    print("Get service endpoint policy:\n{}".format(service_endpoint_policy))
+    print(f"Get service endpoint policy:\n{service_endpoint_policy}")
 
     # Update service endpoint policy
     service_endpoint_policy = network_client.service_endpoint_policies.update_tags(
@@ -61,8 +61,8 @@ def main():
           }
         }
     )
-    print("Update service endpoint policy:\n{}".format(service_endpoint_policy))
-    
+    print(f"Update service endpoint policy:\n{service_endpoint_policy}")
+
     # Delete service endpoint policy
     service_endpoint_policy = network_client.service_endpoint_policies.begin_delete(
         GROUP_NAME,

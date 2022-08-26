@@ -51,7 +51,7 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(server))
+    print(f"Create server:\n{server}")
 
     # Create Database
     database = sql_client.databases.begin_create_or_update(
@@ -62,7 +62,7 @@ def main():
           "location": "eastus"
         }
     ).result()
-    print("Create database:\n{}".format(database))
+    print(f"Create database:\n{database}")
 
     sync_database = sql_client.databases.begin_create_or_update(
         GROUP_NAME,
@@ -72,7 +72,7 @@ def main():
           "location": "eastus"
         }
     ).result()
-    print("Create sync database:\n{}".format(sync_database))
+    print(f"Create sync database:\n{sync_database}")
     # - end -
 
     # Create sync agent
@@ -81,10 +81,11 @@ def main():
         SERVER,
         SYNC_AGENT,
         {
-          "sync_database_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Sql/servers/" + SERVER + "/databases/" + SYNC_DATABASE
-        }
+            "sync_database_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Sql/servers/{SERVER}/databases/{SYNC_DATABASE}"
+        },
     ).result()
-    print("Create sync agent:\n{}".format(sync_agent))
+
+    print(f"Create sync agent:\n{sync_agent}")
 
     # Create sync group
     sync_group = sql_client.sync_groups.begin_create_or_update(
@@ -93,14 +94,15 @@ def main():
         DATABASE,
         SYNC_GROUP,
         {
-          "interval": "-1",
-          "conflict_resolution_policy": "HubWin",
-          "sync_database_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Sql/servers/" + SERVER + "/databases/" + SYNC_DATABASE,
-          "hub_database_user_name": "hubUser",
-          "use_private_link_connection": False
-        }
+            "interval": "-1",
+            "conflict_resolution_policy": "HubWin",
+            "sync_database_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Sql/servers/{SERVER}/databases/{SYNC_DATABASE}",
+            "hub_database_user_name": "hubUser",
+            "use_private_link_connection": False,
+        },
     ).result()
-    print("Create sync group:\n{}".format(sync_group))
+
+    print(f"Create sync group:\n{sync_group}")
 
     # Create sync member
     sync_member = sql_client.sync_members.begin_create_or_update(
@@ -120,7 +122,7 @@ def main():
           "sync_state": "UnProvisioned"
         }
     ).result()
-    print("Create sync member:\n{}".format(sync_member))
+    print(f"Create sync member:\n{sync_member}")
 
     # Get sync member
     sync_member = sql_client.sync_members.get(
@@ -130,7 +132,7 @@ def main():
         SYNC_GROUP,
         SYNC_MEMBER
     )
-    print("Get sync member:\n{}".format(sync_member))
+    print(f"Get sync member:\n{sync_member}")
 
     # Update sync member
     sync_member = sql_client.sync_members.begin_update(
@@ -143,8 +145,8 @@ def main():
           "use_private_link_connection": False
         }
     ).result()
-    print("Update sync member:\n{}".format(sync_member))
-    
+    print(f"Update sync member:\n{sync_member}")
+
     # Delete sync member
     sql_client.sync_members.begin_delete(
         GROUP_NAME,

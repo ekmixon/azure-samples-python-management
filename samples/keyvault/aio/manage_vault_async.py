@@ -107,20 +107,20 @@ async def main():
         }
     )
     vault = await async_poller.result()
-    print("Create vault:\n{}".format(vault))
+    print(f"Create vault:\n{vault}")
 
     # Get vault
     vault = await keyvault_client.vaults.get(
         GROUP_NAME,
         VAULT
     )
-    print("Get vault:\n{}".format(vault))
+    print(f"Get vault:\n{vault}")
 
     # List vault (List operation will return asyncList)
-    vaults = list()
+    vaults = []
     async for v in keyvault_client.vaults.list_by_resource_group(GROUP_NAME, top="1"):
         vaults.append(v)
-    print("List vaults:\n{}".format(vaults))
+    print(f"List vaults:\n{vaults}")
 
     # Update vault
     vault = await keyvault_client.vaults.update(
@@ -132,8 +132,8 @@ async def main():
             }
         }
     )
-    print("Update vault:\n{}".format(vault))
-    
+    print(f"Update vault:\n{vault}")
+
     # Delete vault
     await keyvault_client.vaults.delete(
         GROUP_NAME,

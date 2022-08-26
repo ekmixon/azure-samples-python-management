@@ -33,7 +33,7 @@ def main():
         GROUP_NAME,
         {"location": "eastus"}
     )
-    print("Create a resource group:\n{}".format(resource_group))
+    print(f"Create a resource group:\n{resource_group}")
 
     # Create Communication
     communication = communication_client.communication_service.begin_create_or_update(
@@ -41,14 +41,14 @@ def main():
         communication_service_name=COMMUNICATION_NAME,
         parameters=CommunicationServiceResource(location="global", data_location="United States")
     ).result()
-    print('Create a communication service:\n{}'.format(communication))
+    print(f'Create a communication service:\n{communication}')
 
     # Get Communication
     communication_res = communication_client.communication_service.get(
         resource_group_name=GROUP_NAME,
         communication_service_name=COMMUNICATION_NAME
     )
-    print('Get a communication service:\n{}'.format(communication_res))
+    print(f'Get a communication service:\n{communication_res}')
 
     # Delete Communication
     communication_client.communication_service.begin_delete(

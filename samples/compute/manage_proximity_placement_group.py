@@ -42,14 +42,14 @@ def main():
           "proximity_placement_group_type": "Standard"
         }
     )
-    print("Create proximity placement group:\n{}".format(proximity_placement_group))
+    print(f"Create proximity placement group:\n{proximity_placement_group}")
 
     # Get proximity placement group
     proximity_placement_group = compute_client.proximity_placement_groups.get(
         GROUP_NAME,
         PROXIMITY_PLACEMENT_GROUP_NAME
     )
-    print("Get proximity placement group:\n{}".format(proximity_placement_group))
+    print(f"Get proximity placement group:\n{proximity_placement_group}")
 
     # Update proximity placement group
     proximity_placement_group = compute_client.proximity_placement_groups.update(
@@ -60,7 +60,7 @@ def main():
           "proximity_placement_group_type": "Standard"
         }
     )
-    print("Update proximity placement group:\n{}".format(proximity_placement_group))
+    print(f"Update proximity placement group:\n{proximity_placement_group}")
 
     # Delete proximity placement group
     compute_client.proximity_placement_groups.delete(

@@ -82,40 +82,34 @@ def main():
         GROUP_NAME,
         VIRTUAL_NETWORK_GATEWAY,
         {
-          "ip_configurations": [
-            {
-              "private_ip_allocation_method": "Dynamic",
-              "subnet": {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + VIRTUAL_NETWORK_NAME + "/subnets/" + GATEWAY_SUBNET + ""
-              },
-              "public_ip_address": {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/publicIPAddresses/" + PUBLIC_IP_ADDRESS_NAME + ""
-              },
-              "name": IP_CONFIGURATION_NAME
-            }
-          ],
-          "gateway_type": "Vpn",
-          "vpn_type": "RouteBased",
-          "enable_bgp": False,
-          "active_active": False,
-          "enable_dns_forwarding": False,
-          "sku": {
-            "name": "VpnGw1",
-            "tier": "VpnGw1"
-          },
-          "bgp_settings": {
-            "asn": "65515",
-            "bgp_peering_address": "10.0.1.30",
-            "peer_weight": "0"
-          },
-          "custom_routes": {
-            "address_prefixes": [
-              "101.168.0.6/32"
-            ]
-          },
-          "location": "eastus"
-        }
+            "ip_configurations": [
+                {
+                    "private_ip_allocation_method": "Dynamic",
+                    "subnet": {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{VIRTUAL_NETWORK_NAME}/subnets/{GATEWAY_SUBNET}"
+                    },
+                    "public_ip_address": {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/publicIPAddresses/{PUBLIC_IP_ADDRESS_NAME}"
+                    },
+                    "name": IP_CONFIGURATION_NAME,
+                }
+            ],
+            "gateway_type": "Vpn",
+            "vpn_type": "RouteBased",
+            "enable_bgp": False,
+            "active_active": False,
+            "enable_dns_forwarding": False,
+            "sku": {"name": "VpnGw1", "tier": "VpnGw1"},
+            "bgp_settings": {
+                "asn": "65515",
+                "bgp_peering_address": "10.0.1.30",
+                "peer_weight": "0",
+            },
+            "custom_routes": {"address_prefixes": ["101.168.0.6/32"]},
+            "location": "eastus",
+        },
     ).result()
+
 
     # Create local network gateway
     network_client.local_network_gateways.begin_create_or_update(
@@ -138,65 +132,67 @@ def main():
         GROUP_NAME,
         VIRTUAL_NETWORK_GATEWAY_CONNECTION,
         {
-          "virtual_network_gateway1": {
-            "ip_configurations": [
-              {
-                "private_ip_allocation_method": "Dynamic",
-                "subnet": {
-                  "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + VIRTUAL_NETWORK_NAME + "/subnets/" + GATEWAY_SUBNET + ""
+            "virtual_network_gateway1": {
+                "ip_configurations": [
+                    {
+                        "private_ip_allocation_method": "Dynamic",
+                        "subnet": {
+                            "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{VIRTUAL_NETWORK_NAME}/subnets/{GATEWAY_SUBNET}"
+                        },
+                        "public_ip_address": {
+                            "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/publicIPAddresses/{PUBLIC_IP_ADDRESS_NAME}"
+                        },
+                        "name": IP_CONFIGURATION_NAME,
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworkGateways/{VIRTUAL_NETWORK_GATEWAY}/ipConfigurations/{IP_CONFIGURATION_NAME}",
+                    }
+                ],
+                "gateway_type": "Vpn",
+                "vpn_type": "RouteBased",
+                "enable_bgp": False,
+                "active_active": False,
+                "sku": {"name": "VpnGw1", "tier": "VpnGw1"},
+                "bgp_settings": {
+                    "asn": "65514",
+                    "bgp_peering_address": "10.0.2.30",
+                    "peer_weight": "0",
                 },
-                "public_ip_address": {
-                  "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/publicIPAddresses/" + PUBLIC_IP_ADDRESS_NAME + ""
+                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworkGateways/{VIRTUAL_NETWORK_GATEWAY}",
+                "location": "eastus",
+            },
+            "local_network_gateway2": {
+                "local_network_address_space": {
+                    "address_prefixes": ["10.1.0.0/16"]
                 },
-                "name": IP_CONFIGURATION_NAME,
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworkGateways/" + VIRTUAL_NETWORK_GATEWAY + "/ipConfigurations/" + IP_CONFIGURATION_NAME + ""
-              }
-            ],
-            "gateway_type": "Vpn",
-            "vpn_type": "RouteBased",
+                "gateway_ip_address": "10.1.0.1",
+                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/localNetworkGateways/{LOCAL_NETWORK_GATEWAY}",
+                "location": "eastus",
+            },
+            "connection_type": "IPsec",
+            "connection_protocol": "IKEv2",
+            "routing_weight": "0",
+            "shared_key": "Abc123",
             "enable_bgp": False,
-            "active_active": False,
-            "sku": {
-              "name": "VpnGw1",
-              "tier": "VpnGw1"
-            },
-            "bgp_settings": {
-              "asn": "65514",
-              "bgp_peering_address": "10.0.2.30",
-              "peer_weight": "0"
-            },
-            "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworkGateways/" + VIRTUAL_NETWORK_GATEWAY + "",
-            "location": "eastus"
-          },
-          "local_network_gateway2": {
-            "local_network_address_space": {
-              "address_prefixes": [
-                "10.1.0.0/16"
-              ]
-            },
-            "gateway_ip_address": "10.1.0.1",
-            "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/localNetworkGateways/" + LOCAL_NETWORK_GATEWAY + "",
-            "location": "eastus"
-          },
-          "connection_type": "IPsec",
-          "connection_protocol": "IKEv2",
-          "routing_weight": "0",
-          "shared_key": "Abc123",
-          "enable_bgp": False,
-          "use_policy_based_traffic_selectors": False,
-          "ipsec_policies": [],
-          "traffic_selector_policies": [],
-          "location": "eastus"
-        }
+            "use_policy_based_traffic_selectors": False,
+            "ipsec_policies": [],
+            "traffic_selector_policies": [],
+            "location": "eastus",
+        },
     ).result()
-    print("Create virtual network gateway connection:\n{}".format(virtual_network_gateway_connection))
+
+    print(
+        f"Create virtual network gateway connection:\n{virtual_network_gateway_connection}"
+    )
+
 
     # Get virtual network gateway connection
     virtual_network_gateway_connection = network_client.virtual_network_gateway_connections.get(
         GROUP_NAME,
         VIRTUAL_NETWORK_GATEWAY_CONNECTION
     )
-    print("Get virtual network gateway connection:\n{}".format(virtual_network_gateway_connection))
+    print(
+        f"Get virtual network gateway connection:\n{virtual_network_gateway_connection}"
+    )
+
 
     # Update virtual network gateway connection
     virtual_network_gateway_connection = network_client.virtual_network_gateway_connections.begin_update_tags(
@@ -209,8 +205,11 @@ def main():
           }
         }
     ).result()
-    print("Update virtual network gateway connection:\n{}".format(virtual_network_gateway_connection))
-    
+    print(
+        f"Update virtual network gateway connection:\n{virtual_network_gateway_connection}"
+    )
+
+
     # Delete virtual network gateway connection
     virtual_network_gateway_connection = network_client.virtual_network_gateway_connections.begin_delete(
         GROUP_NAME,

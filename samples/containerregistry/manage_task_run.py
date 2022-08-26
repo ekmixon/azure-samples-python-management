@@ -75,7 +75,7 @@ def main():
           }
         }
     ).result()
-    print("Create task run:\n{}".format(task_run))
+    print(f"Create task run:\n{task_run}")
 
     # Get task run
     task_run = containerregistry_client.task_runs.get(
@@ -83,7 +83,7 @@ def main():
         REGISTRIES,
         TASK_RUN
     )
-    print("Get task run:\n{}".format(task_run))
+    print(f"Get task run:\n{task_run}")
 
     # Update task run
     task_run = containerregistry_client.task_runs.begin_update(
@@ -107,8 +107,8 @@ def main():
           }
         }
     ).result()
-    print("Update task run:\n{}".format(task_run))
-    
+    print(f"Update task run:\n{task_run}")
+
     # Delete task run
     task_run = containerregistry_client.task_runs.begin_delete(
         GROUP_NAME,

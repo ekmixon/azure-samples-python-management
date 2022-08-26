@@ -28,7 +28,10 @@ NETWORK_NAME = "networknamex"
 VIRTUAL_MACHINE_NAME = "virtualmachinex11"
 SUBNET_NAME = "subnetx"
 INTERFACE_NAME = "interfacex"
-your_password = 'A1_' + ''.join(random.choice(string.ascii_lowercase) for i in range(8))
+your_password = 'A1_' + ''.join(
+    random.choice(string.ascii_lowercase) for _ in range(8)
+)
+
 
 RS_VAULT = 'my-vault'
 
@@ -76,36 +79,32 @@ def main():
         VIRTUAL_MACHINE_NAME,
         {
             "location": LOCATION,
-            "hardware_profile": {
-                "vm_size": "Standard_D2_v2"
-            },
+            "hardware_profile": {"vm_size": "Standard_D2_v2"},
             "storage_profile": {
                 "image_reference": {
                     "sku": "2016-Datacenter",
                     "publisher": "MicrosoftWindowsServer",
                     "version": "latest",
-                    "offer": "WindowsServer"
+                    "offer": "WindowsServer",
                 },
                 "os_disk": {
                     "caching": "ReadWrite",
-                    "managed_disk": {
-                        "storage_account_type": "Standard_LRS"
-                    },
+                    "managed_disk": {"storage_account_type": "Standard_LRS"},
                     "name": "myVMosdisk",
-                    "create_option": "FromImage"
+                    "create_option": "FromImage",
                 },
                 "data_disks": [
                     {
                         "disk_size_gb": "1023",
                         "create_option": "Empty",
-                        "lun": "0"
+                        "lun": "0",
                     },
                     {
                         "disk_size_gb": "1023",
                         "create_option": "Empty",
-                        "lun": "1"
-                    }
-                ]
+                        "lun": "1",
+                    },
+                ],
             },
             "os_profile": {
                 "admin_username": "testuser",
@@ -113,21 +112,19 @@ def main():
                 "admin_password": your_password,
                 "windows_configuration": {
                     "enable_automatic_updates": True  # need automatic update for reimage
-                }
+                },
             },
             "network_profile": {
                 "network_interfaces": [
                     {
-                        "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/networkInterfaces/" + INTERFACE_NAME + "",
-                        # "id": NIC_ID,
-                        "properties": {
-                            "primary": True
-                        }
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/networkInterfaces/{INTERFACE_NAME}",
+                        "properties": {"primary": True},
                     }
                 ]
-            }
-        }
+            },
+        },
     ).result()
+
     print(f"Create virtual machine:{vm}")
 
     # Create Recovery Services vault

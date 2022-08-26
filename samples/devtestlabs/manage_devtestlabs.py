@@ -18,8 +18,8 @@ def main():
 
     SUBSCRIPTION_ID = os.environ.get("SUBSCRIPTION_ID", None)
     TIME = str(time.time()).replace('.','')
-    GROUP_NAME = "testdevtestlabs" + TIME
-    DEVTESTLABS = "devtestlabs" + TIME
+    GROUP_NAME = f"testdevtestlabs{TIME}"
+    DEVTESTLABS = f"devtestlabs{TIME}"
     LOCATION = 'eastus'
 
     # Create client
@@ -50,14 +50,14 @@ def main():
         DEVTESTLABS,
         {'location': LOCATION}
     ).result()
-    print("Create devtestlabs:\n{}".format(devtestlabs))
+    print(f"Create devtestlabs:\n{devtestlabs}")
 
     # Get devtestlabs
     devtestlabs = devtestlabs_client.labs.get(
         GROUP_NAME,
         DEVTESTLABS
     )
-    print("Get devtestlabs:\n{}".format(devtestlabs))
+    print(f"Get devtestlabs:\n{devtestlabs}")
 
     # Update devtestlabs
     BODY = {
@@ -70,8 +70,8 @@ def main():
         DEVTESTLABS,
         BODY
     )
-    print("Update devtestlabs:\n{}".format(devtestlabs))
-    
+    print(f"Update devtestlabs:\n{devtestlabs}")
+
     # Delete devtestlabs
     devtestlabs = devtestlabs_client.labs.begin_delete(
         GROUP_NAME,

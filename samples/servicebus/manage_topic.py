@@ -62,7 +62,7 @@ def main():
             "enable_express": True
         }
     )
-    print("Create topic:\n{}".format(topic))
+    print(f"Create topic:\n{topic}")
 
     # Get topic
     topic = servicebus_client.topics.get(
@@ -70,7 +70,7 @@ def main():
         NAMESPACE,
         TOPIC
     )
-    print("Get topic:\n{}".format(topic))
+    print(f"Get topic:\n{topic}")
 
     # Delete topic
     topic = servicebus_client.topics.delete(

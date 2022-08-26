@@ -50,14 +50,14 @@ def main():
           }
         }
     ).result()
-    print("Create app service plan:\n{}".format(app_service_plan))
+    print(f"Create app service plan:\n{app_service_plan}")
 
     # Get app service plan
     app_service_plan = web_client.app_service_plans.get(
         GROUP_NAME,
         APP_SERVICE_PLAN
     )
-    print("Get app service plan:\n{}".format(app_service_plan))
+    print(f"Get app service plan:\n{app_service_plan}")
 
     # Update app service plan
     app_service_plan = web_client.app_service_plans.update(
@@ -67,8 +67,8 @@ def main():
           "kind": "app"
         }
     )
-    print("Update app service plan:\n{}".format(app_service_plan))
-    
+    print(f"Update app service plan:\n{app_service_plan}")
+
     # Delete app service plan
     app_service_plan = web_client.app_service_plans.delete(
         GROUP_NAME,

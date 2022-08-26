@@ -45,14 +45,14 @@ def main():
           "threat_intel_mode": "Alert"
         }
     ).result()
-    print("Create firewall policy:\n{}".format(firewall_policy))
+    print(f"Create firewall policy:\n{firewall_policy}")
 
     # Get firewall policy
     firewall_policy = network_client.firewall_policies.get(
         GROUP_NAME,
         FIREWALL_POLICY
     )
-    print("Get firewall policy:\n{}".format(firewall_policy))
+    print(f"Get firewall policy:\n{firewall_policy}")
 
     # Delete firewall policy
     firewall_policy = network_client.firewall_policies.begin_delete(

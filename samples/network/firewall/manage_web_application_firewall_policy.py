@@ -50,14 +50,20 @@ def main():
           "custom_rules": []
         }
     )
-    print("Create web application firewall policy:\n{}".format(web_application_firewall_policy))
+    print(
+        f"Create web application firewall policy:\n{web_application_firewall_policy}"
+    )
+
 
     # Get web application firewall policy
     web_application_firewall_policy = network_client.web_application_firewall_policies.get(
         GROUP_NAME,
         WEB_APPLICATION_FIREWALL_POLICY
     )
-    print("Get web application firewall policy:\n{}".format(web_application_firewall_policy))
+    print(
+        f"Get web application firewall policy:\n{web_application_firewall_policy}"
+    )
+
 
     # Delete web application firewall policy
     web_application_firewall_policy = network_client.web_application_firewall_policies.begin_delete(

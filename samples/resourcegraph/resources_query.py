@@ -29,7 +29,7 @@ def main():
             subscriptions=[SUBSCRIPTION_ID]
         )
     query_response = resourcegraph_client.resources(query)
-    print("Basic query up to 2 pieces of data:\n{}".format(query_response))
+    print(f"Basic query up to 2 pieces of data:\n{query_response}")
 
     # Basic query up to 2 pieces of object array
     query = QueryRequest(
@@ -40,7 +40,7 @@ def main():
             )
         )
     query_response = resourcegraph_client.resources(query)
-    print("Basic query up to 2 pieces of object array:\n{}".format(query_response))
+    print(f"Basic query up to 2 pieces of object array:\n{query_response}")
 
     # Query with options
     query = QueryRequest(
@@ -52,7 +52,7 @@ def main():
             )
         )
     query_response = resourcegraph_client.resources(query)
-    print("Query with options:\n{}".format(query_response))
+    print(f"Query with options:\n{query_response}")
 
     # Query with facet expressions
     facet_expression0 = 'location'
@@ -79,7 +79,7 @@ def main():
         ]
     )
     query_response = resourcegraph_client.resources(query)
-    print("Query with facet expressions:\n{}".format(query_response))
+    print(f"Query with facet expressions:\n{query_response}")
 
 
 if __name__ == "__main__":

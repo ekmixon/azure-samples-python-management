@@ -68,7 +68,7 @@ def main():
         GROUP_NAME,
         DEPLOYMENT_NAME
     )
-    print("Check deployment existence:\n{}".format(exist_result))
+    print(f"Check deployment existence:\n{exist_result}")
 
     # Create deployment
     deployment = resource_client.deployments.begin_create_or_update(
@@ -82,14 +82,14 @@ def main():
             }
         }
     ).result()
-    print("Create deployment:\n{}".format(deployment))
+    print(f"Create deployment:\n{deployment}")
 
     # Get deployment
     deployment = resource_client.deployments.get(
         GROUP_NAME,
         DEPLOYMENT_NAME
     )
-    print("Get deployment:\n{}".format(deployment))
+    print(f"Get deployment:\n{deployment}")
 
     # Validate deployment
     validation = resource_client.deployments.begin_validate(
@@ -103,7 +103,7 @@ def main():
             }
         }
     ).result()
-    print("Vlidate deployment:\n{}".format(validation))
+    print(f"Vlidate deployment:\n{validation}")
 
     # Delete deployment
     resource_client.deployments.begin_delete(

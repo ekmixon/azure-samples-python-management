@@ -82,29 +82,30 @@ def main():
         GROUP_NAME,
         NETWORK_INTERFACE,
         {
-          "enable_accelerated_networking": True,
-          "ip_configurations": [
-            {
-              "name": IP_CONFIGURATION_NAME,
-              "public_ip_address": {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/publicIPAddresses/" + PUBLIC_IP_ADDRESS_NAME
-              },
-              "subnet": {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + VIRTUAL_NETWORK_NAME + "/subnets/"+ SUBNET_NAME
-              }
-            }
-          ],
-          "location": "eastus"
-        }
+            "enable_accelerated_networking": True,
+            "ip_configurations": [
+                {
+                    "name": IP_CONFIGURATION_NAME,
+                    "public_ip_address": {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/publicIPAddresses/{PUBLIC_IP_ADDRESS_NAME}"
+                    },
+                    "subnet": {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{VIRTUAL_NETWORK_NAME}/subnets/{SUBNET_NAME}"
+                    },
+                }
+            ],
+            "location": "eastus",
+        },
     ).result()
-    print("Create network interface:\n{}".format(network_interface))
+
+    print(f"Create network interface:\n{network_interface}")
 
     # Get network interface
     network_interface = network_client.network_interfaces.get(
         GROUP_NAME,
         NETWORK_INTERFACE
     )
-    print("Get network interface:\n{}".format(network_interface))
+    print(f"Get network interface:\n{network_interface}")
 
     # Update network interface
     network_interface = network_client.network_interfaces.update_tags(
@@ -117,8 +118,8 @@ def main():
           }
         }
     )
-    print("Update network interface:\n{}".format(network_interface))
-    
+    print(f"Update network interface:\n{network_interface}")
+
     # Delete network interface
     network_interface = network_client.network_interfaces.begin_delete(
         GROUP_NAME,

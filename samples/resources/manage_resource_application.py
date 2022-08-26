@@ -52,14 +52,14 @@ def main():
             "location": "East US"
         }
     ).result()
-    print("Create application definition: {}".format(app_definition))
+    print(f"Create application definition: {app_definition}")
 
     # Get application definition
     app_definition = app_client.application_definitions.get(
         GROUP_NAME,
         APP_DEF_NAME
     )
-    print("Get application definition: {}".format(app_definition))
+    print(f"Get application definition: {app_definition}")
 
     # Create application
     app = app_client.applications.begin_create_or_update(
@@ -67,31 +67,33 @@ def main():
         APPLICATION_NAME,
         {
             "application_definition_id": app_definition.id,
-            "managed_resource_group_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/myManagedRG" + GROUP_NAME_2,
+            "managed_resource_group_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/myManagedRG{GROUP_NAME_2}",
             "location": "East US",
-            "kind": "ServiceCatalog"
-        }
+            "kind": "ServiceCatalog",
+        },
     )
+
     # ).result()
-    print("Create application: {}".format(app))
+    print(f"Create application: {app}")
 
     # Get application
     app = app_client.applications.get(
         GROUP_NAME,
         APPLICATION_NAME
     )
-    print("Get application: {}".format(app))
+    print(f"Get application: {app}")
 
     # Update application
     app = app_client.applications.update(
         GROUP_NAME,
         APPLICATION_NAME,
         {
-            "managed_resource_group_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/myManagedRG" + GROUP_NAME_2,
-            "kind": "ServiceCatalog"
-        }
+            "managed_resource_group_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/myManagedRG{GROUP_NAME_2}",
+            "kind": "ServiceCatalog",
+        },
     )
-    print("Update application: {}".format(app))
+
+    print(f"Update application: {app}")
 
     # Delete application
     app_client.applications.begin_delete(

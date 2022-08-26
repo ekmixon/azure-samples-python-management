@@ -24,7 +24,10 @@ def main():
     VMSS_NAME = "vmssxyz"
     AUTOSCALESETTING_NAME = "autoscalesettingx"
 
-    your_password = 'A1_' + ''.join(random.choice(string.ascii_lowercase) for i in range(8))
+    your_password = 'A1_' + ''.join(
+        random.choice(string.ascii_lowercase) for _ in range(8)
+    )
+
 
     # Create client
     # For other authentication approaches, please see: https://pypi.org/project/azure-identity/
@@ -183,7 +186,7 @@ def main():
           ]
         }
     )
-    print("Create autoscale setting:\n{}".format(autoscale_setting))
+    print(f"Create autoscale setting:\n{autoscale_setting}")
 
     # Get autoscale setting
     autoscale_setting = monitor_client.autoscale_settings.get(
@@ -228,7 +231,7 @@ def main():
           ]
         }
     )
-    print("Update autoscale setting:\n{}".format(autoscale_setting))
+    print(f"Update autoscale setting:\n{autoscale_setting}")
 
     # Delete autoscale setting
     monitor_client.autoscale_settings.delete(

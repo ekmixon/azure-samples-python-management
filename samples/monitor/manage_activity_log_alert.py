@@ -38,38 +38,28 @@ def main():
         GROUP_NAME,
         ACTIVITY_LOG_ALERT_NAME,
         {
-          "location": "Global",
-          "scopes": [
-            "subscriptions/" + SUBSCRIPTION_ID
-          ],
-          "enabled": True,
-          "condition": {
-            "all_of": [
-              {
-                "field": "category",
-                "equals": "Administrative"
-              },
-              {
-                "field": "level",
-                "equals": "Error"
-              }
-            ]
-          },
-          "actions": {
-            "action_groups": [
-            ]
-          },
-          "description": "Sample activity log alert description"
-        }
+            "location": "Global",
+            "scopes": [f"subscriptions/{SUBSCRIPTION_ID}"],
+            "enabled": True,
+            "condition": {
+                "all_of": [
+                    {"field": "category", "equals": "Administrative"},
+                    {"field": "level", "equals": "Error"},
+                ]
+            },
+            "actions": {"action_groups": []},
+            "description": "Sample activity log alert description",
+        },
     )
-    print("Create activity log alert:\n{}".format(log_alert))
+
+    print(f"Create activity log alert:\n{log_alert}")
 
     # Get activity log alert
     log_alert = monitor_client.activity_log_alerts.get(
         GROUP_NAME,
         ACTIVITY_LOG_ALERT_NAME
     )
-    print("Get activity log alert:\n{}".format(log_alert))
+    print(f"Get activity log alert:\n{log_alert}")
 
     # Patch acitivity log alert
     log_alert = monitor_client.activity_log_alerts.update(
@@ -85,7 +75,7 @@ def main():
           }
         }
     )
-    print("Update activity log alert:\n{}".format(log_alert))
+    print(f"Update activity log alert:\n{log_alert}")
 
     # Delete activate log alert
     monitor_client.activity_log_alerts.delete(

@@ -61,7 +61,7 @@ def main():
           "direction": "Outbound"
         }
     ).result()
-    print("Create security rule:\n{}".format(security_rule))
+    print(f"Create security rule:\n{security_rule}")
 
     # Get security rule
     security_rule = network_client.security_rules.get(
@@ -69,7 +69,7 @@ def main():
         NETWORK_SECURITY_GROUP,
         SECURITY_RULE
     )
-    print("Get security rule:\n{}".format(security_rule))
+    print(f"Get security rule:\n{security_rule}")
 
     # Delete security rule
     security_rule = network_client.security_rules.begin_delete(

@@ -41,7 +41,7 @@ def main():
         subscriptions=[SUBSCRIPTION_ID]
     )
     query_response = resourcegraph_client.resources(query, cls=custom_res)
-    print("Basic query up to 2 pieces of data:\n{}".format(query_response))
+    print(f"Basic query up to 2 pieces of data:\n{query_response}")
 
 
 if __name__ == "__main__":

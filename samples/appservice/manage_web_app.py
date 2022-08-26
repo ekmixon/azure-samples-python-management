@@ -75,14 +75,14 @@ def main():
           "https_only": False
         }
     ).result()
-    print("Create web app:\n{}".format(web_app))
+    print(f"Create web app:\n{web_app}")
 
     # Get web app
     web_app = web_client.web_apps.get(
         GROUP_NAME,
         WEB_APP
     )
-    print("Get web app:\n{}".format(web_app))
+    print(f"Get web app:\n{web_app}")
 
     # Update web app
     web_app = web_client.web_apps.update(
@@ -106,8 +106,8 @@ def main():
           "https_only": False
         }
     )
-    print("Update web app:\n{}".format(web_app))
-    
+    print(f"Update web app:\n{web_app}")
+
     # Delete web app
     web_app = web_client.web_apps.delete(
         GROUP_NAME,

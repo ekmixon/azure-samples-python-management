@@ -48,7 +48,7 @@ def main():
           "location": "East US 2"
         }
     )
-    print("Create automation account:\n{}".format(automation_account))
+    print(f"Create automation account:\n{automation_account}")
     # - end -
 
     # Create runbook
@@ -70,7 +70,7 @@ def main():
           }
         }
     )
-    print("Create runbook:\n{}".format(runbook))
+    print(f"Create runbook:\n{runbook}")
 
     # Get runbook
     runbook = automation_client.runbook.get(
@@ -78,7 +78,7 @@ def main():
         AUTOMATION_ACCOUNT,
         RUNBOOK
     )
-    print("Get runbook:\n{}".format(runbook))
+    print(f"Get runbook:\n{runbook}")
 
     # Update runbook
     runbook = automation_client.runbook.update(
@@ -92,8 +92,8 @@ def main():
           "log_activity_trace": "1"
         }
     )
-    print("Update runbook:\n{}".format(runbook))
-    
+    print(f"Update runbook:\n{runbook}")
+
     # Delete runbook
     runbook = automation_client.runbook.delete(
         GROUP_NAME,

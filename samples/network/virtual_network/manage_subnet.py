@@ -57,7 +57,7 @@ def main():
           "address_prefix": "10.0.0.0/24"
         }
     ).result()
-    print("Create subnet:\n{}".format(subnet))
+    print(f"Create subnet:\n{subnet}")
 
     # Get subnet
     subnet = network_client.subnets.get(
@@ -65,8 +65,8 @@ def main():
         VIRTUAL_NETWORK_NAME,
         SUBNET
     )
-    print("Get subnet:\n{}".format(subnet))
-    
+    print(f"Get subnet:\n{subnet}")
+
     # Delete subnet
     subnet = network_client.subnets.begin_delete(
         GROUP_NAME,

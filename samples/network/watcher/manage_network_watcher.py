@@ -41,14 +41,14 @@ def main():
           "location": "eastus"
         }
     )
-    print("Create network watcher:\n{}".format(network_watcher))
+    print(f"Create network watcher:\n{network_watcher}")
 
     # Get network watcher
     network_watcher = network_client.network_watchers.get(
         GROUP_NAME,
         NETWORK_WATCHER
     )
-    print("Get network watcher:\n{}".format(network_watcher))
+    print(f"Get network watcher:\n{network_watcher}")
 
     # Update network watcher
     network_watcher = network_client.network_watchers.update_tags(
@@ -61,8 +61,8 @@ def main():
           }
         }
     )
-    print("Update network watcher:\n{}".format(network_watcher))
-    
+    print(f"Update network watcher:\n{network_watcher}")
+
     # Delete network watcher
     network_watcher = network_client.network_watchers.begin_delete(
         GROUP_NAME,

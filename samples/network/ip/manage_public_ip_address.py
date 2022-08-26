@@ -41,14 +41,14 @@ def main():
           "location": "eastus"
         }
     ).result()
-    print("Create public ip address:\n{}".format(public_ip_address))
+    print(f"Create public ip address:\n{public_ip_address}")
 
     # Get public ip address
     public_ip_address = network_client.public_ip_addresses.get(
         GROUP_NAME,
         PUBLIC_IP_ADDRESS
     )
-    print("Get public ip address:\n{}".format(public_ip_address))
+    print(f"Get public ip address:\n{public_ip_address}")
 
     # Update public ip address
     public_ip_address = network_client.public_ip_addresses.update_tags(
@@ -61,8 +61,8 @@ def main():
           }
         }
     )
-    print("Update public ip address:\n{}".format(public_ip_address))
-    
+    print(f"Update public ip address:\n{public_ip_address}")
+
     # Delete public ip address
     public_ip_address = network_client.public_ip_addresses.begin_delete(
         GROUP_NAME,

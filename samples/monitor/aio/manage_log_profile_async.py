@@ -76,20 +76,20 @@ async def main():
           "storage_account_id": storage_account.id,
         }
     )
-    print("Create log profile:\n{}".format(log_profile))
+    print(f"Create log profile:\n{log_profile}")
 
     # Need wait seconds
     await asyncio.sleep(20)
 
     # Get log profile
     log_profile = await monitor_client.log_profiles.get(LOGPROFILE_NAME)
-    print("Get log profile:\n{}".format(log_profile))
+    print(f"Get log profile:\n{log_profile}")
 
     # List log profile (List operation will return asyncList)
-    log_profiles = list()
+    log_profiles = []
     async for log in monitor_client.log_profiles.list():
         log_profiles.append(log)
-    print("List log profiles:\n{}".format(log_profiles))
+    print(f"List log profiles:\n{log_profiles}")
 
     # Delete log profile
     await monitor_client.log_profiles.delete(LOGPROFILE_NAME)

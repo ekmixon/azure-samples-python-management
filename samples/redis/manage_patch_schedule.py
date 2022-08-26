@@ -66,27 +66,19 @@ def main():
         GROUP_NAME,
         REDIS,
         {
-          "location": "eastus",
-          "zones": [
-            "1"
-          ],
-          "sku": {
-            "name": "Premium",
-            "family": "P",
-            "capacity": "1"
-          },
-          "enable_non_ssl_port": True,
-          "shard_count": "2",
-          # "replicas_per_master": "2",
-          "redis_configuration": {
-            "maxmemory-policy": "allkeys-lru"
-          },
-          "subnet_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + NETWORK_NAME + "/subnets/" + SUBNET_NAME,
-          "static_ip": "10.0.0.5",
-          "minimum_tls_version": "1.2"
-        }
+            "location": "eastus",
+            "zones": ["1"],
+            "sku": {"name": "Premium", "family": "P", "capacity": "1"},
+            "enable_non_ssl_port": True,
+            "shard_count": "2",
+            "redis_configuration": {"maxmemory-policy": "allkeys-lru"},
+            "subnet_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{NETWORK_NAME}/subnets/{SUBNET_NAME}",
+            "static_ip": "10.0.0.5",
+            "minimum_tls_version": "1.2",
+        },
     ).result()
-    print("Create redis:\n{}".format(redis))
+
+    print(f"Create redis:\n{redis}")
     # - end -
 
     # Create patch schedule
@@ -108,7 +100,7 @@ def main():
           ]
         }
     )
-    print("Create patch schedule:\n{}".format(patch_schedule))
+    print(f"Create patch schedule:\n{patch_schedule}")
 
     # Get patch schedule
     patch_schedule = redis_client.patch_schedules.get(
@@ -116,7 +108,7 @@ def main():
         REDIS,
         "default"
     )
-    print("Get patch schedule:\n{}".format(patch_schedule))
+    print(f"Get patch schedule:\n{patch_schedule}")
 
     # Delete patch schedule
     patch_schedule = redis_client.patch_schedules.delete(

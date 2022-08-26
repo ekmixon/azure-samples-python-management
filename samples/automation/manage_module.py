@@ -48,7 +48,7 @@ def main():
           "location": "East US 2"
         }
     )
-    print("Create automation account:\n{}".format(automation_account))
+    print(f"Create automation account:\n{automation_account}")
     # - end -
 
     # Create module
@@ -67,7 +67,7 @@ def main():
           }
         }
     )
-    print("Create module:\n{}".format(module))
+    print(f"Create module:\n{module}")
 
     # Get module
     module = automation_client.module.get(
@@ -75,7 +75,7 @@ def main():
         AUTOMATION_ACCOUNT,
         MODULE
     )
-    print("Get module:\n{}".format(module))
+    print(f"Get module:\n{module}")
 
     # Update module
     module = automation_client.module.update(
@@ -93,8 +93,8 @@ def main():
           }
         }
     )
-    print("Update module:\n{}".format(module))
-    
+    print(f"Update module:\n{module}")
+
     # Delete module
     module = automation_client.module.delete(
         GROUP_NAME,

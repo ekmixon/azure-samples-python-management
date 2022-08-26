@@ -52,14 +52,14 @@ def main():
             }
         }
     ).result()
-    print("Create namespace:\n{}".format(namespace))
+    print(f"Create namespace:\n{namespace}")
 
     # Get namespace
     namespace = relay_client.namespaces.get(
         GROUP_NAME,
         NAMESPACE
     )
-    print("Get namespace:\n{}".format(namespace))
+    print(f"Get namespace:\n{namespace}")
 
     # Update namespace
     namespace = relay_client.namespaces.update(
@@ -71,8 +71,8 @@ def main():
             }
         }
     )
-    print("Update namespace:\n{}".format(namespace))
-    
+    print(f"Update namespace:\n{namespace}")
+
     # Delete namespace
     namespace = relay_client.namespaces.begin_delete(
         GROUP_NAME,

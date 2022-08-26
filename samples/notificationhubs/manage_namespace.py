@@ -43,7 +43,7 @@ def main():
             "location": "eastus"
         }
     )
-    print("Create namespace:\n{}".format(namespace))
+    print(f"Create namespace:\n{namespace}")
 
     # Get namespace
     namespace = notificationhubs_client.namespaces.get(
@@ -56,7 +56,7 @@ def main():
             GROUP_NAME,
             NAMESPACE,
         )
-    print("Get namespace:\n{}".format(namespace))
+    print(f"Get namespace:\n{namespace}")
 
     # Update namespace
     namespace = notificationhubs_client.namespaces.patch(
@@ -66,8 +66,8 @@ def main():
             "enabled": True
         }
     )
-    print("Update namespace:\n{}".format(namespace))
-    
+    print(f"Update namespace:\n{namespace}")
+
     # Delete namespace
     notificationhubs_client.namespaces.begin_delete(
         GROUP_NAME,

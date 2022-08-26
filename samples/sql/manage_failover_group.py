@@ -48,7 +48,7 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(server))
+    print(f"Create server:\n{server}")
 
     partner_server = sql_client.servers.begin_create_or_update(
         GROUP_NAME,
@@ -59,7 +59,7 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(partner_server))
+    print(f"Create server:\n{partner_server}")
     # - end -
 
     # Create failover group
@@ -68,23 +68,21 @@ def main():
         SERVER,
         FAILOVER_GROUP,
         {
-          "read_write_endpoint": {
-            "failover_policy": "Automatic",
-            "failover_with_data_loss_grace_period_minutes": "480"
-          },
-          "read_only_endpoint": {
-            "failover_policy": "Disabled"
-          },
-          "partner_servers": [
-            {
-              "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Sql/servers/" + PARTNER_SERVER
-            }
-          ],
-          "databases": [
-          ]
-        }
+            "read_write_endpoint": {
+                "failover_policy": "Automatic",
+                "failover_with_data_loss_grace_period_minutes": "480",
+            },
+            "read_only_endpoint": {"failover_policy": "Disabled"},
+            "partner_servers": [
+                {
+                    "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Sql/servers/{PARTNER_SERVER}"
+                }
+            ],
+            "databases": [],
+        },
     ).result()
-    print("Create failover group:\n{}".format(failover_group))
+
+    print(f"Create failover group:\n{failover_group}")
 
     # Get failover group
     failover_group = sql_client.failover_groups.get(
@@ -92,7 +90,7 @@ def main():
         SERVER,
         FAILOVER_GROUP
     )
-    print("Get failover group:\n{}".format(failover_group))
+    print(f"Get failover group:\n{failover_group}")
 
     # Update failover group
     failover_group = sql_client.failover_groups.begin_update(
@@ -108,8 +106,8 @@ def main():
           ]
         }
     ).result()
-    print("Update failover group:\n{}".format(failover_group))
-    
+    print(f"Update failover group:\n{failover_group}")
+
     # Delete failover group
     failover_group = sql_client.failover_groups.begin_delete(
         GROUP_NAME,

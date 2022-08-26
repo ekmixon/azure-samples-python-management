@@ -50,14 +50,14 @@ def main():
           }
         }
     ).result()
-    print("Create Namespace: {}".format(namesapce))
+    print(f"Create Namespace: {namesapce}")
 
     # Get Namesapce
     namespace = eventhub_client.namespaces.get(
         GROUP_NAME,
         NAMESPACE_NAME
     )
-    print("Get Namespace: {}".format(namespace))
+    print(f"Get Namespace: {namespace}")
 
     # Update Namespace
     namespace = eventhub_client.namespaces.update(
@@ -71,7 +71,7 @@ def main():
           }
         }
     )
-    print("Update Namespace: {}".format(namesapce))
+    print(f"Update Namespace: {namesapce}")
 
     # Delete Namespace
     eventhub_client.namespaces.begin_delete(

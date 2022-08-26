@@ -110,15 +110,19 @@ def main():
         EXPRESS_ROUTE_CIRCUIT_CONNECTION,
         {
             "express_route_circuit_peering": {
-              "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/expressRouteCircuits/" + EXPRESS_ROUTE_CIRCUIT + "/peerings/" + EXPRESS_ROUTE_CIRCUIT_PEERING
+                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/expressRouteCircuits/{EXPRESS_ROUTE_CIRCUIT}/peerings/{EXPRESS_ROUTE_CIRCUIT_PEERING}"
             },
             "peer_express_route_circuit_peering": {
-              "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/expressRouteCircuits/" + EXPRESS_ROUTE_CIRCUIT_2 + "/peerings/" + EXPRESS_ROUTE_CIRCUIT_PEERING 
+                "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/expressRouteCircuits/{EXPRESS_ROUTE_CIRCUIT_2}/peerings/{EXPRESS_ROUTE_CIRCUIT_PEERING}"
             },
-            "address_prefix": "104.0.0.0/29"
-          }
+            "address_prefix": "104.0.0.0/29",
+        },
     ).result()
-    print("Create express route circuit connection:\n{}".format(express_route_circuit_connection))
+
+    print(
+        f"Create express route circuit connection:\n{express_route_circuit_connection}"
+    )
+
 
     # Get express route circuit connection
     express_route_circuit_connection = network_client.express_route_circuit_connections.get(
@@ -127,7 +131,10 @@ def main():
         EXPRESS_ROUTE_CIRCUIT_PEERING,
         EXPRESS_ROUTE_CIRCUIT_CONNECTION
     )
-    print("Get express route circuit connection:\n{}".format(express_route_circuit_connection))
+    print(
+        f"Get express route circuit connection:\n{express_route_circuit_connection}"
+    )
+
 
     # Delete express route circuit connection
     express_route_circuit_connection = network_client.express_route_circuit_connections.begin_delete(

@@ -51,14 +51,14 @@ def main():
           "properties": {}
         }
     ).result()
-    print("Create iot dps resource:\n{}".format(iot_dps_resource))
+    print(f"Create iot dps resource:\n{iot_dps_resource}")
 
     # Get iot dps resource
     iot_dps_resource = iotdps_client.iot_dps_resource.get(
         IOT_DPS_RESOURCE,
         GROUP_NAME
     )
-    print("Get iot hub resource:\n{}".format(iot_dps_resource))
+    print(f"Get iot hub resource:\n{iot_dps_resource}")
 
     # Delete iot dps resource
     iot_dps_resource = iotdps_client.iot_dps_resource.begin_delete(

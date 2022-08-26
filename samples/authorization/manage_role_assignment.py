@@ -46,18 +46,19 @@ def main():
         SCOPE,
         ROLE_ASSIGNMENT,
         {
-          "role_definition_id": "/subscriptions/" + SUBSCRIPTION_ID + "/providers/Microsoft.Authorization/roleDefinitions/" + ROLE_DEFINITION,
-          "principal_id": CLIENT_OID,
-        }
+            "role_definition_id": f"/subscriptions/{SUBSCRIPTION_ID}/providers/Microsoft.Authorization/roleDefinitions/{ROLE_DEFINITION}",
+            "principal_id": CLIENT_OID,
+        },
     )
-    print("Create role assignment:\n{}".format(role_assignment))
+
+    print(f"Create role assignment:\n{role_assignment}")
 
     # Get role assignment
     role_assignment = authorization_client.role_assignments.get(
         SCOPE,
         ROLE_ASSIGNMENT
     )
-    print("Get role assignment:\n{}".format(role_assignment))
+    print(f"Get role assignment:\n{role_assignment}")
 
     # Delete role assignment
     role_assignment = authorization_client.role_assignments.delete(

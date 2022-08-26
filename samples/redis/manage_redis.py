@@ -66,34 +66,26 @@ def main():
         GROUP_NAME,
         REDIS,
         {
-          "location": "eastus",
-          "zones": [
-            "1"
-          ],
-          "sku": {
-            "name": "Premium",
-            "family": "P",
-            "capacity": "1"
-          },
-          "enable_non_ssl_port": True,
-          "shard_count": "2",
-          # "replicas_per_master": "2",
-          "redis_configuration": {
-            "maxmemory-policy": "allkeys-lru"
-          },
-          "subnet_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/virtualNetworks/" + NETWORK_NAME + "/subnets/" + SUBNET_NAME,
-          "static_ip": "10.0.0.5",
-          "minimum_tls_version": "1.2"
-        }
+            "location": "eastus",
+            "zones": ["1"],
+            "sku": {"name": "Premium", "family": "P", "capacity": "1"},
+            "enable_non_ssl_port": True,
+            "shard_count": "2",
+            "redis_configuration": {"maxmemory-policy": "allkeys-lru"},
+            "subnet_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/virtualNetworks/{NETWORK_NAME}/subnets/{SUBNET_NAME}",
+            "static_ip": "10.0.0.5",
+            "minimum_tls_version": "1.2",
+        },
     ).result()
-    print("Create redis:\n{}".format(redis))
+
+    print(f"Create redis:\n{redis}")
 
     # Get redis
     redis = redis_client.redis.get(
         GROUP_NAME,
         REDIS
     )
-    print("Get redis:\n{}".format(redis))
+    print(f"Get redis:\n{redis}")
 
     # Update redis
     redis = redis_client.redis.update(
@@ -103,8 +95,8 @@ def main():
             "enable_non_ssl_port": True
         }
     )
-    print("Update redis:\n{}".format(redis))
-    
+    print(f"Update redis:\n{redis}")
+
     # Delete redis
     redis = redis_client.redis.begin_delete(
         GROUP_NAME,

@@ -47,7 +47,7 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(server))
+    print(f"Create server:\n{server}")
     # - end -
 
     # Create database
@@ -60,7 +60,7 @@ def main():
           "read_scale": "Disabled"
         }
     ).result()
-    print("Create database:\n{}".format(database))
+    print(f"Create database:\n{database}")
 
     # Get database
     database = sql_client.databases.get(
@@ -68,7 +68,7 @@ def main():
         SERVER,
         DATABASE
     )
-    print("Get database:\n{}".format(database))
+    print(f"Get database:\n{database}")
 
     # Update database
     database = sql_client.databases.begin_update(
@@ -84,8 +84,8 @@ def main():
           "max_size_bytes": "1073741824"
         }
     ).result()
-    print("Update database:\n{}".format(database))
-    
+    print(f"Update database:\n{database}")
+
     # Delete database
     database = sql_client.databases.begin_delete(
         GROUP_NAME,

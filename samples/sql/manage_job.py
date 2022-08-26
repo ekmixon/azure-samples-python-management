@@ -53,7 +53,7 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(server))
+    print(f"Create server:\n{server}")
 
     # Create database
     database = sql_client.databases.begin_create_or_update(
@@ -65,7 +65,7 @@ def main():
           "read_scale": "Disabled"
         }
     ).result()
-    print("Create database:\n{}".format(database))
+    print(f"Create database:\n{database}")
     # - end -
 
     # Create job agent
@@ -74,11 +74,12 @@ def main():
         SERVER,
         JOB_AGENT,
         {
-          "location": "eastus",
-          "database_id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Sql/servers/" + SERVER + "/databases/" + DATABASE
-        }
+            "location": "eastus",
+            "database_id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Sql/servers/{SERVER}/databases/{DATABASE}",
+        },
     ).result()
-    print("Create job agent:\n{}".format(agent))
+
+    print(f"Create job agent:\n{agent}")
 
     # Create job credential
     credential = sql_client.job_credentials.create_or_update(
@@ -91,7 +92,7 @@ def main():
           "password": "<password>"
         }
     )
-    print("Create job credential:\n{}".format(credential))
+    print(f"Create job credential:\n{credential}")
 
     # Create job target group
     group = sql_client.job_target_groups.create_or_update(
@@ -103,7 +104,7 @@ def main():
           "members": []
         }
     )
-    print("Create job target group:\n{}".format(group))
+    print(f"Create job target group:\n{group}")
 
     # Create job
     job = sql_client.jobs.create_or_update(
@@ -122,7 +123,7 @@ def main():
           }
         }
     )
-    print("Create job:\n{}".format(job))
+    print(f"Create job:\n{job}")
 
     # Create job step
     step = sql_client.job_steps.create_or_update(
@@ -132,14 +133,13 @@ def main():
         JOB,
         JOB_STEP,
         {
-          "target_group": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Sql/servers/" + SERVER + "/jobAgents/" + JOB_AGENT + "/targetGroups/" + TARGET_GROUP,
-          "credential": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Sql/servers/" + SERVER + "/jobAgents/" + JOB_AGENT + "/credentials/" + CREDENTIAL,
-          "action": {
-            "value": "select 1"
-          }
-        }
+            "target_group": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Sql/servers/{SERVER}/jobAgents/{JOB_AGENT}/targetGroups/{TARGET_GROUP}",
+            "credential": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Sql/servers/{SERVER}/jobAgents/{JOB_AGENT}/credentials/{CREDENTIAL}",
+            "action": {"value": "select 1"},
+        },
     )
-    print("Create job step:\n{}".format(step))
+
+    print(f"Create job step:\n{step}")
 
     # Create job execution
     execution = sql_client.job_executions.begin_create_or_update(
@@ -149,7 +149,7 @@ def main():
         JOB,
         JOB_EXECUTION_ID
     ).result()
-    print("Create execution:\n{}".format(execution))
+    print(f"Create execution:\n{execution}")
 
     # Get job
     job = sql_client.jobs.get(
@@ -158,7 +158,7 @@ def main():
         JOB_AGENT,
         JOB
     )
-    print("Get job:\n{}".format(job))
+    print(f"Get job:\n{job}")
 
     # Delete job
     job = sql_client.jobs.delete(

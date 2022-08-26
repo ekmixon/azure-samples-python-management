@@ -24,7 +24,10 @@ def main():
     SUBNET_NAME = "subnetx"
     INTERFACE_NAME = "interfacexx"
 
-    your_password = 'A1_' + ''.join(random.choice(string.ascii_lowercase) for i in range(8))
+    your_password = 'A1_' + ''.join(
+        random.choice(string.ascii_lowercase) for _ in range(8)
+    )
+
 
     # Create client
     # For other authentication approaches, please see: https://pypi.org/project/azure-identity/
@@ -185,14 +188,14 @@ def main():
           ]
         }
     )
-    print("Create metric alert:\n{}".format(metric_alert))
+    print(f"Create metric alert:\n{metric_alert}")
 
     # Get metric alert
     metric_alert = monitor_client.metric_alerts.get(
         GROUP_NAME,
         METRIC_ALERT_NAME
     )
-    print("Get metric alert:\n{}".format(metric_alert))
+    print(f"Get metric alert:\n{metric_alert}")
 
     # Delete metric alert
     monitor_client.metric_alerts.delete(

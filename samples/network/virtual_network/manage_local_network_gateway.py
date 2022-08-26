@@ -47,14 +47,14 @@ def main():
           "location": "eastus"
         }
     ).result()
-    print("Create local network gateway:\n{}".format(local_network_gateway))
+    print(f"Create local network gateway:\n{local_network_gateway}")
 
     # Get local network gateway
     local_network_gateway = network_client.local_network_gateways.get(
         GROUP_NAME,
         LOCAL_NETWORK_GATEWAY
     )
-    print("Get local network gateway:\n{}".format(local_network_gateway))
+    print(f"Get local network gateway:\n{local_network_gateway}")
 
     # Update local network gateway
     local_network_gateway = network_client.local_network_gateways.update_tags(
@@ -67,8 +67,8 @@ def main():
           }
         }
     )
-    print("Update local network gateway:\n{}".format(local_network_gateway))
-    
+    print(f"Update local network gateway:\n{local_network_gateway}")
+
     # Delete local network gateway
     local_network_gateway = network_client.local_network_gateways.begin_delete(
         GROUP_NAME,

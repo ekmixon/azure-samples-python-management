@@ -49,14 +49,14 @@ def main():
           "admin_user_enabled": True
         }
     ).result()
-    print("Create registries:\n{}".format(registries))
+    print(f"Create registries:\n{registries}")
 
     # Get registries
     registries = registry_client.registries.get(
         GROUP_NAME,
         REGISTRIES
     )
-    print("Get registries:\n{}".format(registries))
+    print(f"Get registries:\n{registries}")
 
     # Update registries
     registries = registry_client.registries.begin_update(
@@ -72,8 +72,8 @@ def main():
           "admin_user_enabled": True
         }
     ).result()
-    print("Update registries:\n{}".format(registries))
-    
+    print(f"Update registries:\n{registries}")
+
     # Delete registries
     registries = registry_client.registries.begin_delete(
         GROUP_NAME,

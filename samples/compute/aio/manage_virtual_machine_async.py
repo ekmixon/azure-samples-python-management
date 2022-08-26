@@ -24,7 +24,10 @@ async def main():
     NETWORK_NAME = "networknamex"
     VIRTUAL_MACHINE_EXTENSION_NAME = "virtualmachineextensionx"
 
-    your_password = 'A1_' + ''.join(random.choice(string.ascii_lowercase) for i in range(8))
+    your_password = 'A1_' + ''.join(
+        random.choice(string.ascii_lowercase) for _ in range(8)
+    )
+
 
     # Create client
     # For other authentication approaches, please see: https://pypi.org/project/azure-identity/
@@ -91,59 +94,54 @@ async def main():
         VIRTUAL_MACHINE_NAME,
         {
             "location": "eastus",
-            "hardware_profile": {
-                "vm_size": "Standard_D2_v2"
-            },
+            "hardware_profile": {"vm_size": "Standard_D2_v2"},
             "storage_profile": {
                 "image_reference": {
-                "sku": "2016-Datacenter",
-                "publisher": "MicrosoftWindowsServer",
-                "version": "latest",
-                "offer": "WindowsServer"
+                    "sku": "2016-Datacenter",
+                    "publisher": "MicrosoftWindowsServer",
+                    "version": "latest",
+                    "offer": "WindowsServer",
                 },
                 "os_disk": {
-                "caching": "ReadWrite",
-                "managed_disk": {
-                    "storage_account_type": "Standard_LRS"
-                },
-                "name": "myVMosdisk",
-                "create_option": "FromImage"
+                    "caching": "ReadWrite",
+                    "managed_disk": {"storage_account_type": "Standard_LRS"},
+                    "name": "myVMosdisk",
+                    "create_option": "FromImage",
                 },
                 "data_disks": [
-                {
-                    "disk_size_gb": "1023",
-                    "create_option": "Empty",
-                    "lun": "0"
-                },
-                {
-                    "disk_size_gb": "1023",
-                    "create_option": "Empty",
-                    "lun": "1"
-                }
-                ]
+                    {
+                        "disk_size_gb": "1023",
+                        "create_option": "Empty",
+                        "lun": "0",
+                    },
+                    {
+                        "disk_size_gb": "1023",
+                        "create_option": "Empty",
+                        "lun": "1",
+                    },
+                ],
             },
             "os_profile": {
                 "admin_username": "testuser",
                 "computer_name": "myVM",
                 "admin_password": your_password,
                 "windows_configuration": {
-                "enable_automatic_updates": True  # need automatic update for reimage
-                }
+                    "enable_automatic_updates": True  # need automatic update for reimage
+                },
             },
             "network_profile": {
                 "network_interfaces": [
-                {
-                    "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/networkInterfaces/" + INTERFACE_NAME + "",
-                    "properties": {
-                    "primary": True
+                    {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/networkInterfaces/{INTERFACE_NAME}",
+                        "properties": {"primary": True},
                     }
-                }
                 ]
-            }
-        }
+            },
+        },
     )
+
     vm = await async_poller.result()
-    print("Create virtual machine:\n{}".format(vm))
+    print(f"Create virtual machine:\n{vm}")
 
     # Create vm extension
     async_poller = await compute_client.virtual_machine_extensions.begin_create_or_update(
@@ -159,20 +157,20 @@ async def main():
         }
     )
     extension = await async_poller.result()
-    print("Create vm extension:\n{}".format(extension))
+    print(f"Create vm extension:\n{extension}")
 
     # Get virtual machine
     vm = await compute_client.virtual_machines.get(
         GROUP_NAME,
         VIRTUAL_MACHINE_NAME
     )
-    print("Get virtual machine:\n{}".format(vm))
+    print(f"Get virtual machine:\n{vm}")
 
     # List virtual machine (List operation will return asyncList)
-    vms = list()
+    vms = []
     async for vm in compute_client.virtual_machines.list(GROUP_NAME):
         vms.append(vm)
-    print("List virtual machine:\n{}".format(vms))
+    print(f"List virtual machine:\n{vms}")
 
     # Get vm extension
     extension = await compute_client.virtual_machine_extensions.get(
@@ -180,27 +178,26 @@ async def main():
         VIRTUAL_MACHINE_NAME,
         VIRTUAL_MACHINE_EXTENSION_NAME
     )
-    print("Get vm extesnion:\n{}".format(extension))
+    print(f"Get vm extesnion:\n{extension}")
 
     # Update virtual machine
     async_poller = await compute_client.virtual_machines.begin_update(
         GROUP_NAME,
         VIRTUAL_MACHINE_NAME,
         {
-        "network_profile": {
-            "network_interfaces": [
-            {
-                "id": "/subscriptions/" + SUBSCRIPTION_ID + "/resourceGroups/" + GROUP_NAME + "/providers/Microsoft.Network/networkInterfaces/" + INTERFACE_NAME + "",
-                "properties": {
-                "primary": True
-                }
+            "network_profile": {
+                "network_interfaces": [
+                    {
+                        "id": f"/subscriptions/{SUBSCRIPTION_ID}/resourceGroups/{GROUP_NAME}/providers/Microsoft.Network/networkInterfaces/{INTERFACE_NAME}",
+                        "properties": {"primary": True},
+                    }
+                ]
             }
-            ]
-        }
-        }
+        },
     )
+
     vm = await async_poller.result()
-    print("Update virtual machine:\n{}".format(vm))
+    print(f"Update virtual machine:\n{vm}")
 
     # Update vm extension
     async_poller = await compute_client.virtual_machine_extensions.begin_update(
@@ -216,7 +213,7 @@ async def main():
         }
     )
     extension = await async_poller.result()
-    print("Update vm extension:\n{}".format(extension))
+    print(f"Update vm extension:\n{extension}")
 
 
     # Delete vm extension (Need vm started)

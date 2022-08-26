@@ -66,7 +66,7 @@ def main():
           ]
         }
     ).result()
-    print("Create webhook:\n{}".format(webhook))
+    print(f"Create webhook:\n{webhook}")
 
     # Get webhook
     webhook = containerregistry_client.webhooks.get(
@@ -74,7 +74,7 @@ def main():
         REGISTRIES,
         WEBHOOK
     )
-    print("Get webhook:\n{}".format(webhook))
+    print(f"Get webhook:\n{webhook}")
 
     # Update webhook
     webhook = containerregistry_client.webhooks.begin_update(
@@ -91,8 +91,8 @@ def main():
 
         }
     ).result()
-    print("Update webhook:\n{}".format(webhook))
-    
+    print(f"Update webhook:\n{webhook}")
+
     # Delete webhook
     webhook = containerregistry_client.webhooks.begin_delete(
         GROUP_NAME,

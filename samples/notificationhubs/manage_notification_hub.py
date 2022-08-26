@@ -55,7 +55,7 @@ def main():
             GROUP_NAME,
             NAMESPACE,
         )
-    print("Create namespace:\n{}".format(namespace))
+    print(f"Create namespace:\n{namespace}")
     # - end -
 
     # Create notification hub
@@ -67,7 +67,7 @@ def main():
             "location": "eastus"
         }
     )
-    print("Create notification hub:\n{}".format(notification_hub))
+    print(f"Create notification hub:\n{notification_hub}")
 
     # Get notification hub
     notification_hub = notificationhubs_client.notification_hubs.get(
@@ -75,7 +75,7 @@ def main():
         NAMESPACE,
         NOTIFICATION_HUB
     )
-    print("Get notification hub:\n{}".format(notification_hub))
+    print(f"Get notification hub:\n{notification_hub}")
 
     # Delete notification hub
     notificationhubs_client.notification_hubs.delete(

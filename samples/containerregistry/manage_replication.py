@@ -65,7 +65,7 @@ def main():
           }
         }
     ).result()
-    print("Create replication:\n{}".format(replication))
+    print(f"Create replication:\n{replication}")
 
     # Get replication
     replication = containerregistry_client.replications.get(
@@ -73,7 +73,7 @@ def main():
         REGISTRIES,
         REPLICATION
     )
-    print("Get replication:\n{}".format(replication))
+    print(f"Get replication:\n{replication}")
 
     # Update replication
     replication = containerregistry_client.replications.begin_update(
@@ -86,8 +86,8 @@ def main():
           }
         }
     ).result()
-    print("Update replication:\n{}".format(replication))
-    
+    print(f"Update replication:\n{replication}")
+
     # Delete replication
     replication = containerregistry_client.replications.begin_delete(
         GROUP_NAME,

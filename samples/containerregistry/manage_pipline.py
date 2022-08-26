@@ -76,9 +76,8 @@ def main():
           ]
         }
     ).result()
-    print("Create import pipeline:\n{}".format(pipeline))
+    print(f"Create import pipeline:\n{pipeline}")
 
-        # Create export pipeline
     pipeline = containerregistry_client.export_pipelines.begin_create(
         GROUP_NAME,
         REGISTRIES,
@@ -98,7 +97,7 @@ def main():
           ]
         }
     ).result()
-    print("Create import pipeline:\n{}".format(pipeline))
+    print(f"Create import pipeline:\n{pipeline}")
 
     # Get import pipeline
     pipeline = containerregistry_client.import_pipelines.get(
@@ -106,7 +105,7 @@ def main():
         REGISTRIES,
         PIPELINE
     )
-    print("Get import pipeline:\n{}".format(pipeline))
+    print(f"Get import pipeline:\n{pipeline}")
 
     # Get export pipeline
     pipeline = containerregistry_client.export_pipelines.get(
@@ -114,7 +113,7 @@ def main():
         REGISTRIES,
         PIPELINE
     )
-    print("Get export pipeline:\n{}".format(pipeline))
+    print(f"Get export pipeline:\n{pipeline}")
 
     # Delete import pipeline
     pipeline = containerregistry_client.import_pipelines.begin_delete(

@@ -76,7 +76,7 @@ def main():
           "status": "enabled",
         }
     ).result()
-    print("Create token:\n{}".format(token))
+    print(f"Create token:\n{token}")
 
     # Get token
     token = containerregistry_client.tokens.get(
@@ -84,7 +84,7 @@ def main():
         REGISTRIES,
         TOKEN
     )
-    print("Get token:\n{}".format(token))
+    print(f"Get token:\n{token}")
 
     # Update token
     token = containerregistry_client.tokens.begin_update(
@@ -95,8 +95,8 @@ def main():
           "scope_map_id": scope_map.id
         }
     ).result()
-    print("Update token:\n{}".format(token))
-    
+    print(f"Update token:\n{token}")
+
     # Delete token
     token = containerregistry_client.tokens.begin_delete(
         GROUP_NAME,

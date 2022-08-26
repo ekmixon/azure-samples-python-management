@@ -49,14 +49,14 @@ def main():
           }
         }
     )
-    print("Create account:\n{}".format(account))
+    print(f"Create account:\n{account}")
 
     # Get account
     account = cognitiveservices_client.accounts.get_properties(
         GROUP_NAME,
         ACCOUNT
     )
-    print("Get account:\n{}".format(account))
+    print(f"Get account:\n{account}")
 
     # Update account
     account = cognitiveservices_client.accounts.update(
@@ -73,8 +73,8 @@ def main():
           }
         }
     )
-    print("Update account:\n{}".format(account))
-    
+    print(f"Update account:\n{account}")
+
     # Delete account
     account = cognitiveservices_client.accounts.delete(
         GROUP_NAME,

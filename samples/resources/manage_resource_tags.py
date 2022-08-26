@@ -26,21 +26,21 @@ def main():
     tag = resource_client.tags.create_or_update(
         TAG_NAME
     )
-    print("Create tag:\n{}".format(tag))
+    print(f"Create tag:\n{tag}")
 
     # Create tag value
     tag = resource_client.tags.create_or_update_value(
         TAG_NAME,
         TAG_VALUE
     )
-    print("Create tag value:\n{}".format(tag))
+    print(f"Create tag value:\n{tag}")
 
     # Get at scope
-    scope = "subscriptions/" + SUBSCRIPTION_ID
+    scope = f"subscriptions/{SUBSCRIPTION_ID}"
     tag = resource_client.tags.get_at_scope(
         scope
     )
-    print("Get tag:\n{}".format(tag))
+    print(f"Get tag:\n{tag}")
 
     # Delete tag value
     resource_client.tags.delete_value(

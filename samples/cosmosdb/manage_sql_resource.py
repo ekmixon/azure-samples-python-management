@@ -55,7 +55,7 @@ def main():
           "api_properties": {}
         }
     ).result()
-    print("Create database account:\n{}".format(database_account))
+    print(f"Create database account:\n{database_account}")
     # - end -
 
     # Create sql database
@@ -73,7 +73,7 @@ def main():
           }
         }
     ).result()
-    print("Create sql database:\n{}".format(database))
+    print(f"Create sql database:\n{database}")
 
     # Create sql container
     container = cosmosdb_client.sql_resources.begin_create_update_sql_container(
@@ -133,7 +133,7 @@ def main():
           }
         }
     ).result()
-    print("Create sql container:\n{}".format(container))
+    print(f"Create sql container:\n{container}")
 
     # Get sql database
     database = cosmosdb_client.sql_resources.get_sql_database(
@@ -141,7 +141,7 @@ def main():
         DATABASE_ACCOUNT,
         DATABASE_NAME
     )
-    print("Get sql database:\n{}".format(database))
+    print(f"Get sql database:\n{database}")
 
     # Delete sql database
     cosmosdb_client.sql_resources.begin_delete_sql_database(

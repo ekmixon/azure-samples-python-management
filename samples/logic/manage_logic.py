@@ -69,7 +69,7 @@ def main():
         WORKFLOW_NAME
     )
     print("Get logic:\n")
-    
+
     # Delete logic
     logic_client.workflows.delete(
         GROUP_NAME,

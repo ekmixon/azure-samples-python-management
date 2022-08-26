@@ -47,7 +47,7 @@ def main():
           "administrator_login_password": PASSWORD
         }
     ).result()
-    print("Create server:\n{}".format(server))
+    print(f"Create server:\n{server}")
     # - end -
 
     # Create elastic pool
@@ -59,7 +59,7 @@ def main():
           "location": "eastus"
         }
     ).result()
-    print("Create elastic pool:\n{}".format(elastic_pool))
+    print(f"Create elastic pool:\n{elastic_pool}")
 
     # Get elastic pool
     elastic_pool = sql_client.elastic_pools.get(
@@ -67,7 +67,7 @@ def main():
         SERVER,
         ELASTIC_POOL
     )
-    print("Get elastic pool:\n{}".format(elastic_pool))
+    print(f"Get elastic pool:\n{elastic_pool}")
 
     # Update elastic pool
     elastic_pool = sql_client.elastic_pools.begin_update(
@@ -76,8 +76,8 @@ def main():
         ELASTIC_POOL,
         {}
     ).result()
-    print("Update elastic pool:\n{}".format(elastic_pool))
-    
+    print(f"Update elastic pool:\n{elastic_pool}")
+
     # Delete elastic pool
     elastic_pool = sql_client.elastic_pools.begin_delete(
         GROUP_NAME,

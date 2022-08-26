@@ -45,13 +45,13 @@ def main():
         resource_group=GROUP_NAME,
         config_contract=input
     )
-    print("Create configuration:\n{}".format(configuration))
+    print(f"Create configuration:\n{configuration}")
 
     # Get configuration
     configurations = advisor_client.configurations.list_by_resource_group(
         resource_group=GROUP_NAME,
     )
-    print("Get configuration:\n{}".format(list(configurations)[0]))
+    print(f"Get configuration:\n{list(configurations)[0]}")
 
     # Delete Group
     resource_client.resource_groups.begin_delete(

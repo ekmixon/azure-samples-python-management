@@ -37,7 +37,7 @@ def main():
         resource_name=RESOURCE_NAME,
         api_version="2019-10-01"
     )
-    print("Check resource existence:\n{}".format(check_result))
+    print(f"Check resource existence:\n{check_result}")
 
     # Create resource
     resource = resource_client.resources.begin_create_or_update(
@@ -49,7 +49,7 @@ def main():
         parameters={'location': "eastus"},
         api_version="2019-07-01"
     ).result()
-    print("Create resource:\n{}".format(resource))
+    print(f"Create resource:\n{resource}")
 
     # Get resource
     resource = resource_client.resources.get(
@@ -60,7 +60,7 @@ def main():
         resource_name=RESOURCE_NAME,
         api_version="2019-07-01"
     )
-    print("Get resource:\n{}".format(resource))
+    print(f"Get resource:\n{resource}")
 
     # Update resource
     resource = resource_client.resources.begin_update(
@@ -72,7 +72,7 @@ def main():
         parameters={'tags': {"tag1": "value1"}},
         api_version="2019-07-01"
     ).result()
-    print("Update resource:\n{}".format(resource))
+    print(f"Update resource:\n{resource}")
 
     # Delete resource
     resource_client.resources.begin_delete(

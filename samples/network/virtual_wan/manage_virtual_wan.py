@@ -46,14 +46,14 @@ def main():
           "type": "Basic"
         }
     ).result()
-    print("Create virtual wan:\n{}".format(virtual_wan))
+    print(f"Create virtual wan:\n{virtual_wan}")
 
     # Get virtual wan
     virtual_wan = network_client.virtual_wans.get(
         GROUP_NAME,
         VIRTUAL_WAN
     )
-    print("Get virtual wan:\n{}".format(virtual_wan))
+    print(f"Get virtual wan:\n{virtual_wan}")
 
     # Update virtual wan
     virtual_wan = network_client.virtual_wans.update_tags(
@@ -66,8 +66,8 @@ def main():
           }
         }
     )
-    print("Update virtual wan:\n{}".format(virtual_wan))
-    
+    print(f"Update virtual wan:\n{virtual_wan}")
+
     # Delete virtual wan
     virtual_wan = network_client.virtual_wans.begin_delete(
         GROUP_NAME,
